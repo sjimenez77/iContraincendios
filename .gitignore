@@ -1,0 +1,27 @@
+############
+## Windows
+############
+
+# Windows image file caches
+Thumbs.db
+
+# Folder config file
+Desktop.ini
+
+# Mac crap
+.DS_Store
+
+
+############
+## Sublime
+############
+*.sublime-project
+*.sublime-workspace
+
+
+/vendor/
+/cache/
+!/cache/.gitkeep
+/logs/
+!/logs/.gitkeep
+composer.lock
