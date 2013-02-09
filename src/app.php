@@ -1,13 +1,22 @@
 <?php
 
-require_once __DIR__.'/../vendor/autoload.php';
+/**
+ * This file is part of the iContraincendios app.
+ * 
+ * (c) Santos Jiménez <sjimenez77@gmail.com>
+ */
 
-$app = new Silex\Application();
+use Silex\Application;
+
+$app = new Application();
+
+$app->register(new TwigServiceProvider(), array(
+    'twig.path'    => array(__DIR__.'/../templates'),
+    // descomenta esta línea para activar la cache de Twig
+    'twig.options' => array('cache' => __DIR__.'/../cache/twig'),
+));
+
 
 $app['debug'] = true;
 
-$app->get('/hello/{name}', function ($name) use ($app) {
-    return 'Hello '.$app->escape($name);
-});
-
-$app->run();
+return $app;
