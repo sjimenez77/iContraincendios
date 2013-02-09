@@ -15,3 +15,12 @@ use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 $app->get('/hello/{name}', function ($name) use ($app) {
     return 'Hello '.$app->escape($name);
 });
+
+$app->get('/', function () use ($app) {
+	return new Response(
+        $app['twig']->render('portada.twig'),
+        200, 
+        array('Cache-Control' => 'public, max-age=600, s-maxage=600')
+    );
+})
+->bind('portada');

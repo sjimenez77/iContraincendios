@@ -1,0 +1,35 @@
+<!DOCTYPE html> 
+<html> 
+<head> 
+	<meta charset="utf-8">
+    <title>iContraincendios</title> 
+	<meta name="viewport" content="width=device-width, initial-scale=1"> 
+	<link rel="stylesheet" href="http://code.jquery.com/mobile/1.2.0/jquery.mobile-1.2.0.min.css" />
+    <link rel="stylesheet" type="text/css" href="css/jqm-docs.css">
+	<script src="http://code.jquery.com/jquery-1.9.1.min.js"></script>
+    <script src="http://code.jquery.com/jquery-migrate-1.1.0.min.js"></script>
+    <script src="js/vendor/jqm-docs.js"></script>
+	<script src="http://code.jquery.com/mobile/1.2.0/jquery.mobile-1.2.0.min.js"></script>
+</head> 
+<body> 
+
+<div data-role="page" class="{% block body_class %}{% endblock %}">
+
+    {% block cabecera %}{% endblock %}
+
+	<div data-role="content">
+        {% block contenido_secundario %}{% endblock %}
+
+        {% block contenido_primario %}{% endblock %}
+	</div><!-- /content -->
+
+  	<div data-role="footer" class="footer-docs" data-theme="c">
+	</div>
+    <div data-role="footer" class="ui-bar" data-position="fixed" data-theme="f">
+		<div align="center"><h6>&copy; Dirección Técnica del P.C.I. 2012</h6></div>
+	</div>
+
+</div><!-- /page -->
+
+</body>
+</html>
