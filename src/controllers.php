@@ -12,10 +12,7 @@ use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\RedirectResponse;
 use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 
-$app->get('/hello/{name}', function ($name) use ($app) {
-    return 'Hello '.$app->escape($name);
-});
-
+// -- PORTADA -----------------------------------------------------------------
 $app->get('/', function () use ($app) {
 	return new Response(
         $app['twig']->render('portada.twig'),
@@ -24,3 +21,54 @@ $app->get('/', function () use ($app) {
     );
 })
 ->bind('portada');
+
+$app->get('/inicio', function () use ($app) {
+	return $app -> redirect('/');
+});
+
+$app->get('/index', function () use ($app) {
+	return $app -> redirect('/');
+});
+// -----------------------------------------------------------------------------
+
+// -- USOS DE INSTALACIONES ----------------------------------------------------
+$app->get('/residencial_vivienda', function () use ($app) {
+    return $app['twig']->render('residencial_vivienda.twig', array('opcion' => 'residencial_vivienda'));
+})
+->bind('uso.residencial_vivienda');
+
+$app->get('/administrativo', function () use ($app) {
+    return $app['twig']->render('administrativo.twig', array('opcion' => 'administrativo'));
+})
+->bind('uso.administrativo');
+
+$app->get('/residencial_publico', function () use ($app) {
+    return $app['twig']->render('residencial_publico.twig', array());
+})
+->bind('uso.residencial_publico');
+
+$app->get('/hospitalario', function () use ($app) {
+    return $app['twig']->render('hospitalario.twig', array());
+})
+->bind('uso.hospitalario');
+
+$app->get('/docente', function () use ($app) {
+    return $app['twig']->render('docente.twig', array());
+})
+->bind('uso.docente');
+
+$app->get('/comercial', function () use ($app) {
+    return $app['twig']->render('comercial.twig', array());
+})
+->bind('uso.comercial');
+
+$app->get('/publica_concurrencia', function () use ($app) {
+    return $app['twig']->render('publica_concurrencia.twig', array());
+})
+->bind('uso.publica_concurrencia');
+
+$app->get('/aparcamiento', function () use ($app) {
+    return $app['twig']->render('aparcamiento.twig', array());
+})
+->bind('uso.aparcamiento');
+// ----------------------------------------------------------------------------

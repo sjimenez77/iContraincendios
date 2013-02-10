@@ -1,0 +1,59 @@
+{% extends 'uso.twig' %}
+
+{% block titulo 'Residencial Vivienda' %}
+
+{% block contenido_secundario %}
+	{% include 'menu_lateral_usos.twig' with {'opcion':opcion} %}
+{% endblock %}
+
+{% block contenido_primario %}
+    	<div class="content-primary">
+  			<h2>Administrativo</h2><hr>
+  			<p>Explicación administrativo...</p>
+        	<div class="ui-body ui-body-a"><p><strong>Cumplimente los datos solicitados a continuación:</strong></p></div>
+        	<form name="resviv" method="post" action="">
+        		<div class="ui-body ui-body-b">
+        		    <label for="superficie">Superficie construida en (m&sup2;)</label>
+        		    <input type="text" name="superficie" id="superficie" placeholder="m&sup2;">
+        		    <label for="altura_d">Altura de evacuación descendente (m)</label>
+        		    <input type="text" name="altura_d" id="altura_d" placeholder="m">
+        		    <label for="altura_a">Altura de evacuación ascendente (m)</label>
+        		    <input type="text" name="altura_a" id="altura_a" placeholder="m">
+        		    <hr>
+        		    <label for="dens_1per">¿La densidad de ocupación es mayor que 1 persona cada 5 m&sup2;?</label>
+        		    <select name="dens_1per" id="dens_1per" data-role="slider" data-theme="c" data-track-theme="a">
+        		        <option value="no">No</option>
+        		        <option value="si">Si</option>
+        		    </select>
+        		    <hr>
+        		    <label for="cocina">¿Hay cocinas instaladas dentro del edificio con una potencia instalada superior a ... ?</label>
+        		    <select name="cocina" id="cocina" data-role="slider" data-theme="c" data-track-theme="a">
+        		        <option value="no">No</option>
+        		        <option value="si">Si</option>
+        		    </select>
+        		    <hr>
+        		    <label for="centro_transf">¿Existe centro de transformación cuyos aparatos tengan aislamiento dieléctrico con punto de inflamación menor de 300&ordm; y potencia instalada mayor de 1000 kVA en cada aparato o de 4000 kVA en el conjunto de aparatos?</label>
+        		    <select name="centro_transf" id="centro_transf" data-role="slider" data-theme="c" data-track-theme="a">
+        		        <option value="no">No</option>
+        		        <option value="si">Si</option>
+        		    </select><br>&nbsp;
+        		    <div class="ui-body ui-body-a"><p><strong>Locales y zonas de riesgo especial</strong></p></div>
+        		    <div class="ui-body ui-body-e">
+        		    <label for="trasteros">¿Hay trasteros en el edificio?</label>
+        		    <select name="trasteros" id="trasteros" data-role="slider" data-theme="c" data-track-theme="a">
+        		        <option value="no">No</option>
+        		        <option value="si">Si</option>
+        		    </select>
+        		    <hr>
+        		    <label for="superficie_trasteros">¿Cuál es la superficie construida de los trasteros? (m&sup2;)</label>
+        		    <input type="text" name="superficie_trasteros" id="superficie_trasteros" placeholder="m&sup2;">
+        		    </div>
+        		    <fieldset class="ui-grid-a">
+        		        <div class="ui-block-a"><button type="reset" data-theme="c">Cancelar</button></div>
+        		        <div class="ui-block-b"><button type="submit" data-theme="b">Calcular</button></div>	   
+        		    </fieldset>
+        		</div>
+	        </form>
+	        <p>&nbsp;</p>		
+    	</div><!--/content-primary -->
+{% endblock %}

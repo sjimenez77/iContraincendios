@@ -1,0 +1,15 @@
+{% extends 'layout.twig' %}
+
+{% block body_class 'type-interior' %}
+
+{% block cabecera %}
+	<div data-role="header" data-position="fixed" data-theme="d">
+		<div align="center"><img src="img/logo.fw.png" alt="iContraincendios" height="35" /></div>
+		<a href="{{ app.url_generator.generate('portada') }}" data-icon="home" data-iconpos="notext" data-direction="reverse">Inicio</a>
+		<a href="#" data-icon="search" data-iconpos="notext" data-rel="dialog" data-transition="fade">Buscar</a>
+	</div><!-- /header -->
+{% endblock %}
+
+{% block contenido_secundario %}{% endblock %}
+
+{% block contenido_primario %}{% endblock %}
