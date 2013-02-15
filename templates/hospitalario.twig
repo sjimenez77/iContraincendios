@@ -1,0 +1,74 @@
+{% extends 'uso.twig' %}
+
+{% block titulo 'Hospitalario' %}
+
+{% block contenido_secundario %}
+	{% include 'menu_lateral_usos.twig' with {'opcion':opcion} %}
+{% endblock %}
+
+{% block contenido_primario %}
+    	<div class="content-primary">
+  			<h2>Hospitalario</h2><hr>
+  			<p>Edificio o establecimiento destinado a asistencia sanitaria con hospitalización de 24 horas y que está ocupados por personas que, en su mayoría, son incapaces de cuidarse por sí mismas, tales como hospitales, clínicas, sanatorios, residencias geriátricas, etc.</p>
+            <p>Las zonas de dichos edificios o establecimientos destinadas a asistencia sanitaria de carácter ambulatorio (despachos médicos, consultas, áreas destinadas al diagnóstico y tratamiento, etc.) así como a los centros con dicho carácter en exclusiva, deben cumplir las condiciones correspondientes al uso Administrativo.</p>
+        	<div class="ui-bar ui-bar-a"><strong>Cumplimente los datos solicitados a continuación:</strong></div>
+        	<form name="hospitalario" method="post" action="">
+        		<div class="ui-body ui-body-b">
+        		    <label for="superficie">Superficie construida en (m&sup2;)</label>
+        		    <input type="text" name="superficie" id="superficie" placeholder="m&sup2;">
+        		    <label for="altura_d">Altura de evacuación descendente (m)</label>
+        		    <input type="text" name="altura_d" id="altura_d" placeholder="m">
+        		    <label for="altura_a">Altura de evacuación ascendente (m)</label>
+        		    <input type="text" name="altura_a" id="altura_a" placeholder="m">
+        		    <hr>
+        		    <label for="camas_100">¿El edificio dispone de más de 100 camas?</label>
+        		    <select name="camas_100" id="camas_100" data-role="slider" data-theme="c" data-track-theme="a">
+        		        <option value="no">No</option>
+        		        <option value="si">Si</option>
+        		    </select>
+        		    <hr>
+        		    <label for="cocina">¿Hay cocinas instaladas dentro del edificio con una potencia instalada superior a 20 kW?</label>
+        		    <select name="cocina" id="cocina" data-role="slider" data-theme="c" data-track-theme="a">
+        		        <option value="no">No</option>
+        		        <option value="si">Si</option>
+        		    </select>
+        		    <hr>
+        		    <label for="centro_transf">¿Existe centro de transformación cuyos aparatos tengan aislamiento dieléctrico con punto de inflamación menor de 300&deg; y potencia instalada mayor de 1000 kVA en cada aparato o de 4000 kVA en el conjunto de aparatos?</label>
+        		    <select name="centro_transf" id="centro_transf" data-role="slider" data-theme="c" data-track-theme="a">
+        		        <option value="no">No</option>
+        		        <option value="si">Si</option>
+        		    </select><br>&nbsp;
+        		    <div class="ui-bar ui-bar-a"><strong>Locales y zonas de riesgo especial</strong></div>
+        		    <div class="ui-body ui-body-e">
+            		    <label for="almacenes_fc">¿Hay almacenes de productos farmacéuticos y clínicos?</label>
+            		    <select name="almacenes_fc" id="almacenes_fc" data-role="slider" data-theme="c" data-track-theme="a">
+            		        <option value="no">No</option>
+            		        <option value="si">Si</option>
+            		    </select>
+            		    <hr>
+            		    <label for="v_almacenes">¿Cuál es el volumen construido de los almacenes?  (m&sup3;)</label>
+            		    <input type="text" name="v_almacenes" id="v_almacenes" placeholder="m&sup3;">
+                        <hr>
+                        <label for="lab_c">¿Hay laboratorios clínicos?</label>
+                        <select name="lab_c" id="lab_c" data-role="slider" data-theme="c" data-track-theme="a">
+                            <option value="no">No</option>
+                            <option value="si">Si</option>
+                        </select>
+                        <hr>
+                        <label for="v_lab">¿Cuál es el volumen construido de los laboratorios?  (m&sup3;)</label>
+                        <input type="text" name="v_lab" id="v_lab" placeholder="m&sup3;">
+                        <hr>
+                        <label for="zonas_e">¿Hay zonas de esterilización y almacenes anejos?</label>
+                        <select name="zonas_e" id="zonas_e" data-role="slider" data-theme="c" data-track-theme="a">
+                            <option value="no">No</option>
+                            <option value="si">Si</option>
+                        </select>
+        		    </div>
+        		</div>
+                {% block envio %}
+                    {% include 'envio_calculo.twig' %}
+                {% endblock %}
+	        </form>
+	        <p>&nbsp;</p>		
+    	</div><!--/content-primary -->
+{% endblock %}

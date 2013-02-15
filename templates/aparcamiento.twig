@@ -1,0 +1,54 @@
+{% extends 'uso.twig' %}
+
+{% block titulo 'Aparcamiento' %}
+
+{% block contenido_secundario %}
+	{% include 'menu_lateral_usos.twig' with {'opcion':opcion} %}
+{% endblock %}
+
+{% block contenido_primario %}
+    	<div class="content-primary">
+  			<h2>Aparcamiento</h2><hr>
+  			<p>Edificio, establecimiento o zona independiente o accesoria de otro uso principal, destinado a estacionamiento de vehículos y cuya superficie construida exceda de 100 m2, incluyendo las dedicadas a revisiones tales como lavado, puesta a punto, montaje de accesorios, comprobación de neumáticos y faros, etc., que no requieran la manipulación de productos o de útiles de trabajo que puedan presentar riesgo adicional y que se produce habitualmente en la reparación propiamente dicha. Se excluyen de este uso los garajes, cualquiera que sea su superficie, de una vivienda unifamiliar, así como los aparcamientos en espacios exteriores del entorno de los edificios, aunque sus plazas estén cubiertas.</p>
+            <p>Dentro de este uso, se denominan aparcamientos robotizados aquellos en los que el movimiento de los vehículos, desde el acceso hasta las plazas de aparcamiento, únicamente se realiza mediante sistemas mecánicos y sin presencia ni intervención directa de personas, exceptuando la actuación ocasional de personal de mantenimiento. En dichos aparcamientos no es preciso cumplir las condiciones de evacuación que se establecen en este DB SI, aunque deben disponer de los medios de escape en caso de emergencia para dicho personal que en cada caso considere adecuados la autoridad de control competente.</p>
+        	<div class="ui-bar ui-bar-a"><strong>Cumplimente los datos solicitados a continuación:</strong></div>
+        	<form name="aparcamiento" method="post" action="">
+        		<div class="ui-body ui-body-b">
+        		    <label for="superficie">Superficie construida en (m&sup2;)</label>
+        		    <input type="text" name="superficie" id="superficie" placeholder="m&sup2;">
+        		    <label for="altura_d">Altura de evacuación descendente (m)</label>
+        		    <input type="text" name="altura_d" id="altura_d" placeholder="m">
+        		    <label for="altura_a">Altura de evacuación ascendente (m)</label>
+        		    <input type="text" name="altura_a" id="altura_a" placeholder="m">
+                    <hr>
+                    <label for="robotizado">¿El aparcamiento es robotizado?</label>
+                    <select name="robotizado" id="robotizado" data-role="slider" data-theme="c" data-track-theme="a">
+                        <option value="no">No</option>
+                        <option value="si">Si</option>
+                    </select>
+                    <hr>
+                    <label for="plantas_rasante">¿Existen más de tres plantas bajo rasante o más de cuatro sobre rasante?</label>
+                    <select name="plantas_rasante" id="plantas_rasante" data-role="slider" data-theme="c" data-track-theme="a">
+                        <option value="no">No</option>
+                        <option value="si">Si</option>
+                    </select>
+        		    <hr>
+        		    <label for="cocina">¿Hay cocinas instaladas dentro del edificio con una potencia instalada superior a 50 kW?</label>
+        		    <select name="cocina" id="cocina" data-role="slider" data-theme="c" data-track-theme="a">
+        		        <option value="no">No</option>
+        		        <option value="si">Si</option>
+        		    </select>
+        		    <hr>
+        		    <label for="centro_transf">¿Existe centro de transformación cuyos aparatos tengan aislamiento dieléctrico con punto de inflamación menor de 300&deg; y potencia instalada mayor de 1000 kVA en cada aparato o de 4000 kVA en el conjunto de aparatos?</label>
+        		    <select name="centro_transf" id="centro_transf" data-role="slider" data-theme="c" data-track-theme="a">
+        		        <option value="no">No</option>
+        		        <option value="si">Si</option>
+        		    </select><br>&nbsp;
+        		</div>
+                {% block envio %}
+                    {% include 'envio_calculo.twig' %}
+                {% endblock %}
+	        </form>
+	        <p>&nbsp;</p>		
+    	</div><!--/content-primary -->
+{% endblock %}

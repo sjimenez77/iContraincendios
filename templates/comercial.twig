@@ -1,6 +1,6 @@
 {% extends 'uso.twig' %}
 
-{% block titulo 'Administrativo' %}
+{% block titulo 'Comercial' %}
 
 {% block contenido_secundario %}
 	{% include 'menu_lateral_usos.twig' with {'opcion':opcion} %}
@@ -8,11 +8,11 @@
 
 {% block contenido_primario %}
     	<div class="content-primary">
-  			<h2>Administrativo</h2><hr>
-  			<p>Edificio, establecimiento o zona en el que se desarrollan actividades de gestión o de servicios en cualquiera de sus modalidades, como por ejemplo, centros de la administración pública, bancos, despachos profesionales, oficinas, etc.</p>
-            <p>A los edificios, establecimientos o zonas de uso sanitario o asistencial de carácter ambulatorio se les debe aplicar las condiciones particulares del uso Administrativo.</p>
+  			<h2>Comercial</h2><hr>
+  			<p>Edificio o establecimiento cuya actividad principal es la venta de productos directamente al público o la prestación de servicios relacionados con los mismos, incluyendo, tanto las tiendas y a los grandes almacenes los cuales suelen constituir un único establecimiento con un único titular, como los centros comerciales, los mercados, las galerías comerciales, etc.</p>
+            <p>También se consideran de uso Comercial aquellos establecimientos en los que se prestan directamente al público determinados servicios no necesariamente relacionados con la venta de productos, pero cuyas características constructivas y funcionales, las del riesgo derivado de la actividad y las de los ocupantes se puedan asimilar más a las propias de este uso que a las de cualquier otro. Como ejemplos de dicha asimilación pueden citarse las lavanderías, los salones de peluquería, etc.</p>
         	<div class="ui-bar ui-bar-a"><strong>Cumplimente los datos solicitados a continuación:</strong></div>
-        	<form name="administrativo" method="post" action="">
+        	<form name="comercial" method="post" action="">
         		<div class="ui-body ui-body-b">
         		    <label for="superficie">Superficie construida en (m&sup2;)</label>
         		    <input type="text" name="superficie" id="superficie" placeholder="m&sup2;">
@@ -21,12 +21,18 @@
         		    <label for="altura_a">Altura de evacuación ascendente (m)</label>
         		    <input type="text" name="altura_a" id="altura_a" placeholder="m">
         		    <hr>
-        		    <label for="dens_1per">¿La densidad de ocupación es mayor que 1 persona cada 5 m&sup2;?</label>
-        		    <select name="dens_1per" id="dens_1per" data-role="slider" data-theme="c" data-track-theme="a">
+        		    <label for="area_1500">¿La superficie total construida del área pública de ventas excede de 1.500 m&sup2;?</label>
+        		    <select name="area_1500" id="area_1500" data-role="slider" data-theme="c" data-track-theme="a">
         		        <option value="no">No</option>
         		        <option value="si">Si</option>
         		    </select>
         		    <hr>
+                    <label for="densidad_cf_500">¿La densidad de carga de fuego ponderada y corregida aportada por los productos comercializados es mayor que 500 MJ/m&sup2;?</label>
+                    <select name="densidad_cf_500" id="densidad_cf_500" data-role="slider" data-theme="c" data-track-theme="a">
+                        <option value="no">No</option>
+                        <option value="si">Si</option>
+                    </select>
+                    <hr>
         		    <label for="cocina">¿Hay cocinas instaladas dentro del edificio con una potencia instalada superior a 50 kW?</label>
         		    <select name="cocina" id="cocina" data-role="slider" data-theme="c" data-track-theme="a">
         		        <option value="no">No</option>
@@ -40,14 +46,11 @@
         		    </select><br>&nbsp;
         		    <div class="ui-bar ui-bar-a"><strong>Locales y zonas de riesgo especial</strong></div>
         		    <div class="ui-body ui-body-e">
-            		    <label for="locales_anejos">¿Hay imprenta, reprografía y locales anejos, tales como almacenes de papel, encuadernado, etc.?</label>
-            		    <select name="locales_anejos" id="locales_anejos" data-role="slider" data-theme="c" data-track-theme="a">
+            		    <label for="almacenes_cf_3400">¿Hay almacenes en los que la densidad de carga de fuego ponderada y corregida (Qs) aportada por los productos almacenados es superior a 3.400 MJ/m²?</label>
+            		    <select name="almacenes_cf_3400" id="almacenes_cf_3400" data-role="slider" data-theme="c" data-track-theme="a">
             		        <option value="no">No</option>
             		        <option value="si">Si</option>
             		    </select>
-            		    <hr>
-            		    <label for="volumen_construido">¿Cuál es el volumen construido?  (m&sup3;)</label>
-            		    <input type="text" name="volumen_construido" id="volumen_construido" placeholder="m&sup3;">
         		    </div>
         		</div>
                 {% block envio %}

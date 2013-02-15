@@ -1,6 +1,6 @@
 {% extends 'uso.twig' %}
 
-{% block titulo 'Administrativo' %}
+{% block titulo 'Residencial Público' %}
 
 {% block contenido_secundario %}
 	{% include 'menu_lateral_usos.twig' with {'opcion':opcion} %}
@@ -8,11 +8,10 @@
 
 {% block contenido_primario %}
     	<div class="content-primary">
-  			<h2>Administrativo</h2><hr>
-  			<p>Edificio, establecimiento o zona en el que se desarrollan actividades de gestión o de servicios en cualquiera de sus modalidades, como por ejemplo, centros de la administración pública, bancos, despachos profesionales, oficinas, etc.</p>
-            <p>A los edificios, establecimientos o zonas de uso sanitario o asistencial de carácter ambulatorio se les debe aplicar las condiciones particulares del uso Administrativo.</p>
+  			<h2>Residencial Público</h2><hr>
+  			<p>Edificio o establecimiento destinado a proporcionar alojamiento temporal, regentado por un titular de la actividad diferente del conjunto de los ocupantes y que puede disponer de servicios comunes, tales como limpieza, comedor, lavandería, locales para reuniones y espectáculos, deportes, etc. Incluye a los hoteles, hostales, residencias, pensiones, apartamentos turísticos, etc.</p>
         	<div class="ui-bar ui-bar-a"><strong>Cumplimente los datos solicitados a continuación:</strong></div>
-        	<form name="administrativo" method="post" action="">
+        	<form name="residencial_publico" method="post" action="">
         		<div class="ui-body ui-body-b">
         		    <label for="superficie">Superficie construida en (m&sup2;)</label>
         		    <input type="text" name="superficie" id="superficie" placeholder="m&sup2;">
@@ -21,13 +20,13 @@
         		    <label for="altura_a">Altura de evacuación ascendente (m)</label>
         		    <input type="text" name="altura_a" id="altura_a" placeholder="m">
         		    <hr>
-        		    <label for="dens_1per">¿La densidad de ocupación es mayor que 1 persona cada 5 m&sup2;?</label>
-        		    <select name="dens_1per" id="dens_1per" data-role="slider" data-theme="c" data-track-theme="a">
+        		    <label for="al_50pers">¿El establecimiento está previsto para dar alojamiento a más de 50 personas?</label>
+        		    <select name="al_50pers" id="al_50pers" data-role="slider" data-theme="c" data-track-theme="a">
         		        <option value="no">No</option>
         		        <option value="si">Si</option>
         		    </select>
         		    <hr>
-        		    <label for="cocina">¿Hay cocinas instaladas dentro del edificio con una potencia instalada superior a 50 kW?</label>
+        		    <label for="cocina">¿Hay cocinas instaladas dentro del edificio con una potencia instalada superior a 20 kW?</label>
         		    <select name="cocina" id="cocina" data-role="slider" data-theme="c" data-track-theme="a">
         		        <option value="no">No</option>
         		        <option value="si">Si</option>
@@ -40,14 +39,14 @@
         		    </select><br>&nbsp;
         		    <div class="ui-bar ui-bar-a"><strong>Locales y zonas de riesgo especial</strong></div>
         		    <div class="ui-body ui-body-e">
-            		    <label for="locales_anejos">¿Hay imprenta, reprografía y locales anejos, tales como almacenes de papel, encuadernado, etc.?</label>
-            		    <select name="locales_anejos" id="locales_anejos" data-role="slider" data-theme="c" data-track-theme="a">
-            		        <option value="no">No</option>
-            		        <option value="si">Si</option>
-            		    </select>
-            		    <hr>
-            		    <label for="volumen_construido">¿Cuál es el volumen construido?  (m&sup3;)</label>
-            		    <input type="text" name="volumen_construido" id="volumen_construido" placeholder="m&sup3;">
+                        <label for="locales_anejos">¿Hay roperos y locales para la custodia de equipajes?</label>
+                        <select name="locales_anejos" id="locales_anejos" data-role="slider" data-theme="c" data-track-theme="a">
+                            <option value="no">No</option>
+                            <option value="si">Si</option>
+                        </select>
+                        <hr>
+                        <label for="sc_locales">¿Cuál es la superficie construida de los locales? (m&sup2;)</label>
+                        <input type="text" name="sc_locales" id="sc_locales" placeholder="m&sup2;">
         		    </div>
         		</div>
                 {% block envio %}

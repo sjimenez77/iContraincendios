@@ -33,42 +33,66 @@ $app->get('/index', function () use ($app) {
 
 // -- USOS DE INSTALACIONES ----------------------------------------------------
 $app->get('/residencial_vivienda', function () use ($app) {
-    return $app['twig']->render('residencial_vivienda.twig', array('opcion' => 'residencial_vivienda'));
+    return $app['twig']->render(
+    	'residencial_vivienda.twig', 
+    	array('opcion' => 'residencial_vivienda')
+    );
 })
 ->bind('uso.residencial_vivienda');
 
 $app->get('/administrativo', function () use ($app) {
-    return $app['twig']->render('administrativo.twig', array('opcion' => 'administrativo'));
+    return $app['twig']->render(
+    	'administrativo.twig', 
+    	array('opcion' => 'administrativo')
+    );
 })
 ->bind('uso.administrativo');
 
 $app->get('/residencial_publico', function () use ($app) {
-    return $app['twig']->render('residencial_publico.twig', array());
+    return $app['twig']->render(
+    	'residencial_publico.twig', 
+    	array('opcion' => 'residencial_publico')
+    );
 })
 ->bind('uso.residencial_publico');
 
 $app->get('/hospitalario', function () use ($app) {
-    return $app['twig']->render('hospitalario.twig', array());
+    return $app['twig']->render(
+    	'hospitalario.twig', 
+    	array('opcion' => 'hospitalario')
+    );
 })
 ->bind('uso.hospitalario');
 
 $app->get('/docente', function () use ($app) {
-    return $app['twig']->render('docente.twig', array());
+    return $app['twig']->render(
+    	'docente.twig', 
+    	array('opcion' => 'docente')
+    );
 })
 ->bind('uso.docente');
 
 $app->get('/comercial', function () use ($app) {
-    return $app['twig']->render('comercial.twig', array());
+    return $app['twig']->render(
+    	'comercial.twig', 
+    	array('opcion' => 'comercial')
+    );
 })
 ->bind('uso.comercial');
 
 $app->get('/publica_concurrencia', function () use ($app) {
-    return $app['twig']->render('publica_concurrencia.twig', array());
+    return $app['twig']->render(
+    	'publica_concurrencia.twig', 
+    	array('opcion' => 'publica_concurrencia')
+    );
 })
 ->bind('uso.publica_concurrencia');
 
 $app->get('/aparcamiento', function () use ($app) {
-    return $app['twig']->render('aparcamiento.twig', array());
+    return $app['twig']->render(
+    	'aparcamiento.twig', 
+    	array('opcion' => 'aparcamiento')
+    );
 })
 ->bind('uso.aparcamiento');
 // ----------------------------------------------------------------------------

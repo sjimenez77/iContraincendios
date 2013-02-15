@@ -10,8 +10,8 @@
     	<div class="content-primary">
   			<h2>Residencial Vivienda</h2><hr>
   			<p>Edificio o zona destinada a alojamiento permanente, cualquiera que sea el tipo de edificio: vivienda unifamiliar, edificio de pisos o de apartamentos, etc.</p>
-        	<div class="ui-body ui-body-a"><p><strong>Cumplimente los datos solicitados a continuación:</strong></p></div>
-        	<form name="resviv" method="post" action="">
+        	<div class="ui-bar ui-bar-a"><strong>Cumplimente los datos solicitados a continuación:</strong></div>
+        	<form name="residencial_vivienda" method="post" action="">
         		<div class="ui-body ui-body-b">
         		    <label for="superficie">Superficie construida en (m&sup2;)</label>
         		    <input type="text" name="superficie" id="superficie" placeholder="m&sup2;">
@@ -26,18 +26,18 @@
         		        <option value="si">Si</option>
         		    </select>
         		    <hr>
-        		    <label for="cocina">¿Hay cocinas instaladas dentro del edificio con una potencia instalada superior a ... ?</label>
+        		    <label for="cocina">¿Hay cocinas instaladas dentro del edificio con una potencia instalada superior a 50 kW?</label>
         		    <select name="cocina" id="cocina" data-role="slider" data-theme="c" data-track-theme="a">
         		        <option value="no">No</option>
         		        <option value="si">Si</option>
         		    </select>
         		    <hr>
-        		    <label for="centro_transf">¿Existe centro de transformación cuyos aparatos tengan aislamiento dieléctrico con punto de inflamación menor de 300&ordm; y potencia instalada mayor de 1000 kVA en cada aparato o de 4000 kVA en el conjunto de aparatos?</label>
+        		    <label for="centro_transf">¿Existe centro de transformación cuyos aparatos tengan aislamiento dieléctrico con punto de inflamación menor de 300&deg; y potencia instalada mayor de 1000 kVA en cada aparato o de 4000 kVA en el conjunto de aparatos?</label>
         		    <select name="centro_transf" id="centro_transf" data-role="slider" data-theme="c" data-track-theme="a">
         		        <option value="no">No</option>
         		        <option value="si">Si</option>
         		    </select><br>&nbsp;
-        		    <div class="ui-body ui-body-a"><p><strong>Locales y zonas de riesgo especial</strong></p></div>
+        		    <div class="ui-bar ui-bar-a"><strong>Locales y zonas de riesgo especial</strong></div>
         		    <div class="ui-body ui-body-e">
         		    <label for="trasteros">¿Hay trasteros en el edificio?</label>
         		    <select name="trasteros" id="trasteros" data-role="slider" data-theme="c" data-track-theme="a">
@@ -48,11 +48,10 @@
         		    <label for="superficie_trasteros">¿Cuál es la superficie construida de los trasteros? (m&sup2;)</label>
         		    <input type="text" name="superficie_trasteros" id="superficie_trasteros" placeholder="m&sup2;">
         		    </div>
-        		    <fieldset class="ui-grid-a">
-        		        <div class="ui-block-a"><button type="reset" data-theme="c">Cancelar</button></div>
-        		        <div class="ui-block-b"><button type="submit" data-theme="b">Calcular</button></div>	   
-        		    </fieldset>
         		</div>
+                {% block envio %}
+                    {% include 'envio_calculo.twig' %}
+                {% endblock %}
 	        </form>
 	        <p>&nbsp;</p>		
     	</div><!--/content-primary -->

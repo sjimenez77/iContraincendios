@@ -1,6 +1,6 @@
 {% extends 'uso.twig' %}
 
-{% block titulo 'Administrativo' %}
+{% block titulo 'Pública Concurrencia' %}
 
 {% block contenido_secundario %}
 	{% include 'menu_lateral_usos.twig' with {'opcion':opcion} %}
@@ -8,11 +8,11 @@
 
 {% block contenido_primario %}
     	<div class="content-primary">
-  			<h2>Administrativo</h2><hr>
-  			<p>Edificio, establecimiento o zona en el que se desarrollan actividades de gestión o de servicios en cualquiera de sus modalidades, como por ejemplo, centros de la administración pública, bancos, despachos profesionales, oficinas, etc.</p>
-            <p>A los edificios, establecimientos o zonas de uso sanitario o asistencial de carácter ambulatorio se les debe aplicar las condiciones particulares del uso Administrativo.</p>
+  			<h2>Pública Concurrencia</h2><hr>
+  			<p>Edificio o establecimiento destinado a alguno de los siguientes usos: cultural (destinados a restauración,espectáculos, reunión, deporte, esparcimiento, auditorios, juego y similares), religioso y de transporte de personas.</p>
+            <p><strong>(Anulado por Sentencia del TS de 4/5/2010, BOE 30/7/2010)</strong></p>
         	<div class="ui-bar ui-bar-a"><strong>Cumplimente los datos solicitados a continuación:</strong></div>
-        	<form name="administrativo" method="post" action="">
+        	<form name="publica_concurrencia" method="post" action="">
         		<div class="ui-body ui-body-b">
         		    <label for="superficie">Superficie construida en (m&sup2;)</label>
         		    <input type="text" name="superficie" id="superficie" placeholder="m&sup2;">
@@ -21,12 +21,22 @@
         		    <label for="altura_a">Altura de evacuación ascendente (m)</label>
         		    <input type="text" name="altura_a" id="altura_a" placeholder="m">
         		    <hr>
-        		    <label for="dens_1per">¿La densidad de ocupación es mayor que 1 persona cada 5 m&sup2;?</label>
-        		    <select name="dens_1per" id="dens_1per" data-role="slider" data-theme="c" data-track-theme="a">
+        		    <label for="ocupacion_500">¿La ocupación excede de 500 personas?</label>
+        		    <select name="ocupacion_500" id="ocupacion_500" data-role="slider" data-theme="c" data-track-theme="a">
         		        <option value="no">No</option>
         		        <option value="si">Si</option>
         		    </select>
         		    <hr>
+                    <label for="uso_previsto" class="select">Seleccione de la lista el uso previsto...</label>
+                    <select name="uso_previsto" id="uso_previsto" data-theme="a">
+                        <option value="0">Cines</option>
+                        <option value="1">Teatros</option>
+                        <option value="2">Auditorios</option>
+                        <option value="3">Discotecas</option>
+                        <option value="4">Recintos deportivos</option>
+                        <option value="5">Otros</option>
+                    </select>
+                    <hr>
         		    <label for="cocina">¿Hay cocinas instaladas dentro del edificio con una potencia instalada superior a 50 kW?</label>
         		    <select name="cocina" id="cocina" data-role="slider" data-theme="c" data-track-theme="a">
         		        <option value="no">No</option>
@@ -40,14 +50,11 @@
         		    </select><br>&nbsp;
         		    <div class="ui-bar ui-bar-a"><strong>Locales y zonas de riesgo especial</strong></div>
         		    <div class="ui-body ui-body-e">
-            		    <label for="locales_anejos">¿Hay imprenta, reprografía y locales anejos, tales como almacenes de papel, encuadernado, etc.?</label>
-            		    <select name="locales_anejos" id="locales_anejos" data-role="slider" data-theme="c" data-track-theme="a">
+            		    <label for="talleres_dec">¿Existen talleres o almacenes de decorados, de vestuario, etc., con un volumen construido superior a 200m&sup3;?</label>
+            		    <select name="talleres_dec" id="talleres_dec" data-role="slider" data-theme="c" data-track-theme="a">
             		        <option value="no">No</option>
             		        <option value="si">Si</option>
             		    </select>
-            		    <hr>
-            		    <label for="volumen_construido">¿Cuál es el volumen construido?  (m&sup3;)</label>
-            		    <input type="text" name="volumen_construido" id="volumen_construido" placeholder="m&sup3;">
         		    </div>
         		</div>
                 {% block envio %}
