@@ -1,0 +1,58 @@
+{% extends 'layout.twig' %}
+
+{% block titulo 'Portada' %}
+
+{% block body_class 'type-home' %}
+
+{% block cabecera %}
+    {% include 'cabecera.twig' %}
+    {% include 'form_login_popup.twig' %}
+{% endblock %}
+
+{% block contenido_secundario %}
+		<div class="content-secondary">
+            <div id="jqm-homeheader">
+                <h1 id="jqm-logo"><img src="/img/logo.fw.png" alt="iContraincendios" /></h1>
+                <p>Calcule las necesidades de una instalación contraincendios.</p>
+            </div>
+
+			<p class="intro"><strong>Bienvenido.</strong> iContraincendios es una aplicación para el cálculo de las necesidades para todo tipo de instalaciones contra incendios.</p>
+			
+			<ul data-role="listview" data-inset="true" data-theme="c" data-dividertheme="f">
+				<li data-role="list-divider">Opciones generales</li>
+                <li><a href="/quienes">¿Quiénes somos?</a></li>
+				<li><a href="/contacto">Contacto</a></li>				
+				<li><a href="/ayuda">Ayuda</a></li>
+			</ul>
+            
+            <p><a href="#" data-theme="a" data-role="button" data-icon="plus" data-iconpos="right">Registrar nuevo técnico</a></p>
+		</div><!--/content-secondary -->
+{% endblock %}
+
+{% block contenido_primario %}
+		<div class="content-primary">
+            <h2>Registro de técnicos</h2><hr>
+            <p>Los datos que introduzca a continuación serán tratados de manera interna por la organización. En caso que desee revocar o modificar los datos de dicho registro rellene el formulario de contacto <a href="{{ app.url_generator.generate('contacto') }}">pinchando aquí</a> o pulsando el botón "Contacto".</p>
+            <div class="ui-bar ui-bar-a"><strong>Cumplimente los datos solicitados a continuación:</strong></div>
+            <form name="registro" method="post" action="{{ app.url_generator.generate('registro_tecnico') }}">
+                <div class="ui-body ui-body-b">
+                    <label for="nombre">Nombre</label>
+                    <input type="text" name="nombre" id="nombre" placeholder="Introduzca su nombre">
+                    <label for="apellidos">Apellidos</label>
+                    <input type="text" name="apellidos" id="apellidos" placeholder="Introduzca sus apellidos">
+                    <label for="usuario">Email (será su nombre de usuario)</label>
+                    <input type="email" name="usuario" id="usuario" placeholder="usuario@dominio.com">
+                    <label for="password">Contraseña</label>
+                    <input type="password" name="password" id="password">
+                    <hr>
+                </div>
+                <div class="ui-bar ui-bar-a">
+                    <fieldset class="ui-grid-a">
+                        <div class="ui-block-a"><button type="reset" data-theme="c">Cancelar</button></div>
+                        <div class="ui-block-b"><button type="submit" data-theme="b">Registrar</button></div>       
+                    </fieldset>
+                </div>
+            </form>
+            <p>&nbsp;</p>
+        </div><!--/content-primary -->
+{% endblock %}

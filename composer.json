@@ -3,6 +3,14 @@
         "monolog/monolog": ">=1.0.0",
         "silex/silex": "1.0.*@dev",
         "twig/twig": ">=1.8,<2.0-dev",
-        "symfony/class-loader": "2.1.*"
+        "symfony/twig-bridge": "2.1.*",
+        "symfony/security": "2.1.*",
+        "symfony/class-loader": "2.1.*",
+        "doctrine/dbal": "2.2.*"
+    },
+    "autoload": {
+        "psr-0": {
+        	"ic": "src/"
+        }
     }
 }

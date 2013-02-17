@@ -4,21 +4,28 @@
 
 {% block body_class 'type-home' %}
 
+{% block cabecera %}
+    {% include 'cabecera.twig' %}
+    {% include 'form_login_popup.twig' %}
+{% endblock %}
+
 {% block contenido_secundario %}
 		<div class="content-secondary">
-                    <div id="jqm-homeheader">
-                        <h1 id="jqm-logo"><img src="/img/logo.fw.png" alt="iContraincendios" /></h1>
-                        <p>Calcule las necesidades de una instalación contraincendios.</p>
-                    </div>
+            <div id="jqm-homeheader">
+                <h1 id="jqm-logo"><img src="/img/logo.fw.png" alt="iContraincendios" /></h1>
+                <p>Calcule las necesidades de una instalación contraincendios.</p>
+            </div>
 
-					<p class="intro"><strong>Bienvenido.</strong> iContraincendios es una aplicación para el cálculo de las necesidades para todo tipo de instalaciones contra incendios.</p>
-					
-					<ul data-role="listview" data-inset="true" data-theme="c" data-dividertheme="f">
-						<li data-role="list-divider">Información general</li>
-						<li><a href="#">¿Quiénes somos?</a></li>
-						<li><a href="#">Contacto</a></li>				
-						<li><a href="#">Ayuda</a></li>
-					</ul>
+			<p class="intro"><strong>Bienvenido.</strong> iContraincendios es una aplicación para el cálculo de las necesidades para todo tipo de instalaciones contra incendios.</p>
+			
+			<ul data-role="listview" data-inset="true" data-theme="c" data-dividertheme="f">
+				<li data-role="list-divider">Opciones generales</li>
+                <li><a href="/quienes">¿Quiénes somos?</a></li>
+				<li><a href="/contacto">Contacto</a></li>				
+				<li><a href="/ayuda">Ayuda</a></li>
+			</ul>
+            
+            <p><a href="{{ app.url_generator.generate('registro') }}" data-theme="a" data-role="button" data-icon="plus" data-iconpos="right">Registrar nuevo técnico</a></p>
 		</div><!--/content-secondary -->
 {% endblock %}
 

@@ -10,3 +10,6 @@ use Silex\Provider\MonologServiceProvider;
 // ));
 
 // añadir a continuación cualquier otra opción de configuración de producción
+
+// Sal para el codificador...
+$app['salt'] = 'tralariquetevi123412314kdfmdnñlanfñlkd';
