@@ -1,5 +1,9 @@
 	<div data-role="header" data-position="fixed" data-theme="f">
         <div align="center"><img src="/img/logo_claro.png" alt="iContraincendios" height="35" /></div>
-        <a href="{{ app.url_generator.generate('portada') }}" data-icon="home" data-iconpos="notext" data-direction="reverse">Inicio</a>
-        <a href="#popupLogin" data-theme="a" data-icon="arrow-r" data-iconpos="right" data-rel="popup" data-position-to="window" data-role="button" data-inline="true" data-transition="pop">Login</a>
+        <a href="{{ app.url_generator.generate('inicio') }}" data-icon="home" data-iconpos="notext" data-direction="reverse">Inicio</a>
+        {% if is_granted('IS_AUTHENTICATED_FULLY') %}
+        <a href="#menuUsuario" data-theme="a" data-icon="gear" data-iconpos="right" data-rel="popup" data-position-to="window" data-role="button" data-inline="true" data-transition="pop">Concectado</a>
+		{% else %}
+        <a href="#popupLogin" data-theme="a" data-icon="arrow-r" data-iconpos="right" data-rel="popup" data-position-to="window" data-role="button" data-inline="true" data-transition="pop">Acceso</a>
+        {% endif %}
     </div><!-- /header -->

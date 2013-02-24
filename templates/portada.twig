@@ -6,7 +6,11 @@
 
 {% block cabecera %}
     {% include 'cabecera.twig' %}
+    {% if is_granted('IS_AUTHENTICATED_FULLY') %}
+    {% include 'menu_usuario.twig' %}
+    {% else %}
     {% include 'form_login_popup.twig' %}
+    {% endif %}
 {% endblock %}
 
 {% block contenido_secundario %}
@@ -23,9 +27,8 @@
                 <li><a href="/quienes">¿Quiénes somos?</a></li>
 				<li><a href="/contacto">Contacto</a></li>				
 				<li><a href="/ayuda">Ayuda</a></li>
+                <li data-theme="b" data-icon="plus"><a href="{{ app.url_generator.generate('registro') }}" >Registrar nuevo técnico</a></li>
 			</ul>
-            
-            <p><a href="{{ app.url_generator.generate('registro') }}" data-theme="a" data-role="button" data-icon="plus" data-iconpos="right">Registrar nuevo técnico</a></p>
 		</div><!--/content-secondary -->
 {% endblock %}
 

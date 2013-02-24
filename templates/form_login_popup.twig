@@ -1,15 +1,16 @@
 		<div data-role="popup" id="popupLogin" data-theme="a" data-overlay-theme="a" class="ui-corner-all">
 			<a href="#" data-rel="back" data-role="button" data-theme="a" data-icon="delete" data-iconpos="notext" class="ui-btn-right">Cerrar</a>
-			<form action="{{ app.url_generator.generate('login') }}" method="post">
+			<form action="{{ path('login_check') }}" method="post">
 				<div style="padding:10px 20px;">
-				  <h3>Acceso técnicos</h3>
-		          <label for="un" class="ui-hidden-accessible">Usuario:</label>
-		          <input type="text" name="user" id="un" value="" placeholder="Usuario" data-theme="b" />
-
-		          <label for="pw" class="ui-hidden-accessible">Contraseña:</label>
-		          <input type="password" name="pass" id="pw" value="" placeholder="Contraseña" data-theme="b" />
-
-		    	  <button type="submit" data-icon="arrow-r" data-iconpos="right" data-theme="b">Entrar</button>
+					<h3>Acceso técnicos</h3>
+					<label for="un" class="ui-hidden-accessible">Usuario:</label>
+		        	<input type="text" id="username" name="_username" value="{{ last_username | default('') }}" placeholder="Usuario" data-theme="b">
+		        	<label for="pw" class="ui-hidden-accessible">Contraseña:</label>
+		        	<input type="password" id="password" name="_password" placeholder="Contraseña" data-theme="b" />
+		        	{% if error %}
+		        		<p><div class="ui-bar ui-bar-e ui-corner-all">Usuario y/o contraseña incorrectos</div></p>
+        			{% endif %}
+		    		<button type="submit" data-icon="arrow-r" data-iconpos="right" data-theme="b">Entrar</button>
 				</div>
 			</form>
 		</div>

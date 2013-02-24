@@ -1,12 +1,16 @@
 {% extends 'layout.twig' %}
 
-{% block titulo 'Portada' %}
+{% block titulo 'Registro' %}
 
 {% block body_class 'type-home' %}
 
 {% block cabecera %}
     {% include 'cabecera.twig' %}
+    {% if is_granted('IS_AUTHENTICATED_FULLY') %}
+    {% include 'menu_usuario.twig' %}
+    {% else %}
     {% include 'form_login_popup.twig' %}
+    {% endif %}
 {% endblock %}
 
 {% block contenido_secundario %}
@@ -24,8 +28,6 @@
 				<li><a href="/contacto">Contacto</a></li>				
 				<li><a href="/ayuda">Ayuda</a></li>
 			</ul>
-            
-            <p><a href="#" data-theme="a" data-role="button" data-icon="plus" data-iconpos="right">Registrar nuevo técnico</a></p>
 		</div><!--/content-secondary -->
 {% endblock %}
 
@@ -33,18 +35,27 @@
 		<div class="content-primary">
             <h2>Registro de técnicos</h2><hr>
             <p>Los datos que introduzca a continuación serán tratados de manera interna por la organización. En caso que desee revocar o modificar los datos de dicho registro rellene el formulario de contacto <a href="{{ app.url_generator.generate('contacto') }}">pinchando aquí</a> o pulsando el botón "Contacto".</p>
+            {% if errores %}
+            <p>
+                <ul data-role="listview" data-inset="true" data-divider-theme="a" data-count-theme="b">
+                    <li data-role="list-divider">No ha rellenado correctamente el registro<span class="ui-li-count">{{ errores|length }} {% if errores|length > 1 %}errores{% else %}error{% endif %}</span></li>
+                    {% for error in errores %}
+                        <li data-theme="e" style="font-weight: normal;">{{ error|raw }}</li>
+                    {% endfor %}
+                </ul>
+            </p>
+            {% endif %}
             <div class="ui-bar ui-bar-a"><strong>Cumplimente los datos solicitados a continuación:</strong></div>
             <form name="registro" method="post" action="{{ app.url_generator.generate('registro_tecnico') }}">
                 <div class="ui-body ui-body-b">
                     <label for="nombre">Nombre</label>
-                    <input type="text" name="nombre" id="nombre" placeholder="Introduzca su nombre">
+                    <input type="text" name="nombre" id="nombre" placeholder="Introduzca su nombre" value="{{ datos.nombre|e }}">
                     <label for="apellidos">Apellidos</label>
-                    <input type="text" name="apellidos" id="apellidos" placeholder="Introduzca sus apellidos">
+                    <input type="text" name="apellidos" id="apellidos" placeholder="Introduzca sus apellidos" value="{{ datos.apellidos|e }}">
                     <label for="usuario">Email (será su nombre de usuario)</label>
-                    <input type="email" name="usuario" id="usuario" placeholder="usuario@dominio.com">
+                    <input type="email" name="usuario" id="usuario" placeholder="usuario@dominio.com" value="{{ datos.usuario|e }}">
                     <label for="password">Contraseña</label>
                     <input type="password" name="password" id="password">
-                    <hr>
                 </div>
                 <div class="ui-bar ui-bar-a">
                     <fieldset class="ui-grid-a">

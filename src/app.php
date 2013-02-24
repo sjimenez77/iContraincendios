@@ -11,9 +11,10 @@ use Silex\Provider\UrlGeneratorServiceProvider;
 use Silex\Provider\MonologServiceProvider;
 use Silex\Provider\DoctrineServiceProvider;
 use Silex\Provider\SessionServiceProvider;
+use Silex\Provider\SecurityServiceProvider;
 use Silex\Provider\TwigServiceProvider;
 use Silex\Provider\HttpCacheServiceProvider;
-use ic;
+use ic; // Mi proveedor de usuarios
 
 $app = new Application();
 
@@ -36,28 +37,28 @@ $app->register(new DoctrineServiceProvider(), array(
 $app->register(new SessionServiceProvider());
 
 // Registro del proveedor de seguridad
-$app->register(new Silex\Provider\SecurityServiceProvider(), array(
+$app->register(new SecurityServiceProvider(), array(
     'security.firewalls' => array(
-        'user' => array(
-            'pattern' => '^/user.*$',
-            'anonymous' => false,
+        'admin' => array(
+            'pattern' => '^/backend.*$',
+            'anonymous' => false, 
             'form' => array(
-            	'login_path' => '/', 
-            	'check_path' => '/login'
-            	),
+                'login_path' => '/login', 
+                'check_path' => '/login_check'
+            ),
             'logout' => array('logout_path' => '/logout'), // url to call for logging out
             'users' => $app->share(function() use ($app) {
                 // Specific class ic\UserProvider is described below
                 return new ic\UserProvider($app['db']);
             }),
         ),
-        'admin' => array(
-            'pattern' => '^/admin.*$',
-            'anonymous' => false, 
+        'user' => array(
+            'pattern' => '^/user.*$',
+            'anonymous' => false,
             'form' => array(
-            	'login_path' => '/', 
-            	'check_path' => '/login'
-            ),
+            	'login_path' => '/login', 
+            	'check_path' => '/login_check'
+            	),
             'logout' => array('logout_path' => '/logout'), // url to call for logging out
             'users' => $app->share(function() use ($app) {
                 // Specific class ic\UserProvider is described below
@@ -68,12 +69,20 @@ $app->register(new Silex\Provider\SecurityServiceProvider(), array(
 			'pattern' => '^/.*$',
         	'anonymous' => true,
             'form' => array(
-            	'login_path' => '/', 
-            	'check_path' => '/login'
+            	'login_path' => '/login', 
+            	'check_path' => '/login_check'
             ),
             'logout' => array('logout_path' => '/logout'), // url to call for logging out
+            'users' => $app->share(function() use ($app) {
+                // Specific class ic\UserProvider is described below
+                return new ic\UserProvider($app['db']);
+            }),
 		),
     ),
+    'access.rules' => array(
+        array('^/backend.*$', 'ROLE_ADMIN', 'https'),
+        array('^/user.*$', 'ROLE_USER'),
+    )
 ));
 
 // Registro del proveedor de plantillas TWIG

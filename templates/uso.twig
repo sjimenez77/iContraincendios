@@ -4,7 +4,11 @@
 
 {% block cabecera %}
 	{% include 'cabecera.twig' %}
+	{% if is_granted('IS_AUTHENTICATED_FULLY') %}
+	{% include 'menu_usuario.twig' %}
+	{% else %}
 	{% include 'form_login_popup.twig' %}
+	{% endif %}
 {% endblock %}
 
 {% block contenido_secundario %}{% endblock %}
