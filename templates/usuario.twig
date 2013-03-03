@@ -1,0 +1,50 @@
+{% extends 'layout.twig' %}
+
+{% block titulo 'Portada' %}
+
+{% block body_class 'type-home' %}
+
+{% block cabecera %}
+    {% include 'cabecera.twig' %}
+    {% if is_granted('IS_AUTHENTICATED_FULLY') %}
+    {% include 'menu_usuario.twig' %}
+    {% else %}
+    {% include 'form_login_popup.twig' %}
+    {% endif %}
+{% endblock %}
+
+{% block contenido_secundario %}
+		<div class="content-secondary">
+            <div id="jqm-homeheader">
+                <h1 id="jqm-logo"><img src="/img/logo.fw.png" alt="iContraincendios" /></h1>
+                <p>Calcule las necesidades de una instalación contraincendios.</p>
+            </div>
+
+			<p class="intro"><strong>Bienvenido.</strong> iContraincendios es una aplicación para el cálculo de las necesidades para todo tipo de instalaciones contra incendios.</p>
+			
+			<ul data-role="listview" data-inset="true" data-theme="c" data-dividertheme="f">
+				<li data-role="list-divider">Opciones de usuario</li>
+				<li><a href="/contacto">Contacto</a></li>				
+				<li><a href="/ayuda">Ayuda</a></li>
+                <li data-theme="a" data-icon="arrow-d"><a href="/logout" >Desconectar</a></li>
+			</ul>
+		</div><!--/content-secondary -->
+{% endblock %}
+
+{% block contenido_primario %}
+		<div class="content-primary">
+            <h2>{{ nombre }} {{ apellidos }}</h2><hr>
+            <p>A continuación se muestra una lista con sus informes organizada por los diferentes tipos de uso de las instalaciones. Seleccione pulsando sobre un uso determinado para ver los informes de este tipo.</p><br>
+            <ul data-role="listview" data-filter="true" data-filter-placeholder="Busque por uso..." data-inset="true" data-count-theme="a">
+                <li data-role="list-divider">Total informes<span class="ui-li-count">{{ total_informes }}</span></li>
+                <li><a href="#">Residencial Vivienda</a><span class="ui-li-count">{{ total_informes_uso|default('0') }}</span></li>
+                <li><a href="#">Administrativo</a><span class="ui-li-count">{{ total_informes_uso|default('0') }}</span></li>
+                <li><a href="#">Residencial Público</a><span class="ui-li-count">{{ total_informes_uso|default('0') }}</span></li>
+                <li><a href="#">Hospitalario</a><span class="ui-li-count">{{ total_informes_uso|default('0') }}</span></li>
+                <li><a href="#">Docente</a><span class="ui-li-count">{{ total_informes_uso|default('0') }}</span></li>
+                <li><a href="#">Comercial</a><span class="ui-li-count">{{ total_informes_uso|default('0') }}</span></li>
+                <li><a href="#">Pública Concurrencia</a><span class="ui-li-count">{{ total_informes_uso|default('0') }}</span></li>
+                <li><a href="#">Aparcamiento</a><span class="ui-li-count">{{ total_informes_uso|default('0') }}</span></li>
+            </ul>
+		</div><!--/content-primary -->
+{% endblock %}

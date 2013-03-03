@@ -8,11 +8,16 @@
 
 {% block contenido_primario %}
     	<div class="content-primary">
-  			<h2>Residencial Vivienda</h2><hr>
-  			<p>Edificio o zona destinada a alojamiento permanente, cualquiera que sea el tipo de edificio: vivienda unifamiliar, edificio de pisos o de apartamentos, etc.</p>
-        	<div class="ui-bar ui-bar-a"><strong>Cumplimente los datos solicitados a continuación:</strong></div>
-        	<form name="residencial_vivienda" method="post" action="">
+            <div data-role="collapsible-set" data-theme="a" data-content-theme="a" data-corners="false">
+                <div data-role="collapsible">
+                    <h1>Residencial Vivienda</h1>
+                    <p>Edificio o zona destinada a alojamiento permanente, cualquiera que sea el tipo de edificio: vivienda unifamiliar, edificio de pisos o de apartamentos, etc.</p>
+                </div>
+            </div>
+            <div class="ui-bar ui-bar-b"><strong>Cumplimente los siguientes datos:</strong></div>
+        	<form name="residencial_vivienda" method="post" action="{{ path('uso.resultados') }}">
         		<div class="ui-body ui-body-b">
+                    <input type="hidden" name="uso" id="uso" value="{{ opcion }}">
         		    <label for="superficie">Superficie construida en (m&sup2;)</label>
         		    <input type="text" name="superficie" id="superficie" placeholder="m&sup2;">
         		    <label for="altura_d">Altura de evacuación descendente (m)</label>
@@ -26,8 +31,8 @@
         		        <option value="si">Si</option>
         		    </select>
         		    <hr>
-        		    <label for="cocina">¿Hay cocinas instaladas dentro del edificio con una potencia instalada superior a 50 kW?</label>
-        		    <select name="cocina" id="cocina" data-role="slider" data-theme="c" data-track-theme="a">
+        		    <label for="cocina_50kW">¿Hay cocinas instaladas dentro del edificio con una potencia instalada superior a 50 kW?</label>
+        		    <select name="cocina_50kW" id="cocina_50kW" data-role="slider" data-theme="c" data-track-theme="a">
         		        <option value="no">No</option>
         		        <option value="si">Si</option>
         		    </select>

@@ -39,26 +39,13 @@ $app->register(new SessionServiceProvider());
 // Registro del proveedor de seguridad
 $app->register(new SecurityServiceProvider(), array(
     'security.firewalls' => array(
-        'admin' => array(
+        'secured' => array(
             'pattern' => '^/backend.*$',
             'anonymous' => false, 
             'form' => array(
                 'login_path' => '/login', 
                 'check_path' => '/login_check'
             ),
-            'logout' => array('logout_path' => '/logout'), // url to call for logging out
-            'users' => $app->share(function() use ($app) {
-                // Specific class ic\UserProvider is described below
-                return new ic\UserProvider($app['db']);
-            }),
-        ),
-        'user' => array(
-            'pattern' => '^/user.*$',
-            'anonymous' => false,
-            'form' => array(
-            	'login_path' => '/login', 
-            	'check_path' => '/login_check'
-            	),
             'logout' => array('logout_path' => '/logout'), // url to call for logging out
             'users' => $app->share(function() use ($app) {
                 // Specific class ic\UserProvider is described below
@@ -79,10 +66,10 @@ $app->register(new SecurityServiceProvider(), array(
             }),
 		),
     ),
-    'access.rules' => array(
-        array('^/backend.*$', 'ROLE_ADMIN', 'https'),
-        array('^/user.*$', 'ROLE_USER'),
-    )
+    'security.access_rules' => array(
+        array('^/backend.+$', 'ROLE_ADMIN', 'https'),
+        array('^/user.+$', 'ROLE_USER'),
+    ),
 ));
 
 // Registro del proveedor de plantillas TWIG

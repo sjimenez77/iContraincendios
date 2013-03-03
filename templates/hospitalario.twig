@@ -8,12 +8,17 @@
 
 {% block contenido_primario %}
     	<div class="content-primary">
-  			<h2>Hospitalario</h2><hr>
-  			<p>Edificio o establecimiento destinado a asistencia sanitaria con hospitalización de 24 horas y que está ocupados por personas que, en su mayoría, son incapaces de cuidarse por sí mismas, tales como hospitales, clínicas, sanatorios, residencias geriátricas, etc.</p>
-            <p>Las zonas de dichos edificios o establecimientos destinadas a asistencia sanitaria de carácter ambulatorio (despachos médicos, consultas, áreas destinadas al diagnóstico y tratamiento, etc.) así como a los centros con dicho carácter en exclusiva, deben cumplir las condiciones correspondientes al uso Administrativo.</p>
-        	<div class="ui-bar ui-bar-a"><strong>Cumplimente los datos solicitados a continuación:</strong></div>
-        	<form name="hospitalario" method="post" action="">
+            <div data-role="collapsible-set" data-theme="a" data-content-theme="a" data-corners="false">
+                <div data-role="collapsible">
+                    <h1>Hospitalario</h1>
+                    <p>Edificio o establecimiento destinado a asistencia sanitaria con hospitalización de 24 horas y que está ocupados por personas que, en su mayoría, son incapaces de cuidarse por sí mismas, tales como hospitales, clínicas, sanatorios, residencias geriátricas, etc.</p>
+                    <p>Las zonas de dichos edificios o establecimientos destinadas a asistencia sanitaria de carácter ambulatorio (despachos médicos, consultas, áreas destinadas al diagnóstico y tratamiento, etc.) así como a los centros con dicho carácter en exclusiva, deben cumplir las condiciones correspondientes al uso Administrativo.</p>
+                </div>
+            </div>
+            <div class="ui-bar ui-bar-b"><strong>Cumplimente los siguientes datos:</strong></div>
+        	<form name="hospitalario" method="post" action="{{ path('uso.resultados') }}">
         		<div class="ui-body ui-body-b">
+                    <input type="hidden" name="uso" id="uso" value="{{ opcion }}">
         		    <label for="superficie">Superficie construida en (m&sup2;)</label>
         		    <input type="text" name="superficie" id="superficie" placeholder="m&sup2;">
         		    <label for="altura_d">Altura de evacuación descendente (m)</label>
@@ -27,8 +32,8 @@
         		        <option value="si">Si</option>
         		    </select>
         		    <hr>
-        		    <label for="cocina">¿Hay cocinas instaladas dentro del edificio con una potencia instalada superior a 20 kW?</label>
-        		    <select name="cocina" id="cocina" data-role="slider" data-theme="c" data-track-theme="a">
+        		    <label for="cocina_20kW">¿Hay cocinas instaladas dentro del edificio con una potencia instalada superior a 20 kW?</label>
+        		    <select name="cocina_20kW" id="cocina_20kW" data-role="slider" data-theme="c" data-track-theme="a">
         		        <option value="no">No</option>
         		        <option value="si">Si</option>
         		    </select>
@@ -46,8 +51,8 @@
             		        <option value="si">Si</option>
             		    </select>
             		    <hr>
-            		    <label for="v_almacenes">¿Cuál es el volumen construido de los almacenes?  (m&sup3;)</label>
-            		    <input type="text" name="v_almacenes" id="v_almacenes" placeholder="m&sup3;">
+            		    <label for="v_almacenes_fc">¿Cuál es el volumen construido de los almacenes?  (m&sup3;)</label>
+            		    <input type="text" name="v_almacenes_fc" id="v_almacenes_fc" placeholder="m&sup3;">
                         <hr>
                         <label for="lab_c">¿Hay laboratorios clínicos?</label>
                         <select name="lab_c" id="lab_c" data-role="slider" data-theme="c" data-track-theme="a">
@@ -55,11 +60,11 @@
                             <option value="si">Si</option>
                         </select>
                         <hr>
-                        <label for="v_lab">¿Cuál es el volumen construido de los laboratorios?  (m&sup3;)</label>
-                        <input type="text" name="v_lab" id="v_lab" placeholder="m&sup3;">
+                        <label for="v_lab_c">¿Cuál es el volumen construido de los laboratorios?  (m&sup3;)</label>
+                        <input type="text" name="v_lab_c" id="v_lab_c" placeholder="m&sup3;">
                         <hr>
-                        <label for="zonas_e">¿Hay zonas de esterilización y almacenes anejos?</label>
-                        <select name="zonas_e" id="zonas_e" data-role="slider" data-theme="c" data-track-theme="a">
+                        <label for="zonas_est">¿Hay zonas de esterilización y almacenes anejos?</label>
+                        <select name="zonas_est" id="zonas_est" data-role="slider" data-theme="c" data-track-theme="a">
                             <option value="no">No</option>
                             <option value="si">Si</option>
                         </select>

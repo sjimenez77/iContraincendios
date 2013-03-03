@@ -1,9 +1,8 @@
 <div data-role="popup" id="menuUsuario" data-theme="a" data-overlay-theme="a">
-	<a href="#" data-rel="back" data-role="button" data-theme="a" data-icon="delete" data-iconpos="notext" class="ui-btn-right">Cerrar</a>
+	<a href="#" data-rel="back" data-role="button" data-theme="f" data-icon="delete" data-iconpos="notext" class="ui-btn-right">Cerrar</a>
     <ul data-role="listview" data-inset="true" style="min-width:210px;" data-theme="c">
         <li data-role="divider" data-theme="f">{{ app.security.token.user.username }}</li>
-        <li><a href="{{ path('usuario', { 'user': app.security.token.user.username }) }}">Perfil</a></li>
-        <li><a href="#">Mis informes</a></li>
-        <li data-theme="b"><a href="/logout">Desconectar</a></li>
+        <li data-icon="info"><a href="{{ path('usuario', { 'user': app.security.token.user.username }) }}">Ver mi perfil</a></li>
+        <li data-theme="a" data-icon="arrow-d"><a href="/logout">Desconectar</a></li>
     </ul>
 </div>

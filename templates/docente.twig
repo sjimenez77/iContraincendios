@@ -8,11 +8,16 @@
 
 {% block contenido_primario %}
     	<div class="content-primary">
-  			<h2>Docente</h2><hr>
-  			<p>Edificio, establecimiento o zona destinada a docencia, en cualquiera de sus niveles: escuelas infantiles,centros de enseñanza primaria, secundaria, universitaria o formación profesional. No obstante, los establecimientos docentes que no tengan la característica propia de este uso (básicamente, el predominio de actividades en aulas de elevada densidad de ocupación) deben asimilarse a otros usos.</p>
-        	<div class="ui-bar ui-bar-a"><strong>Cumplimente los datos solicitados a continuación:</strong></div>
-        	<form name="docente" method="post" action="">
+            <div data-role="collapsible-set" data-theme="a" data-content-theme="a" data-corners="false">
+                <div data-role="collapsible">
+                    <h1>Docente</h1>
+                    <p>Edificio, establecimiento o zona destinada a docencia, en cualquiera de sus niveles: escuelas infantiles,centros de enseñanza primaria, secundaria, universitaria o formación profesional. No obstante, los establecimientos docentes que no tengan la característica propia de este uso (básicamente, el predominio de actividades en aulas de elevada densidad de ocupación) deben asimilarse a otros usos.</p>
+                </div>
+            </div>
+            <div class="ui-bar ui-bar-b"><strong>Cumplimente los siguientes datos:</strong></div>
+        	<form name="docente" method="post" action="{{ path('uso.resultados') }}">
         		<div class="ui-body ui-body-b">
+                    <input type="hidden" name="uso" id="uso" value="{{ opcion }}">
         		    <label for="superficie">Superficie construida en (m&sup2;)</label>
         		    <input type="text" name="superficie" id="superficie" placeholder="m&sup2;">
         		    <label for="altura_d">Altura de evacuación descendente (m)</label>
@@ -20,8 +25,8 @@
         		    <label for="altura_a">Altura de evacuación ascendente (m)</label>
         		    <input type="text" name="altura_a" id="altura_a" placeholder="m">
         		    <hr>
-        		    <label for="cocina">¿Hay cocinas instaladas dentro del edificio con una potencia instalada superior a 50 kW?</label>
-        		    <select name="cocina" id="cocina" data-role="slider" data-theme="c" data-track-theme="a">
+        		    <label for="cocina_50kW">¿Hay cocinas instaladas dentro del edificio con una potencia instalada superior a 50 kW?</label>
+        		    <select name="cocina_50kW" id="cocina_50kW" data-role="slider" data-theme="c" data-track-theme="a">
         		        <option value="no">No</option>
         		        <option value="si">Si</option>
         		    </select>

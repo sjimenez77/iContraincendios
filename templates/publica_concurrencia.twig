@@ -8,12 +8,17 @@
 
 {% block contenido_primario %}
     	<div class="content-primary">
-  			<h2>Pública Concurrencia</h2><hr>
-  			<p>Edificio o establecimiento destinado a alguno de los siguientes usos: cultural (destinados a restauración,espectáculos, reunión, deporte, esparcimiento, auditorios, juego y similares), religioso y de transporte de personas.</p>
-            <p><strong>(Anulado por Sentencia del TS de 4/5/2010, BOE 30/7/2010)</strong></p>
-        	<div class="ui-bar ui-bar-a"><strong>Cumplimente los datos solicitados a continuación:</strong></div>
-        	<form name="publica_concurrencia" method="post" action="">
+            <div data-role="collapsible-set" data-theme="a" data-content-theme="a" data-corners="false">
+                <div data-role="collapsible">
+                    <h1>Pública Concurrencia</h1>
+                    <p>Edificio o establecimiento destinado a alguno de los siguientes usos: cultural (destinados a restauración,espectáculos, reunión, deporte, esparcimiento, auditorios, juego y similares), religioso y de transporte de personas.</p>
+                    <p><strong>(Anulado por Sentencia del TS de 4/5/2010, BOE 30/7/2010)</strong></p>
+                </div>
+            </div>
+            <div class="ui-bar ui-bar-b"><strong>Cumplimente los siguientes datos:</strong></div>
+        	<form name="publica_concurrencia" method="post" action="{{ path('uso.resultados') }}">
         		<div class="ui-body ui-body-b">
+                    <input type="hidden" name="uso" id="uso" value="{{ opcion }}">
         		    <label for="superficie">Superficie construida en (m&sup2;)</label>
         		    <input type="text" name="superficie" id="superficie" placeholder="m&sup2;">
         		    <label for="altura_d">Altura de evacuación descendente (m)</label>
@@ -27,18 +32,18 @@
         		        <option value="si">Si</option>
         		    </select>
         		    <hr>
-                    <label for="uso_previsto" class="select">Seleccione de la lista el uso previsto...</label>
-                    <select name="uso_previsto" id="uso_previsto" data-theme="a">
-                        <option value="0">Cines</option>
-                        <option value="1">Teatros</option>
-                        <option value="2">Auditorios</option>
-                        <option value="3">Discotecas</option>
-                        <option value="4">Recintos deportivos</option>
-                        <option value="5">Otros</option>
+                    <label for="tipo_pub_concurrencia" class="select">Seleccione de la lista el uso previsto...</label>
+                    <select name="tipo_pub_concurrencia" id="tipo_pub_concurrencia" data-theme="a">
+                        <option value="Cines">Cines</option>
+                        <option value="Teatros">Teatros</option>
+                        <option value="Auditorios">Auditorios</option>
+                        <option value="Discotecas">Discotecas</option>
+                        <option value="Recintos deportivos">Recintos deportivos</option>
+                        <option value="Otros">Otros</option>
                     </select>
                     <hr>
-        		    <label for="cocina">¿Hay cocinas instaladas dentro del edificio con una potencia instalada superior a 50 kW?</label>
-        		    <select name="cocina" id="cocina" data-role="slider" data-theme="c" data-track-theme="a">
+        		    <label for="cocina_50kW">¿Hay cocinas instaladas dentro del edificio con una potencia instalada superior a 50 kW?</label>
+        		    <select name="cocina_50kW" id="cocina_50kW" data-role="slider" data-theme="c" data-track-theme="a">
         		        <option value="no">No</option>
         		        <option value="si">Si</option>
         		    </select>

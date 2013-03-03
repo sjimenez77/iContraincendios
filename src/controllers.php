@@ -34,38 +34,69 @@ $app->get('/portada', function() use ($app) {
 
 // -- LOGIN --------------------------------------------------------------------
 $app->get('/login', function(Request $request) use ($app) {
-
-    $token = $app['security']->getToken();
-    if (null !== $token) {
-        $user = $token->getUser();
-    }
-    // DEBUG
-    $app['monolog']->addDebug('Usuario autenticado: '.$user);
-
     return $app['twig']->render('portada.twig', array(
         'error'         => $app['security.last_error']($request),
         'last_username' => $app['session']->get('_security.last_username'),
     ));
-    // return $app -> redirect('/');
 })
 ->bind('login');
 // -----------------------------------------------------------------------------
 
+// -- USOS DE INSTALACIONES ----------------------------------------------------
+$app->mount('/uso', include 'usos.php');
+// ----------------------------------------------------------------------------
+
 // -- USUARIOS -----------------------------------------------------------------
-$userProvider = function ($id) {
-    // Convertir identificador por el id en la BDD
-    // *********************************************
-    // 
-    // CONTINUAR POR AQUÍ...
-    // 
-    // *********************************************
-    return new User($id);
-};
- 
-$app->get('/user/{user}', function (User $user) {
-    // ...
+$app->get('/user/{user}', function (Request $request, $user) use ($app) {
+
+    // Comprobamos que es el usuario el que consulta su propio perfil 
+    // y no el de otro usuario, salvo que sea administrador
+    $token = $app['security']->getToken();
+    if (null !== $token) {
+        // Obtenemos al usuario autenticado, su nombre y si es administrador 
+        $usuario_autenticado = $token->getUser();
+        $nombre_usuario_autenticado = $usuario_autenticado->getUsername();
+        $esAdmin = in_array('ROLE_ADMIN', $usuario_autenticado->getRoles());
+
+        if ($user != $nombre_usuario_autenticado and !$esAdmin) {
+            // El usuario autenticado no es administrador y está intentando
+            // ver el perfil de otro usuario
+            return $app->redirect('/');
+        }
+
+    } else {
+        // Si no está autenticado no debería pasar por aquí
+        // pero aún así lo mandamos a la portada
+        return $app->redirect('/');
+    }
+    
+    // Obtenemos el ID de usuario y sus informes
+    $usuario_consulta = $app['db']->fetchAssoc(
+        "SELECT * FROM usuarios WHERE username = ?",
+        array($user)
+        );
+
+    // Obtenemos el total de informes
+    $total_informes = $app['db']->fetchColumn(
+        "SELECT count(*) FROM informes WHERE idUsuarios = ?",
+        array($usuario_consulta['idUsuarios'])
+        );
+
+    // Obtenemos el total de informes para cada uso
+    $total_informes_uso = $app['db']->fetchArray(
+        "SELECT inf.idUsos, u.Tipo, count(*) FROM informes inf, usos u WHERE inf.idUsuarios = ? AND inf.idUsos = u.idUsos GROUP BY idUsos",
+        array($usuario_consulta['idUsuarios'])
+        );
+
+    return $app['twig']->render('usuario.twig', array(
+        'id' => $usuario_consulta['idUsuarios'],
+        'nombre' => $usuario_consulta['nombre'],
+        'apellidos' => $usuario_consulta['apellidos'],
+        'total_informes' => $total_informes,
+        'total_informes_uso' => $total_informes_uso
+    ));
+
 })
-->convert('user', $userProvider)
 ->bind('usuario');
 // -----------------------------------------------------------------------------
 
@@ -120,7 +151,7 @@ $app->post('/registro_tecnico', function(Request $request) use ($app) {
             "SELECT * FROM usuarios WHERE username = ?",
             array($usuario)
         );
-        if ($usuario == $usuario_consulta['usuario']) {
+        if ($usuario == $usuario_consulta['username']) {
             if (count($errores) > 0)
                 array_push($errores, "El usuario <strong>".$usuario."</strong> ya está registrado");
             else
@@ -204,102 +235,3 @@ $app->get('/ayuda', function(Request $request) use ($app) {
 })
 ->bind('ayuda');
 // -----------------------------------------------------------------------------
-
-
-// -- USOS DE INSTALACIONES ----------------------------------------------------
-$app->get('/residencial_vivienda', function (Request $request) use ($app) {
-    return $app['twig']->render(
-    	'residencial_vivienda.twig', 
-    	array(
-            'error' => $app['security.last_error']($request),
-            'last_username' => $app['session']->get('_security.last_username'),
-            'opcion' => 'residencial_vivienda'
-        )
-    );
-})
-->bind('uso.residencial_vivienda');
-
-$app->get('/administrativo', function (Request $request) use ($app) {
-    return $app['twig']->render(
-    	'administrativo.twig', 
-    	array(
-            'error' => $app['security.last_error']($request),
-            'last_username' => $app['session']->get('_security.last_username'),
-            'opcion' => 'administrativo'
-        )
-    );
-})
-->bind('uso.administrativo');
-
-$app->get('/residencial_publico', function (Request $request) use ($app) {
-    return $app['twig']->render(
-    	'residencial_publico.twig', 
-    	array(
-            'error' => $app['security.last_error']($request),
-            'last_username' => $app['session']->get('_security.last_username'),
-            'opcion' => 'residencial_publico'
-        )
-    );
-})
-->bind('uso.residencial_publico');
-
-$app->get('/hospitalario', function (Request $request) use ($app) {
-    return $app['twig']->render(
-    	'hospitalario.twig', 
-    	array(
-            'error' => $app['security.last_error']($request),
-            'last_username' => $app['session']->get('_security.last_username'),
-            'opcion' => 'hospitalario'
-        )
-    );
-})
-->bind('uso.hospitalario');
-
-$app->get('/docente', function (Request $request) use ($app) {
-    return $app['twig']->render(
-    	'docente.twig', 
-    	array(
-            'error' => $app['security.last_error']($request),
-            'last_username' => $app['session']->get('_security.last_username'),
-            'opcion' => 'docente'
-        )
-    );
-})
-->bind('uso.docente');
-
-$app->get('/comercial', function (Request $request) use ($app) {
-    return $app['twig']->render(
-    	'comercial.twig', 
-    	array(
-            'error' => $app['security.last_error']($request),
-            'last_username' => $app['session']->get('_security.last_username'),
-            'opcion' => 'comercial'
-        )
-    );
-})
-->bind('uso.comercial');
-
-$app->get('/publica_concurrencia', function (Request $request) use ($app) {
-    return $app['twig']->render(
-    	'publica_concurrencia.twig', 
-    	array(
-            'error' => $app['security.last_error']($request),
-            'last_username' => $app['session']->get('_security.last_username'),
-            'opcion' => 'publica_concurrencia'
-        )
-    );
-})
-->bind('uso.publica_concurrencia');
-
-$app->get('/aparcamiento', function (Request $request) use ($app) {
-    return $app['twig']->render(
-    	'aparcamiento.twig', 
-    	array(
-            'error' => $app['security.last_error']($request),
-            'last_username' => $app['session']->get('_security.last_username'),
-            'opcion' => 'aparcamiento'
-        )
-    );
-})
-->bind('uso.aparcamiento');
-// ----------------------------------------------------------------------------
