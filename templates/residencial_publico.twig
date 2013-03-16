@@ -19,11 +19,11 @@
         		<div class="ui-body ui-body-b">
         		    <input type="hidden" name="uso" id="uso" value="{{ opcion }}">
                     <label for="superficie">Superficie construida en (m&sup2;)</label>
-        		    <input type="text" name="superficie" id="superficie" placeholder="m&sup2;">
+        		    <input type="text" name="superficie" id="superficie" pattern="[0-9]*" placeholder="m&sup2;" required>
         		    <label for="altura_d">Altura de evacuación descendente (m)</label>
-        		    <input type="text" name="altura_d" id="altura_d" placeholder="m">
+        		    <input type="text" name="altura_d" id="altura_d" pattern="[0-9]*" placeholder="m" required>
         		    <label for="altura_a">Altura de evacuación ascendente (m)</label>
-        		    <input type="text" name="altura_a" id="altura_a" placeholder="m">
+        		    <input type="text" name="altura_a" id="altura_a" pattern="[0-9]*" placeholder="m" required>
         		    <hr>
         		    <label for="aloj_50pers">¿El establecimiento está previsto para dar alojamiento a más de 50 personas?</label>
         		    <select name="aloj_50pers" id="aloj_50pers" data-role="slider" data-theme="c" data-track-theme="a">
@@ -51,7 +51,7 @@
                         </select>
                         <hr>
                         <label for="superficie_locales">¿Cuál es la superficie construida de los locales? (m&sup2;)</label>
-                        <input type="text" name="superficie_locales" id="superficie_locales" placeholder="m&sup2;">
+                        <input type="text" name="superficie_locales" id="superficie_locales" pattern="[0-9]*" placeholder="m&sup2;" required>
         		    </div>
         		</div>
                 {% block envio %}

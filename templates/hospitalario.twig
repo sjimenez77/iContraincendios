@@ -20,11 +20,11 @@
         		<div class="ui-body ui-body-b">
                     <input type="hidden" name="uso" id="uso" value="{{ opcion }}">
         		    <label for="superficie">Superficie construida en (m&sup2;)</label>
-        		    <input type="text" name="superficie" id="superficie" placeholder="m&sup2;">
+        		    <input type="text" name="superficie" id="superficie" pattern="[0-9]*" placeholder="m&sup2;" required>
         		    <label for="altura_d">Altura de evacuación descendente (m)</label>
-        		    <input type="text" name="altura_d" id="altura_d" placeholder="m">
+        		    <input type="text" name="altura_d" id="altura_d" pattern="[0-9]*" placeholder="m" required>
         		    <label for="altura_a">Altura de evacuación ascendente (m)</label>
-        		    <input type="text" name="altura_a" id="altura_a" placeholder="m">
+        		    <input type="text" name="altura_a" id="altura_a" pattern="[0-9]*" placeholder="m" required>
         		    <hr>
         		    <label for="camas_100">¿El edificio dispone de más de 100 camas?</label>
         		    <select name="camas_100" id="camas_100" data-role="slider" data-theme="c" data-track-theme="a">
@@ -52,7 +52,7 @@
             		    </select>
             		    <hr>
             		    <label for="v_almacenes_fc">¿Cuál es el volumen construido de los almacenes?  (m&sup3;)</label>
-            		    <input type="text" name="v_almacenes_fc" id="v_almacenes_fc" placeholder="m&sup3;">
+            		    <input type="text" name="v_almacenes_fc" id="v_almacenes_fc" pattern="[0-9]*" placeholder="m&sup3;" required>
                         <hr>
                         <label for="lab_c">¿Hay laboratorios clínicos?</label>
                         <select name="lab_c" id="lab_c" data-role="slider" data-theme="c" data-track-theme="a">
@@ -61,7 +61,7 @@
                         </select>
                         <hr>
                         <label for="v_lab_c">¿Cuál es el volumen construido de los laboratorios?  (m&sup3;)</label>
-                        <input type="text" name="v_lab_c" id="v_lab_c" placeholder="m&sup3;">
+                        <input type="text" name="v_lab_c" id="v_lab_c" pattern="[0-9]*" placeholder="m&sup3;" required>
                         <hr>
                         <label for="zonas_est">¿Hay zonas de esterilización y almacenes anejos?</label>
                         <select name="zonas_est" id="zonas_est" data-role="slider" data-theme="c" data-track-theme="a">
