@@ -222,7 +222,7 @@ $usos_ins->post('/resultados', function (Request $request) use ($app) {
                 array_push($claves_comentarios, "bies_45");
                 array_push($lista_comentarios, "Instalación de BIES de 45mm, en las que el riesgo se deba principalmente a materias combustibles sólidas. En los locales de riesgo especial alto.");
             }
-            if ($sd_incendio && $superficie > 5000) {
+            if ($sd_incendio && $superficie >= 5000) {
                 array_push($claves_comentarios, "sd_incendio");
                 array_push($lista_comentarios, "El sistema de detección automático de incendios debe instalarse en todo el edificio.");
             }
@@ -264,9 +264,9 @@ $usos_ins->post('/resultados', function (Request $request) use ($app) {
             $plantas_rasante = null;
             // Procesamos datos
             if ($superficie > 0) $extintores = True;
-            if ($superficie > 1000 && $aloj_50pers) $bies_25 = True;
+            if ($superficie > 1000 || $aloj_50pers) $bies_25 = True;
             if ($superficie > 2000 || $altura_d > 28 || $altura_a > 6) $hid_exteriores = True;
-            if ($altura_d > 28 && $superficie > 5000) $ia_extincion = True;
+            if ($altura_d > 28 || $superficie > 5000) $ia_extincion = True;
             if ($altura_d > 24 || $altura_a > 24) $columna_seca = True;
             if ($sm_alarma > 500) $sm_alarma = True;
             if ($sm_alarma > 500) $sd_incendio = True;
@@ -318,7 +318,7 @@ $usos_ins->post('/resultados', function (Request $request) use ($app) {
                 $sd_incendio = True;
             }
             if ($superficie > 2000 || $altura_d > 28 || $altura_a > 6) $hid_exteriores = True;
-            if ($altura_d > 28 && $superficie > 5000) $ia_extincion = True;
+            if ($altura_d > 28 || $superficie > 5000) $ia_extincion = True;
             if ($altura_d > 15 || $altura_a > 15) $columna_seca = True;
             if (($almacenes_fc && $v_almacenes_fc > 400) || ($lab_c && $v_lab_c > 400) || $zonas_est) $bies_45 = True;
             if ($cocina_20kW) $ia_extincion_cocina = True;
@@ -329,8 +329,28 @@ $usos_ins->post('/resultados', function (Request $request) use ($app) {
                 array_push($lista_comentarios, "En las zonas de riesgo especial alto, cuya superficie construida exceda de 500 m&sup2;, un extintor móvil de 25 kg de polvo o de CO2 por cada 2.500m&sup2; de superficie o fracción.");
             }
             if ($bies_45) {
+                // Sitios donde se realizarán la instalación de BIES de 45mm 
+                $bies_45_sitios = "";
+                if ($almacenes_fc && $v_almacenes_fc > 400) 
+                    $bies_45_sitios .= "En los almacenes de productos farmaceuticos y clinicos";
+                if ($lab_c && $v_lab_c > 400) 
+                    if (strlen($bies_45_sitios) > 0) 
+                        $bies_45_sitios .= ", en la zona de laboratorios clínicos";
+                    else
+                        $bies_45_sitios .= "En la zona de laboratorios clínicos";
+                if ($zonas_est)
+                    if (strlen($bies_45_sitios) > 0) 
+                        $bies_45_sitios .= "y en la zona de esterilización y almacenajes anejos";
+                    else
+                        $bies_45_sitios .= "En la zona de esterilización y almacenajes anejos";
+                $bies_45_sitios .= ".";
+
                 array_push($claves_comentarios, "bies_45");
-                array_push($lista_comentarios, "Instalación de BIES de 45mm, en las que el riesgo se deba principalmente a materias combustibles sólidas. En los almacenes de productos farmaceuticos y clinicos.");
+                array_push($lista_comentarios, "Instalación de BIES de 45mm, en las que el riesgo se deba principalmente a materias combustibles sólidas. ".$bies_45_sitios);
+            }
+            if ($superficie > 0 && $camas_100) {
+                array_push($claves_comentarios, "sd_incendio");
+                array_push($lista_comentarios, "El edificio debe contar con comunicación telefónica directa con el servicio de bomberos.");
             }
             if ($ia_extincion_cocina) {
                 array_push($claves_comentarios, "ia_extincion_cocina");
@@ -366,15 +386,23 @@ $usos_ins->post('/resultados', function (Request $request) use ($app) {
             $plantas_rasante = null;
             // Procesamos datos
             if ($superficie > 0) $extintores = True;
-            if ($superficie > 5000 || $altura_d > 28 || $altura_a > 6 || $dens_1per) $hid_exteriores = True;
-            if ($altura_d > 80) $ia_extincion = True;
+            if ($superficie > 2000) $bies_25 = True;
+            if ($superficie > 5000 || $altura_d > 28 || $altura_a > 6) $hid_exteriores = True;
+            if ($altura_d > 28 || $superficie > 5000) $ia_extincion = True;
             if ($altura_d > 24 || $altura_a > 24) $columna_seca = True;
-            if ($altura_d > 50 || $altura_a > 50) $sm_alarma = True;
-            if ($altura_d > 50 || $altura_a > 50) $sd_incendio = True;
-            if ($trasteros && $superficie_trasteros > 500) $bies_45 = True;
+            if ($superficie > 1000) $sm_alarma = True;
+            if ($superficie > 2000) $sd_incendio = True;
             if ($cocina_50kW) $ia_extincion_cocina = True;
             if ($centro_transf) $ia_extincion_centro_transf = True;
             // Rellenamos los comentarios asociados
+            if ($sd_incendio && $superficie >= 5000) {
+                array_push($claves_comentarios, "sd_incendio");
+                array_push($lista_comentarios, "El sistema de detección automático de incendios debe instalarse en todo el edificio.");
+            }
+            if ($sd_incendio && $superficie < 5000) {
+                array_push($claves_comentarios, "sd_incendio");
+                array_push($lista_comentarios, "El sistema de detección automático de incendios debe instalarse en las zonas de riesgo especial alto.");
+            }
             // Combinamos los arrays de claves y de comentarios
             $comentarios = array_combine($claves_comentarios, $lista_comentarios);
             break;
