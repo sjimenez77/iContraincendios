@@ -17,13 +17,13 @@
             <div class="ui-bar ui-bar-b"><strong>Cumplimente los siguientes datos:</strong></div>
         	<form name="residencial_publico" method="post" action="{{ path('uso.resultados') }}">
         		<div class="ui-body ui-body-b">
-        		    <input type="hidden" name="uso" id="uso" value="{{ opcion }}">
-                    <label for="superficie">Superficie construida en (m&sup2;)</label>
-        		    <input type="text" name="superficie" id="superficie" pattern="[0-9]*" placeholder="m&sup2;" required>
-        		    <label for="altura_d">Altura de evacuación descendente (m)</label>
-        		    <input type="text" name="altura_d" id="altura_d" pattern="[0-9]*" placeholder="m" required>
-        		    <label for="altura_a">Altura de evacuación ascendente (m)</label>
-        		    <input type="text" name="altura_a" id="altura_a" pattern="[0-9]*" placeholder="m" required>
+                    <input type="hidden" name="uso" id="uso" value="{{ opcion }}">
+        		    <label for="superficie">Superficie construida en (m&sup2;)</label>
+                    <input type="text" name="superficie" id="superficie" pattern="[0-9]*" placeholder="m&sup2;" title="Se necesita un valor de superficie" required>
+                    <label for="altura_d">Altura de evacuación descendente (m)</label>
+                    <input type="text" name="altura_d" id="altura_d" pattern="[0-9]*" placeholder="m" title="Se necesita un valor de altura de evacuación descendente" required>
+                    <label for="altura_a">Altura de evacuación ascendente (m)</label>
+                    <input type="text" name="altura_a" id="altura_a" pattern="[0-9]*" placeholder="m" title="Se necesita un valor de altura de evacuación ascendente" required>
         		    <hr>
         		    <label for="aloj_50pers">¿El establecimiento está previsto para dar alojamiento a más de 50 personas?</label>
         		    <select name="aloj_50pers" id="aloj_50pers" data-role="slider" data-theme="c" data-track-theme="a">
@@ -44,14 +44,14 @@
         		    </select><br>&nbsp;
         		    <div class="ui-bar ui-bar-a"><strong>Locales y zonas de riesgo especial</strong></div>
         		    <div class="ui-body ui-body-e">
-                        <label for="locales_riesgo">¿Hay roperos y locales para la custodia de equipajes?</label>
-                        <select name="locales_riesgo" id="locales_riesgo" data-role="slider" data-theme="c" data-track-theme="a">
+                        <label for="roperos">¿Hay roperos y locales para la custodia de equipajes?</label>
+                        <select name="roperos" id="roperos" data-role="slider" data-theme="c" data-track-theme="a">
                             <option value="no">No</option>
                             <option value="si">Si</option>
                         </select>
                         <hr>
-                        <label for="superficie_locales">¿Cuál es la superficie construida de los locales? (m&sup2;)</label>
-                        <input type="text" name="superficie_locales" id="superficie_locales" pattern="[0-9]*" placeholder="m&sup2;" required>
+                        <label for="superficie_roperos">¿Cuál es la superficie construida de los locales? (m&sup2;)</label>
+                        <input type="text" disabled="disabled" name="superficie_roperos" id="superficie_roperos" pattern="[0-9]*" placeholder="m&sup2;" title="Si hay roperos y locales para la custodia de equipajes debe indicar su superficie" required>
         		    </div>
         		</div>
                 {% block envio %}

@@ -124,8 +124,9 @@ $usos_ins->post('/resultados', function (Request $request) use ($app) {
     $ia_extincion = False;
     $ia_extincion_cocina = False;
     $ia_extincion_centro_transf = False;
-    $claves_comentarios = array(null);
-    $lista_comentarios = array(null);
+    $claves_comentarios = array();
+    $lista_comentarios = array();
+    $comentarios = array();
 
     // Obtenemos los datos comunes
     $superficie = trim($request->get('superficie'));
@@ -140,11 +141,12 @@ $usos_ins->post('/resultados', function (Request $request) use ($app) {
             $cocina_50kW = ($request->get('cocina_50kW')=='si') ? 1 : 0;
             $trasteros = ($request->get('trasteros')=='si') ? 1 : 0;
             $superficie_trasteros = trim($request->get('superficie_trasteros'));
-            $locales_riesgo = null;
+            $reprografia = null;
             $volumen_construido = null;
             $aloj_50pers = null;
             $cocina_20kW = null;
-            $superficie_locales = null;
+            $roperos = null;
+            $superficie_roperos = null;
             $camas_100 = null;
             $almacenes_fc = null;
             $v_almacenes_fc = null;
@@ -187,11 +189,12 @@ $usos_ins->post('/resultados', function (Request $request) use ($app) {
             $cocina_50kW = ($request->get('cocina_50kW')=='si') ? 1 : 0;
             $trasteros = null;
             $superficie_trasteros = null;
-            $locales_riesgo = ($request->get('locales_riesgo')=='si') ? 1 : 0;
+            $reprografia = ($request->get('reprografia')=='si') ? 1 : 0;
             $volumen_construido = trim($request->get('volumen_construido'));
             $aloj_50pers = null;
             $cocina_20kW = null;
-            $superficie_locales = null;
+            $roperos = null;
+            $superficie_roperos = null;
             $camas_100 = null;
             $almacenes_fc = null;
             $v_almacenes_fc = null;
@@ -214,7 +217,7 @@ $usos_ins->post('/resultados', function (Request $request) use ($app) {
             if ($altura_d > 24 || $altura_a > 24) $columna_seca = True;
             if ($superficie > 1000) $sm_alarma = True;
             if ($superficie > 2000) $sd_incendio = True;
-            if ($locales_riesgo && $volumen_construido > 500) $bies_45 = True;
+            if ($reprografia && $volumen_construido > 500) $bies_45 = True;
             if ($cocina_50kW) $ia_extincion_cocina = True;
             if ($centro_transf) $ia_extincion_centro_transf = True;
             // Rellenamos los comentarios asociados
@@ -243,11 +246,12 @@ $usos_ins->post('/resultados', function (Request $request) use ($app) {
             $cocina_50kW = null;
             $trasteros = null;
             $superficie_trasteros = null;
-            $locales_riesgo = ($request->get('locales_riesgo')=='si') ? 1 : 0;
+            $reprografia = null;
             $volumen_construido = null;
             $aloj_50pers = ($request->get('aloj_50pers')=='si') ? 1 : 0; 
             $cocina_20kW = ($request->get('cocina_20kW')=='si') ? 1 : 0;
-            $superficie_locales = trim($request->get('superficie_locales'));
+            $roperos = ($request->get('roperos')=='si') ? 1 : 0;
+            $superficie_roperos = trim($request->get('superficie_roperos'));
             $camas_100 = null;
             $almacenes_fc = null;
             $v_almacenes_fc = null;
@@ -268,9 +272,11 @@ $usos_ins->post('/resultados', function (Request $request) use ($app) {
             if ($superficie > 2000 || $altura_d > 28 || $altura_a > 6) $hid_exteriores = True;
             if ($altura_d > 28 || $superficie > 5000) $ia_extincion = True;
             if ($altura_d > 24 || $altura_a > 24) $columna_seca = True;
-            if ($sm_alarma > 500) $sm_alarma = True;
-            if ($sm_alarma > 500) $sd_incendio = True;
-            if ($locales_riesgo && $superficie_locales > 500) $bies_45 = True;
+            if ($superficie > 500) {
+                $sm_alarma = True;
+                $sd_incendio = True;
+            }
+            if ($roperos && $superficie_roperos > 500) $bies_45 = True;
             if ($cocina_20kW) $ia_extincion_cocina = True;
             if ($centro_transf) $ia_extincion_centro_transf = True;
             // Rellenamos los comentarios asociados
@@ -291,12 +297,13 @@ $usos_ins->post('/resultados', function (Request $request) use ($app) {
             $cocina_50kW = null;
             $trasteros = null;
             $superficie_trasteros = null;
-            $locales_riesgo = null;
+            $reprografia = null;
             $volumen_construido = null;
             $aloj_50pers = null;
             $camas_100 = ($request->get('camas_100')=='si') ? 1 : 0; 
             $cocina_20kW = ($request->get('cocina_20kW')=='si') ? 1 : 0;
-            $superficie_locales = null;
+            $roperos = null;
+            $superficie_roperos = null;
             $almacenes_fc = ($request->get('almacenes_fc')=='si') ? 1 : 0;
             $v_almacenes_fc = trim($request->get('v_almacenes_fc'));
             $lab_c = ($request->get('lab_c')=='si') ? 1 : 0;
@@ -365,11 +372,12 @@ $usos_ins->post('/resultados', function (Request $request) use ($app) {
             $cocina_50kW = ($request->get('cocina_50kW')=='si') ? 1 : 0;
             $trasteros = null;
             $superficie_trasteros = null;
-            $locales_riesgo = null;
+            $reprografia = null;
             $volumen_construido = null;
             $aloj_50pers = null;
             $cocina_20kW = null;
-            $superficie_locales = null;
+            $roperos = null;
+            $superficie_roperos = null;
             $camas_100 = null;
             $almacenes_fc = null;
             $v_almacenes_fc = null;
@@ -407,16 +415,17 @@ $usos_ins->post('/resultados', function (Request $request) use ($app) {
             $comentarios = array_combine($claves_comentarios, $lista_comentarios);
             break;
         
-        case 'Comercial':
+        case 'Comercial': 
             $dens_1per  = null;
             $cocina_50kW = ($request->get('cocina_50kW')=='si') ? 1 : 0;
             $trasteros = null;
             $superficie_trasteros = null;
-            $locales_riesgo = null;
+            $reprografia = null;
             $volumen_construido = null;
             $aloj_50pers = null;
             $cocina_20kW = null;
-            $superficie_locales = null;
+            $roperos = null;
+            $superficie_roperos = null;
             $camas_100 = null;
             $almacenes_fc = null;
             $v_almacenes_fc = null;
@@ -433,15 +442,28 @@ $usos_ins->post('/resultados', function (Request $request) use ($app) {
             $plantas_rasante = null;
             // Procesamos datos
             if ($superficie > 0) $extintores = True;
-            if ($superficie > 5000 || $altura_d > 28 || $altura_a > 6 || $dens_1per) $hid_exteriores = True;
-            if ($altura_d > 80) $ia_extincion = True;
+            if ($superficie > 500) $bies_25 = True;
+            if ($superficie > 1000 || $altura_d > 28 || $altura_a > 6) $hid_exteriores = True;
+            if ($area_ventas_1500 && $densidad_cf_500) $ia_extincion = True;
             if ($altura_d > 24 || $altura_a > 24) $columna_seca = True;
-            if ($altura_d > 50 || $altura_a > 50) $sm_alarma = True;
-            if ($altura_d > 50 || $altura_a > 50) $sd_incendio = True;
-            if ($trasteros && $superficie_trasteros > 500) $bies_45 = True;
+            if ($superficie > 1000) $sm_alarma = True;
+            if ($superficie > 2000) $sd_incendio = True;
+            if ($almacenes_cf_3400) $bies_45 = True;
             if ($cocina_50kW) $ia_extincion_cocina = True;
             if ($centro_transf) $ia_extincion_centro_transf = True;
             // Rellenamos los comentarios asociados
+            if ($superficie > 1000) {
+                array_push($claves_comentarios, "extintores");
+                array_push($lista_comentarios, "En toda agrupación de locales de riesgo especial medio y alto cuya superficie construida total excede de 1.000 m&sup2;, extintores móviles de 50 kg de polvo.");
+            }
+            if ($bies_45) {
+                array_push($claves_comentarios, "bies_45");
+                array_push($lista_comentarios, "Instalación de BIES de 45mm, en las zonas de riesgo especial alto en las que el riesgo se deba principalmente a materias combustibles sólidas.");
+            }
+            if ($ia_extincion) {
+                array_push($claves_comentarios, "ia_extincion");
+                array_push($lista_comentarios, "La instalación automática de extinción deberá contar, tanto el área pública de ventas, como los locales y zonas de riesgo especial medio y alto.");
+            }
             // Combinamos los arrays de claves y de comentarios
             $comentarios = array_combine($claves_comentarios, $lista_comentarios);
             break;
@@ -451,11 +473,12 @@ $usos_ins->post('/resultados', function (Request $request) use ($app) {
             $cocina_50kW = ($request->get('cocina_50kW')=='si') ? 1 : 0;
             $trasteros = null;
             $superficie_trasteros = null;
-            $locales_riesgo = null;
+            $reprografia = null;
             $volumen_construido = null;
             $aloj_50pers = null;
             $cocina_20kW = null;
-            $superficie_locales = null;
+            $roperos = null;
+            $superficie_roperos = null;
             $camas_100 = null;
             $almacenes_fc = null;
             $v_almacenes_fc = null;
@@ -472,15 +495,26 @@ $usos_ins->post('/resultados', function (Request $request) use ($app) {
             $plantas_rasante = null;
             // Procesamos datos
             if ($superficie > 0) $extintores = True;
-            if ($superficie > 5000 || $altura_d > 28 || $altura_a > 6 || $dens_1per) $hid_exteriores = True;
-            if ($altura_d > 80) $ia_extincion = True;
+            if ($superficie > 500) $bies_25 = True;
+            if ($superficie > 500 || $altura_d > 28 || $altura_a > 6) $hid_exteriores = True;
+            if ($ocupacion_500) {
+                $ia_extincion = True;
+                $sm_alarma = True;
+            }
             if ($altura_d > 24 || $altura_a > 24) $columna_seca = True;
-            if ($altura_d > 50 || $altura_a > 50) $sm_alarma = True;
-            if ($altura_d > 50 || $altura_a > 50) $sd_incendio = True;
-            if ($trasteros && $superficie_trasteros > 500) $bies_45 = True;
+            if ($superficie > 1000) $sd_incendio = True;
+            if ($talleres_dec) $bies_45 = True;
             if ($cocina_50kW) $ia_extincion_cocina = True;
             if ($centro_transf) $ia_extincion_centro_transf = True;
             // Rellenamos los comentarios asociados
+            if ($sm_alarma) {
+                array_push($claves_comentarios, "sm_alarma");
+                array_push($lista_comentarios, "El sistema de alarma debe ser apto para emitir mensajes por megafonía.");
+            }
+            if ($superficie > 5000 && ($tipo_pub_concurrencia == "Recintos deportivos" || $tipo_pub_concurrencia = "Otros")) {
+                array_push($claves_comentarios, "hid_exteriores");
+                array_push($lista_comentarios, "Al ser recinto deportivo o sin especificar de más de 5000 m&sup2; de superficie construida es necesaria la instalación del sistema de hidrantes.");
+            }
             // Combinamos los arrays de claves y de comentarios
             $comentarios = array_combine($claves_comentarios, $lista_comentarios);
             break;
@@ -490,11 +524,12 @@ $usos_ins->post('/resultados', function (Request $request) use ($app) {
             $cocina_50kW = ($request->get('cocina_50kW')=='si') ? 1 : 0;
             $trasteros = null;
             $superficie_trasteros = null;
-            $locales_riesgo = null;
+            $reprografia = null;
             $volumen_construido = null;
             $aloj_50pers = null;
             $cocina_20kW = null;
-            $superficie_locales = null;
+            $roperos = null;
+            $superficie_roperos = null;
             $camas_100 = null;
             $almacenes_fc = null;
             $v_almacenes_fc = null;
@@ -511,15 +546,30 @@ $usos_ins->post('/resultados', function (Request $request) use ($app) {
             $plantas_rasante = ($request->get('plantas_rasante')=='si') ? 1 : 0;
             // Procesamos datos
             if ($superficie > 0) $extintores = True;
-            if ($superficie > 5000 || $altura_d > 28 || $altura_a > 6 || $dens_1per) $hid_exteriores = True;
-            if ($altura_d > 80) $ia_extincion = True;
-            if ($altura_d > 24 || $altura_a > 24) $columna_seca = True;
-            if ($altura_d > 50 || $altura_a > 50) $sm_alarma = True;
-            if ($altura_d > 50 || $altura_a > 50) $sd_incendio = True;
-            if ($trasteros && $superficie_trasteros > 500) $bies_45 = True;
+            if ($superficie > 500) {
+                $bies_25 = True;
+                $sd_incendio = True;
+            }
+            if ($superficie > 1000 || $altura_d > 28 || $altura_a > 6) $hid_exteriores = True;
+            if ($plantas_rasante) {
+                $ia_extincion = True;
+                $columna_seca = True;
+                $bies_45 = True;
+            }
+            if ($robotizado) $sm_alarma = True;
             if ($cocina_50kW) $ia_extincion_cocina = True;
             if ($centro_transf) $ia_extincion_centro_transf = True;
             // Rellenamos los comentarios asociados
+            if ($superficie > 500 && $robotizado) {
+                array_push($claves_comentarios, "bies_25");
+                array_push($lista_comentarios, "Se excluye de los aparcamientos robotizados, la necesidad de instalar un Sistema de Bocas de Incendio Equipadas.");
+            }
+            if ($sm_alarma) {
+                array_push($claves_comentarios, "sm_alarma");
+                array_push($lista_comentarios, "Los aparcamientos robotizados dispondrán de pulsadores de alarma en todo caso.");
+            }
+            // Combinamos los arrays de claves y de comentarios
+            $comentarios = array_combine($claves_comentarios, $lista_comentarios);
             break;
         
         default:
@@ -527,11 +577,12 @@ $usos_ins->post('/resultados', function (Request $request) use ($app) {
             $cocina_50kW = null;
             $trasteros = null;
             $superficie_trasteros = null;
-            $locales_riesgo = null;
+            $reprografia = null;
             $volumen_construido = null;
             $aloj_50pers = null;
             $cocina_20kW = null;
-            $superficie_locales = null;
+            $roperos = null;
+            $superficie_roperos = null;
             $camas_100 = null;
             $almacenes_fc = null;
             $v_almacenes_fc = null;
@@ -549,6 +600,9 @@ $usos_ins->post('/resultados', function (Request $request) use ($app) {
             break;
     }
 
+    $app['monolog']->addDebug('Opcion: '.$opcion);
+    $app['monolog']->addDebug('Superficie: '.$superficie);
+
     // Construimos los resultados en función de los datos rellenados
     return $app['twig']->render(
         'resultados.twig',
@@ -564,11 +618,12 @@ $usos_ins->post('/resultados', function (Request $request) use ($app) {
             'cocina_50kW' => $cocina_50kW,
             'trasteros' => $trasteros,
             'superficie_trasteros' => $superficie_trasteros,
-            'locales_riesgo' => $locales_riesgo,
+            'reprografia' => $reprografia,
             'volumen_construido' => $volumen_construido,
             'aloj_50pers' => $aloj_50pers,
             'cocina_20kW' => $cocina_20kW,
-            'superficie_locales' => $superficie_locales,
+            'roperos' => $roperos,
+            'superficie_roperos' => $superficie_roperos,
             'camas_100' => $camas_100,
             'almacenes_fc' => $almacenes_fc,
             'v_almacenes_fc' => $v_almacenes_fc,

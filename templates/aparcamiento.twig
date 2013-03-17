@@ -19,12 +19,12 @@
         	<form name="aparcamiento" method="post" action="{{ path('uso.resultados') }}">
         		<div class="ui-body ui-body-b">
                     <input type="hidden" name="uso" id="uso" value="{{ opcion }}">
-        		    <label for="superficie">Superficie construida en (m&sup2;)</label>
-        		    <input type="text" name="superficie" id="superficie" pattern="[0-9]*" placeholder="m&sup2;" required>
-        		    <label for="altura_d">Altura de evacuación descendente (m)</label>
-        		    <input type="text" name="altura_d" id="altura_d" pattern="[0-9]*" placeholder="m" required>
-        		    <label for="altura_a">Altura de evacuación ascendente (m)</label>
-        		    <input type="text" name="altura_a" id="altura_a" pattern="[0-9]*" placeholder="m" required>
+                    <label for="superficie">Superficie construida en (m&sup2;)</label>
+                    <input type="text" name="superficie" id="superficie" pattern="[0-9]*" placeholder="m&sup2;" title="Se necesita un valor de superficie" required>
+                    <label for="altura_d">Altura de evacuación descendente (m)</label>
+                    <input type="text" name="altura_d" id="altura_d" pattern="[0-9]*" placeholder="m" title="Se necesita un valor de altura de evacuación descendente" required>
+                    <label for="altura_a">Altura de evacuación ascendente (m)</label>
+                    <input type="text" name="altura_a" id="altura_a" pattern="[0-9]*" placeholder="m" title="Se necesita un valor de altura de evacuación ascendente" required>
                     <hr>
                     <label for="robotizado">¿El aparcamiento es robotizado?</label>
                     <select name="robotizado" id="robotizado" data-role="slider" data-theme="c" data-track-theme="a">

@@ -3,42 +3,42 @@
 		<h3>Uso previsto de la instalación</h3>
 		<ul data-role="listview" data-theme="c" data-dividertheme="d">
 			<li data-role="list-divider">Seleccione el uso previsto de la instalación</li>
-            <li {% if opcion == 'Residencial Vivienda' %}data-theme="a"{% endif %}><a href="{{ app.url_generator.generate('uso.residencial_vivienda') }}">
+            <li {% if opcion == 'Residencial Vivienda' %}data-theme="a"{% endif %}><a href="{{ path('uso.residencial_vivienda') }}">
             	<img src="/img/resviv.jpg">
                 <h3>Residencial Vivienda</h3>
                 <p>Edificio o zona destinada a alojamiento permanente </p>
             </a></li>
-            <li {% if opcion == 'Administrativo' %}data-theme="a"{% endif %}><a href="{{ app.url_generator.generate('uso.administrativo') }}">
+            <li {% if opcion == 'Administrativo' %}data-theme="a"{% endif %}><a href="{{ path('uso.administrativo') }}">
             	<img src="/img/adminis.jpg">
                 <h3>Administrativo</h3>
                 <p>Edificio, establecimiento o zona en el que se desarrollan actividades de gestión o de servicios en cualquiera de sus modalidades</p>
             </a></li>
-            <li {% if opcion == 'Residencial Público' %}data-theme="a"{% endif %}><a href="{{ app.url_generator.generate('uso.residencial_publico') }}">
+            <li {% if opcion == 'Residencial Público' %}data-theme="a"{% endif %}><a href="{{ path('uso.residencial_publico') }}">
             	<img src="/img/respub.jpg">
                 <h3>Residencial Público</h3>
                 <p>Edificio o establecimiento destinado a proporcionar alojamiento temporal</p>
             </a></li>
-            <li {% if opcion == 'Hospitalario' %}data-theme="a"{% endif %}><a href="{{ app.url_generator.generate('uso.hospitalario') }}">
+            <li {% if opcion == 'Hospitalario' %}data-theme="a"{% endif %}><a href="{{ path('uso.hospitalario') }}">
             	<img src="/img/hospital.jpg">
                 <h3>Hospitalario</h3>
                 <p>Edificio o establecimiento destinado a asistencia sanitaria con hospitalización de 24 horas</p>
             </a></li>
-            <li {% if opcion == 'Docente' %}data-theme="a"{% endif %}><a href="{{ app.url_generator.generate('uso.docente') }}">
+            <li {% if opcion == 'Docente' %}data-theme="a"{% endif %}><a href="{{ path('uso.docente') }}">
             	<img src="/img/docente.jpg">
                 <h3>Docente</h3>
                 <p>Edificio, establecimiento o zona destinada a docencia, en cualquiera de sus niveles</p>
             </a></li>
-            <li {% if opcion == 'Comercial' %}data-theme="a"{% endif %}><a href="{{ app.url_generator.generate('uso.comercial') }}">
+            <li {% if opcion == 'Comercial' %}data-theme="a"{% endif %}><a href="{{ path('uso.comercial') }}">
             	<img src="/img/comercial.jpg">
                 <h3>Comercial</h3>
                 <p>Edificio o establecimiento cuya actividad principal es la venta de productos directamente al público o la prestación de servicios relacionados con los mismos</p>
             </a></li>
-            <li {% if opcion == 'Pública Concurrencia' %}data-theme="a"{% endif %}><a href="{{ app.url_generator.generate('uso.publica_concurrencia') }}">
+            <li {% if opcion == 'Pública Concurrencia' %}data-theme="a"{% endif %}><a href="{{ path('uso.publica_concurrencia') }}">
             	<img src="/img/pubconcur.jpg">
                 <h3>Pública Concurrencia</h3>
                 <p>Edificio o establecimiento destinado a alguno de los siguientes usos: cultural, religioso y de transporte de personas</p>
             </a></li>
-            <li {% if opcion == 'Aparcamiento' %}data-theme="a"{% endif %}><a href="{{ app.url_generator.generate('uso.aparcamiento') }}">
+            <li {% if opcion == 'Aparcamiento' %}data-theme="a"{% endif %}><a href="{{ path('uso.aparcamiento') }}">
             	<img src="/img/parking.jpg">
                 <h3>Aparcamiento</h3>
                 <p>Edificio, establecimiento o zona independiente o accesoria de otro uso principal, destinado a estacionamiento de vehículos</p>

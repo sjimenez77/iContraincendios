@@ -56,58 +56,37 @@
                 </div>
                 {% endif %}
             </div>
-            <div class="ui-bar ui-bar-b"><strong>Resultados:</strong></div>
+            <div class="ui-bar ui-bar-b">Resultados de la instalación de uso <strong>{{ opcion|e }}</strong></div>
             <form name="resviv" method="post" action="">
               <div class="ui-body ui-body-b">
-                  <div data-role="fieldcontain">
-                  <label for="superficie">Extintores - Señalización</label>
-                  <input type="text" name="superficie" id="superficie" placeholder="Resultado">
-                  </div>
-                  <div data-role="fieldcontain">
-                  <label for="superficie">Bies &Oslash;25 mm</label>
-                  <input type="text" name="superficie" id="superficie" placeholder="Resultado">
-                  </div>
-                  <div data-role="fieldcontain">
-                  <label for="superficie">Bies &Oslash;45 mm</label>
-                  <input type="text" name="superficie" id="superficie" placeholder="Resultado">
-                  </div>
-                  <div data-role="fieldcontain">
-                  <label for="superficie">Columna seca</label>
-                  <input type="text" name="superficie" id="superficie" placeholder="Resultado">
-                  </div>
-                  <div data-role="fieldcontain">
-                  <label for="superficie">Sistema manual de alarma de incendio</label>
-                  <input type="text" name="superficie" id="superficie" placeholder="Resultado">
-                  </div>
-                  <div data-role="fieldcontain">
-                  <label for="superficie">Sistema de detección de incendio</label>
-                  <input type="text" name="superficie" id="superficie" placeholder="Resultado">
-                  </div>
-                  <div data-role="fieldcontain">
-                  <label for="superficie">Hidrantes exteriores</label>
-                  <input type="text" name="superficie" id="superficie" placeholder="Resultado">
-                  </div>
-                  <div data-role="fieldcontain">
-                  <label for="superficie">Instalación automética de extinción</label>
-                  <input type="text" name="superficie" id="superficie" placeholder="Resultado">
-                  </div>
-                  <div data-role="fieldcontain">
-                  <label for="superficie">Instalación automática de extinción cocina</label>
-                  <input type="text" name="superficie" id="superficie" placeholder="Resultado">
-                  </div>
-                  <div data-role="fieldcontain">
-                  <label for="superficie">Instalación automática de extinción centro transformación</label>
-                  <input type="text" name="superficie" id="superficie" placeholder="Resultado">
-                  </div>
-                  <hr>
-                  <label for="textarea-a">Aclaraciones y/o comentarios a los resultados</label>
-                  <textarea name="textarea" id="textarea-a">
-                  </textarea>                  
-                  <hr>
-                  <fieldset class="ui-grid-a">
-                      <div class="ui-block-a"><button type="reset" data-theme="a">Inicio</button></div>
-                      <div class="ui-block-b"><button type="submit" data-theme="b">Recalcular</button></div>       
-                  </fieldset>
+                <p><strong>Recuerda: </strong><span style="color:#477DAD"><strong>Azul</strong></span> indica que la instalación es obligatoria y <strong>negro</strong> que no lo es.</p>
+                <ul data-role="listview" data-inset="true">
+                  <li {% if extintores %} data-theme="b" data-icon="check" {% else %} data-theme="a" data-icon="delete" {% endif %}><a href="#">Extintores - Señalización</a></li>
+                  <li {% if bies_25 %} data-theme="b" data-icon="check" {% else %} data-theme="a" data-icon="delete" {% endif %}><a href="#">BIES &Oslash;25 mm</a></li>
+                  <li {% if bies_45 %} data-theme="b" data-icon="check" {% else %} data-theme="a" data-icon="delete" {% endif %}><a href="#">BIES &Oslash;45 mm</a></li>
+                  <li {% if columna_seca %} data-theme="b" data-icon="check" {% else %} data-theme="a" data-icon="delete" {% endif %}><a href="#">Columna seca</a></li>
+                  <li {% if sm_alarma %} data-theme="b" data-icon="check" {% else %} data-theme="a" data-icon="delete" {% endif %}><a href="#">Sistema manual de alarma de incendio</a></li>
+                  <li {% if sd_incendio %} data-theme="b" data-icon="check" {% else %} data-theme="a" data-icon="delete" {% endif %}><a href="#">Sistema de detección de incendio</a></li>
+                  <li {% if hid_exteriores %} data-theme="b" data-icon="check" {% else %} data-theme="a" data-icon="delete" {% endif %}><a href="#">Hidrantes exteriores</a></li>
+                  <li {% if ia_extincion %} data-theme="b" data-icon="check" {% else %} data-theme="a" data-icon="delete" {% endif %}><a href="#">Instalación automática de extinción</a></li>
+                  <li {% if ia_extincion_cocina %} data-theme="b" data-icon="check" {% else %} data-theme="a" data-icon="delete" {% endif %}><a href="#">Instalación automática de extinción cocina</a></li>
+                  <li {% if ia_extincion_centro_transf %} data-theme="b" data-icon="check" {% else %} data-theme="a" data-icon="delete" {% endif %}><a href="#">Instalación automática de extinción centro transformación</a></li>
+                </ul>
+                <ul data-role="listview" data-inset="true" data-divider-theme="a">
+                  <li data-role="list-divider">Aclaraciones y/o comentarios a los resultados</li>
+                  {% if comentarios|length > 0%}
+                    {% for comentario in comentarios %}
+                      <li data-theme="e" style="font-weight: normal;">{{ comentario|raw }}</li>
+                    {% endfor %}
+                  {% else %}
+                    <li data-theme="e" style="font-weight: normal;">No hay ninguna aclaración y/o comentario.</li>
+                  {% endif %}
+                </ul>                  
+                <hr>
+                <fieldset class="ui-grid-a">
+                    <div class="ui-block-a"><button type="reset" data-theme="a">Inicio</button></div>
+                    <div class="ui-block-b"><button type="submit" data-theme="b">Recalcular</button></div>       
+                </fieldset>
               </div>
             </form>
 	        <p>&nbsp;</p>		
