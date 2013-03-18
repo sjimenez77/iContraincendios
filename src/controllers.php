@@ -32,6 +32,24 @@ $app->get('/portada', function() use ($app) {
 ->bind('inicio');
 // -----------------------------------------------------------------------------
 
+// -- GENERAL ------------------------------------------------------------------
+$app->get('/quienes', function (Request $request) use ($app) {
+    return $app['twig']->render('quienes.twig', array(
+        'error'         => $app['security.last_error']($request),
+        'last_username' => $app['session']->get('_security.last_username'),
+    ));
+})
+->bind('quienes');
+
+$app->get('/ayuda', function (Request $request) use ($app) {
+    return $app['twig']->render('ayuda.twig', array(
+        'error'         => $app['security.last_error']($request),
+        'last_username' => $app['session']->get('_security.last_username'),
+    ));
+})
+->bind('ayuda');
+// -----------------------------------------------------------------------------
+
 // -- LOGIN --------------------------------------------------------------------
 $app->get('/login', function(Request $request) use ($app) {
     return $app['twig']->render('portada.twig', array(

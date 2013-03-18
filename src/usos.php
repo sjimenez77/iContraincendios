@@ -653,5 +653,17 @@ $usos_ins->post('/resultados', function (Request $request) use ($app) {
     );
 })
 ->bind('uso.resultados');
+
+$usos_ins->post('/archivar', function (Request $request) use ($app) {
+    // Obtenemos todos los campos y los almcenamos en la BDD si el usuario está conectado
+
+    // Construimos los resultados en función de los datos rellenados
+    return $app['twig']->render(
+        'archivar.twig',
+        array()
+    );
+})
+->bind('uso.archivar');
+
 // ----------------------------------------------------------------------------
 return $usos_ins;

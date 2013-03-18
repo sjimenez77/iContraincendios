@@ -1,0 +1,41 @@
+{% extends 'layout.twig' %}
+
+{% block titulo 'Portada' %}
+
+{% block body_class 'type-home' %}
+
+{% block cabecera %}
+    {% include 'cabecera.twig' %}
+    {% if is_granted('IS_AUTHENTICATED_FULLY') %}
+    {% include 'menu_usuario.twig' %}
+    {% else %}
+    {% include 'form_login_popup.twig' %}
+    {% endif %}
+{% endblock %}
+
+{% block contenido_secundario %}
+		<div class="content-secondary">
+            <div id="jqm-homeheader">
+                <h1 id="jqm-logo"><img src="/img/logo.fw.png" alt="iContraincendios" /></h1>
+                <p>Calcule las necesidades de una instalación contraincendios.</p>
+            </div>
+
+			<p class="intro"><strong>Bienvenido.</strong> iContraincendios es una aplicación para el cálculo de las necesidades para todo tipo de instalaciones contra incendios.</p>
+			
+			<ul data-role="listview" data-inset="true" data-theme="c" data-dividertheme="f">
+				<li data-role="list-divider">Opciones generales</li>
+                <li><a href="/quienes">¿Quiénes somos?</a></li>
+				<li><a href="/contacto">Contacto</a></li>				
+				<li><a href="/ayuda">Ayuda</a></li>
+                <li data-theme="b" data-icon="plus"><a href="{{ path('registro') }}" >Registrar nuevo técnico</a></li>
+			</ul>
+		</div><!--/content-secondary -->
+{% endblock %}
+
+{% block contenido_primario %}
+        <div class="content-primary">
+            <h2>¿Quiénes somos?</h2><hr>
+            <p>La empresa ... se dedica desde hace ... años a etc, etc.</p>
+            <p>&nbsp;</p>
+        </div><!--/content-primary -->
+{% endblock %}
