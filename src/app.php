@@ -28,7 +28,7 @@ $app->register(new DoctrineServiceProvider(), array(
         'host'      => 'localhost',
         'dbname'    => 'fire',
         'user'      => 'root',
-        'password'  => 'cornell1',
+        'password'  => '', //cornell1 en casa
         'charset'   => 'utf8',
     ),
 ));
