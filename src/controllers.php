@@ -27,7 +27,7 @@ $app->get('/', function (Request $request) use ($app) {
 ->bind('portada');
 
 $app->get('/portada', function() use ($app) {
-    return $app -> redirect('/');
+    return $app -> redirect($app['url_generator']->generate('portada'));
 })
 ->bind('inicio');
 // -----------------------------------------------------------------------------
@@ -62,60 +62,10 @@ $app->get('/login', function(Request $request) use ($app) {
 
 // -- USOS DE INSTALACIONES ----------------------------------------------------
 $app->mount('/uso', include 'usos.php');
-// ----------------------------------------------------------------------------
+// -----------------------------------------------------------------------------
 
 // -- USUARIOS -----------------------------------------------------------------
-$app->get('/user/{user}', function (Request $request, $user) use ($app) {
-
-    // Comprobamos que es el usuario el que consulta su propio perfil 
-    // y no el de otro usuario, salvo que sea administrador
-    $token = $app['security']->getToken();
-    if (null !== $token) {
-        // Obtenemos al usuario autenticado, su nombre y si es administrador 
-        $usuario_autenticado = $token->getUser();
-        $nombre_usuario_autenticado = $usuario_autenticado->getUsername();
-        $esAdmin = in_array('ROLE_ADMIN', $usuario_autenticado->getRoles());
-
-        if ($user != $nombre_usuario_autenticado and !$esAdmin) {
-            // El usuario autenticado no es administrador y está intentando
-            // ver el perfil de otro usuario
-            return $app->redirect('/');
-        }
-
-    } else {
-        // Si no está autenticado no debería pasar por aquí
-        // pero aún así lo mandamos a la portada
-        return $app->redirect('/');
-    }
-    
-    // Obtenemos el ID de usuario y sus informes
-    $usuario_consulta = $app['db']->fetchAssoc(
-        "SELECT * FROM usuarios WHERE username = ?",
-        array($user)
-        );
-
-    // Obtenemos el total de informes
-    $total_informes = $app['db']->fetchColumn(
-        "SELECT count(*) FROM informes WHERE idUsuarios = ?",
-        array($usuario_consulta['idUsuarios'])
-        );
-
-    // Obtenemos el total de informes para cada uso
-    $total_informes_uso = $app['db']->fetchArray(
-        "SELECT inf.idUsos, u.Tipo, count(*) FROM informes inf, usos u WHERE inf.idUsuarios = ? AND inf.idUsos = u.idUsos GROUP BY idUsos",
-        array($usuario_consulta['idUsuarios'])
-        );
-
-    return $app['twig']->render('usuario.twig', array(
-        'id' => $usuario_consulta['idUsuarios'],
-        'nombre' => $usuario_consulta['nombre'],
-        'apellidos' => $usuario_consulta['apellidos'],
-        'total_informes' => $total_informes,
-        'total_informes_uso' => $total_informes_uso
-    ));
-
-})
-->bind('usuario');
+$app->mount('/user', include 'usuarios.php');
 // -----------------------------------------------------------------------------
 
 // -- REGISTRO -----------------------------------------------------------------
@@ -211,7 +161,7 @@ $app->post('/registro_tecnico', function(Request $request) use ($app) {
     } else {
         // Almacenamos al nuevo usuario
         $app['db']->insert(
-            'Usuarios',
+            'usuarios',
             array(
                 'nombre' => $nombre,
                 'apellidos' => $apellidos,
@@ -221,7 +171,7 @@ $app->post('/registro_tecnico', function(Request $request) use ($app) {
                 'roles' => 'ROLE_USER'
             )
         );
-        return $app -> redirect('/');
+        return $app -> redirect($app['url_generator']->generate('inicio'));
     }
 
 })

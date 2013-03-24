@@ -4,22 +4,28 @@
 	<meta charset="utf-8">
     <title>iContraincendios | {% block titulo %}{% endblock %}</title> 
 	<meta name="viewport" content="width=device-width, initial-scale=1"> 
+    {% block estilos %}
     <!-- Estilos -->
     <link rel="stylesheet" href="http://code.jquery.com/mobile/1.3.0/jquery.mobile-1.3.0.min.css" />
     <link rel="stylesheet" type="text/css" href="/css/jqm-docs.css">
+    {% endblock %}
+    {% block js %}
     <!-- JS -->
     <script src="http://code.jquery.com/jquery-1.9.1.min.js"></script>
     <script src="http://code.jquery.com/mobile/1.3.0/jquery.mobile-1.3.0.min.js"></script>
     <script src="/js/vendor/jqm-docs.js"></script>
     <script src="/js/main.js"></script>
+    {% endblock %}
+    {% block iconos %}
     <!-- Iconos -->
     <link rel="shortcut icon" href="/favicon.png">
     <link rel="apple-touch-icon" sizes="57x57" href="/icon-iphone.png" />
     <link rel="apple-touch-icon" sizes="114x114" href="/icon-ipad.png" />
+    {% endblock %}
 </head> 
 <body> 
 
-<div data-role="page" class="{% block body_class %}{% endblock %}">
+<div {% block id_page %}{% endblock %} data-role="page" class="{% block body_class %}{% endblock %}">
 
     {% block cabecera %}{% endblock %}
 

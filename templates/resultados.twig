@@ -65,7 +65,37 @@
                 {% endif %}
             </div>
             <div class="ui-bar ui-bar-b">Resultados de la instalación de uso <strong>{{ opcion|e }}</strong></div>
-            <form name="resviv" method="post" action="">
+            <form name="resviv" method="post" action="{{ path('uso.archivar') }}">
+              <input type="hidden" name="uso" id="uso" value="{{ opcion }}">
+              <input type="hidden" name="superficie" id="superficie" value="{{ superficie }}">
+              <input type="hidden" name="altura_d" id="altura_d" value="{{ altura_d }}">
+              <input type="hidden" name="altura_a" id="altura_a" value="{{ altura_a }}">
+              <input type="hidden" name="dens_1per" id="dens_1per" value="{{ dens_1per }}">
+              <input type="hidden" name="cocina_50kW" id="cocina_50kW" value="{{ cocina_50kW }}">
+              <input type="hidden" name="altura_d" id="altura_d" value="{{ altura_d }}">
+              <input type="hidden" name="centro_transf" id="centro_transf" value="{{ centro_transf }}">
+              <input type="hidden" name="trasteros" id="trasteros" value="{{ trasteros }}">
+              <input type="hidden" name="superficie_trasteros" id="superficie_trasteros" value="{{ superficie_trasteros }}">
+              <input type="hidden" name="reprografia" id="reprografia" value="{{ reprografia }}">
+              <input type="hidden" name="volumen_construido" id="volumen_construido" value="{{ volumen_construido }}">
+              <input type="hidden" name="aloj_50pers" id="aloj_50pers" value="{{ aloj_50pers }}">
+              <input type="hidden" name="cocina_20kW" id="cocina_20kW" value="{{ cocina_20kW }}">
+              <input type="hidden" name="roperos" id="roperos" value="{{ roperos }}">
+              <input type="hidden" name="superficie_roperos" id="superficie_roperos" value="{{ superficie_roperos }}">
+              <input type="hidden" name="camas_100" id="camas_100" value="{{ camas_100 }}">
+              <input type="hidden" name="almacenes_fc" id="almacenes_fc" value="{{ almacenes_fc }}">
+              <input type="hidden" name="v_almacenes_fc" id="v_almacenes_fc" value="{{ v_almacenes_fc }}">
+              <input type="hidden" name="lab_c" id="lab_c" value="{{ lab_c }}">
+              <input type="hidden" name="v_lab_c" id="v_lab_c" value="{{ v_lab_c }}">
+              <input type="hidden" name="zonas_est" id="zonas_est" value="{{ zonas_est }}">
+              <input type="hidden" name="area_ventas_1500" id="area_ventas_1500" value="{{ area_ventas_1500 }}">
+              <input type="hidden" name="densidad_cf_500" id="densidad_cf_500" value="{{ densidad_cf_500 }}">
+              <input type="hidden" name="almacenes_cf_3400" id="almacenes_cf_3400" value="{{ almacenes_cf_3400 }}">
+              <input type="hidden" name="ocupacion_500" id="ocupacion_500" value="{{ ocupacion_500 }}">
+              <input type="hidden" name="tipo_pub_concurrencia" id="tipo_pub_concurrencia" value="{{ tipo_pub_concurrencia }}">
+              <input type="hidden" name="talleres_dec" id="talleres_dec" value="{{ talleres_dec }}">
+              <input type="hidden" name="robotizado" id="robotizado" value="{{ robotizado }}">
+              <input type="hidden" name="plantas_rasante" id="plantas_rasante" value="{{ plantas_rasante }}">
               <div class="ui-body ui-body-b">
                 <p><strong>Recuerda: </strong><span style="color:#477DAD"><strong>Azul</strong></span> indica que la instalación es obligatoria y <strong>negro</strong> que no lo es.</p>
                 <ul data-role="listview" data-inset="true">
@@ -92,25 +122,36 @@
                 </ul>                  
                 <hr>
                 {% if is_granted('IS_AUTHENTICATED_FULLY') %}
-                <div class="ui-bar ui-bar-f"><strong>Rellene los siguientes datos si desea archivar el informe en el sistema</strong></div>
-                <div class="ui-body ui-body-c">
-                  <label for="direccion">Dirección</label>
-                  <input type="text" name="direccion" id="direccion" placeholder="Calle, plaza, ctra..." required>
-                  
-                  <label for="cpostal">Código postal</label>
-                  <input type="text" name="cpostal" id="cpostal" pattern="[0-9]{5}" placeholder="Código postal de 5 números" title="Introduzca un número válido: 00000 - 99999" required>
-                  
-                  <label for="poblacion">Población</label>
-                  <input type="text" name="poblacion" id="poblacion" placeholder="Calle, plaza, ctra..." required>
-                  
-                  <label for="Provincia">Provincia</label>
-                  <input type="text" name="Provincia" id="Provincia" placeholder="Calle, plaza, ctra..." required>
-                </div>
-                <fieldset class="ui-grid-b">
+                <ul data-role="listview" data-inset="true" data-theme="c" data-divider-theme="f">
+                  <li data-role="list-divider">Rellene los siguientes datos si desea archivar el informe en el sistema</li>
+                  <li data-role="fieldcontain">
+                    <label for="direccion">Calle o Plaza</label>
+                    <input type="text" name="direccion" id="direccion" placeholder="Calle, plaza, ctra..." required>
+                  </li>
+                  <li data-role="fieldcontain">
+                    <label for="numero">Número</label>
+                    <input type="text" name="numero" id="numero" placeholder="Número, bis, escalera (opcional)">  
+                  </li>
+                  <li data-role="fieldcontain">
+                    <label for="cpostal">Código postal</label>
+                    <input type="text" name="cpostal" id="cpostal" pattern="[0-9]{5}" placeholder="Código postal de 5 números" title="Introduzca un número válido: 00000 - 99999" required>
+                  </li>
+                  <li data-role="fieldcontain">
+                    <label for="localidad">Localidad</label>
+                    <input type="text" name="localidad" id="localidad" placeholder="Localidad" required>
+                  </li>
+                  <li data-role="fieldcontain">
+                    <label for="provincia">Provincia</label>
+                    <input type="text" name="provincia" id="provincia" placeholder="Provincia" required>
+                  </li>
+                </ul>
+                <fieldset class="ui-grid-a">
                     <div class="ui-block-a"><a href="{{ path('portada') }}" data-role="button" data-theme="a">Inicio</a></div>
                     <div class="ui-block-b"><a href="{{ path(volver) }}" data-role="button" data-theme="c">Volver</a></div>       
-                    <div class="ui-block-c"><a href="{{ path(volver) }}" data-role="button" data-theme="b">Archivar</a></div>       
                 </fieldset>
+                <div class="ui-grid-solo">
+                  <div class="ui-block-a"><input type="submit" value="Archivar" data-icon="plus" data-iconpos="right" data-theme="b"></div>
+                </div>
                 {% else %}
                 <fieldset class="ui-grid-a">
                     <div class="ui-block-a"><a href="{{ path('portada') }}" data-role="button" data-theme="a">Inicio</a></div>

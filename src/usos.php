@@ -112,7 +112,7 @@ $usos_ins->get('/aparcamiento', function (Request $request) use ($app) {
 $usos_ins->post('/resultados', function (Request $request) use ($app) {
     // Obtenemos los datos del formulario
     $opcion = $request->get('uso');
-    
+
     // Inicializamos las variables resultado
     $extintores = False;
     $bies_25 = False;
@@ -134,33 +134,39 @@ $usos_ins->post('/resultados', function (Request $request) use ($app) {
     $altura_a = trim($request->get('altura_a'));
     $centro_transf = ($request->get('centro_transf')=='si') ? 1 : 0;
     
-    // Obtenemos los datos específicos de cada uso y declaramos null el resto
+    // Inicializamos los posibles parámetros
+    $dens_1per = null;
+    $cocina_50kW = null;
+    $trasteros = null;
+    $superficie_trasteros = null;
+    $reprografia = null;
+    $volumen_construido = null;
+    $aloj_50pers = null;
+    $cocina_20kW = null;
+    $roperos = null;
+    $superficie_roperos = null;
+    $camas_100 = null;
+    $almacenes_fc = null;
+    $v_almacenes_fc = null;
+    $lab_c = null;
+    $v_lab_c = null;
+    $zonas_est = null;
+    $area_ventas_1500 = null;
+    $densidad_cf_500 = null;
+    $almacenes_cf_3400 = null;
+    $ocupacion_500 = null;
+    $tipo_pub_concurrencia = null;
+    $talleres_dec = null;
+    $robotizado = null;
+    $plantas_rasante = null;
+
+    // Obtenemos los datos específicos de cada uso
     switch ($opcion) {
         case 'Residencial Vivienda':
             $dens_1per = ($request->get('dens_1per')=='si') ? 1 : 0; // 1 -> True, 0 -> False
             $cocina_50kW = ($request->get('cocina_50kW')=='si') ? 1 : 0;
             $trasteros = ($request->get('trasteros')=='si') ? 1 : 0;
             $superficie_trasteros = trim($request->get('superficie_trasteros'));
-            $reprografia = null;
-            $volumen_construido = null;
-            $aloj_50pers = null;
-            $cocina_20kW = null;
-            $roperos = null;
-            $superficie_roperos = null;
-            $camas_100 = null;
-            $almacenes_fc = null;
-            $v_almacenes_fc = null;
-            $lab_c = null;
-            $v_lab_c = null;
-            $zonas_est = null;
-            $area_ventas_1500 = null;
-            $densidad_cf_500 = null;
-            $almacenes_cf_3400 = null;
-            $ocupacion_500 = null;
-            $tipo_pub_concurrencia = null;
-            $talleres_dec = null;
-            $robotizado = null;
-            $plantas_rasante = null;
             // Procesamos datos
             if ($superficie > 0) $extintores = True;
             if ($superficie > 5000 || $altura_d > 28 || $altura_a > 6 || $dens_1per) $hid_exteriores = True;
@@ -187,28 +193,8 @@ $usos_ins->post('/resultados', function (Request $request) use ($app) {
         case 'Administrativo':
             $dens_1per = ($request->get('dens_1per')=='si') ? 1 : 0; // 1 -> True, 0 -> False
             $cocina_50kW = ($request->get('cocina_50kW')=='si') ? 1 : 0;
-            $trasteros = null;
-            $superficie_trasteros = null;
             $reprografia = ($request->get('reprografia')=='si') ? 1 : 0;
             $volumen_construido = trim($request->get('volumen_construido'));
-            $aloj_50pers = null;
-            $cocina_20kW = null;
-            $roperos = null;
-            $superficie_roperos = null;
-            $camas_100 = null;
-            $almacenes_fc = null;
-            $v_almacenes_fc = null;
-            $lab_c = null;
-            $v_lab_c = null;
-            $zonas_est = null;
-            $area_ventas_1500 = null;
-            $densidad_cf_500 = null;
-            $almacenes_cf_3400 = null;
-            $ocupacion_500 = null;
-            $tipo_pub_concurrencia = null;
-            $talleres_dec = null;
-            $robotizado = null;
-            $plantas_rasante = null;
             // Procesamos datos
             if ($superficie > 0) $extintores = True;
             if ($superficie > 2000) $bies_25 = True;
@@ -242,30 +228,10 @@ $usos_ins->post('/resultados', function (Request $request) use ($app) {
             break;
         
         case 'Residencial Público':
-            $dens_1per = null;
-            $cocina_50kW = null;
-            $trasteros = null;
-            $superficie_trasteros = null;
-            $reprografia = null;
-            $volumen_construido = null;
             $aloj_50pers = ($request->get('aloj_50pers')=='si') ? 1 : 0; 
             $cocina_20kW = ($request->get('cocina_20kW')=='si') ? 1 : 0;
             $roperos = ($request->get('roperos')=='si') ? 1 : 0;
             $superficie_roperos = trim($request->get('superficie_roperos'));
-            $camas_100 = null;
-            $almacenes_fc = null;
-            $v_almacenes_fc = null;
-            $lab_c = null;
-            $v_lab_c = null;
-            $zonas_est = null;
-            $area_ventas_1500 = null;
-            $densidad_cf_500 = null;
-            $almacenes_cf_3400 = null;
-            $ocupacion_500 = null;
-            $tipo_pub_concurrencia = null;
-            $talleres_dec = null;
-            $robotizado = null;
-            $plantas_rasante = null;
             // Procesamos datos
             if ($superficie > 0) $extintores = True;
             if ($superficie > 1000 || $aloj_50pers) $bies_25 = True;
@@ -293,30 +259,13 @@ $usos_ins->post('/resultados', function (Request $request) use ($app) {
             break;
         
         case 'Hospitalario':
-            $dens_1per = null;
-            $cocina_50kW = null;
-            $trasteros = null;
-            $superficie_trasteros = null;
-            $reprografia = null;
-            $volumen_construido = null;
-            $aloj_50pers = null;
             $camas_100 = ($request->get('camas_100')=='si') ? 1 : 0; 
             $cocina_20kW = ($request->get('cocina_20kW')=='si') ? 1 : 0;
-            $roperos = null;
-            $superficie_roperos = null;
             $almacenes_fc = ($request->get('almacenes_fc')=='si') ? 1 : 0;
             $v_almacenes_fc = trim($request->get('v_almacenes_fc'));
             $lab_c = ($request->get('lab_c')=='si') ? 1 : 0;
             $v_lab_c = trim($request->get('v_lab_c'));
             $zonas_est = ($request->get('zonas_est')=='si') ? 1 : 0;
-            $area_ventas_1500 = null;
-            $densidad_cf_500 = null;
-            $almacenes_cf_3400 = null;
-            $ocupacion_500 = null;
-            $tipo_pub_concurrencia = null;
-            $talleres_dec = null;
-            $robotizado = null;
-            $plantas_rasante = null;
             // Procesamos datos
             if ($superficie > 0) {
                 $extintores = True;
@@ -368,30 +317,7 @@ $usos_ins->post('/resultados', function (Request $request) use ($app) {
             break;
         
         case 'Docente':
-            $dens_1per  = null;
             $cocina_50kW = ($request->get('cocina_50kW')=='si') ? 1 : 0;
-            $trasteros = null;
-            $superficie_trasteros = null;
-            $reprografia = null;
-            $volumen_construido = null;
-            $aloj_50pers = null;
-            $cocina_20kW = null;
-            $roperos = null;
-            $superficie_roperos = null;
-            $camas_100 = null;
-            $almacenes_fc = null;
-            $v_almacenes_fc = null;
-            $lab_c = null;
-            $v_lab_c = null;
-            $zonas_est = null;
-            $area_ventas_1500 = null;
-            $densidad_cf_500 = null;
-            $almacenes_cf_3400 = null;
-            $ocupacion_500 = null;
-            $tipo_pub_concurrencia = null;
-            $talleres_dec = null;
-            $robotizado = null;
-            $plantas_rasante = null;
             // Procesamos datos
             if ($superficie > 0) $extintores = True;
             if ($superficie > 2000) $bies_25 = True;
@@ -416,30 +342,10 @@ $usos_ins->post('/resultados', function (Request $request) use ($app) {
             break;
         
         case 'Comercial': 
-            $dens_1per  = null;
             $cocina_50kW = ($request->get('cocina_50kW')=='si') ? 1 : 0;
-            $trasteros = null;
-            $superficie_trasteros = null;
-            $reprografia = null;
-            $volumen_construido = null;
-            $aloj_50pers = null;
-            $cocina_20kW = null;
-            $roperos = null;
-            $superficie_roperos = null;
-            $camas_100 = null;
-            $almacenes_fc = null;
-            $v_almacenes_fc = null;
-            $lab_c = null;
-            $v_lab_c = null;
-            $zonas_est = null;
             $area_ventas_1500 = ($request->get('area_ventas_1500')=='si') ? 1 : 0;
             $densidad_cf_500 = ($request->get('densidad_cf_500')=='si') ? 1 : 0;
             $almacenes_cf_3400 = ($request->get('almacenes_cf_3400')=='si') ? 1 : 0;
-            $ocupacion_500 = null;
-            $tipo_pub_concurrencia = null;
-            $talleres_dec = null;
-            $robotizado = null;
-            $plantas_rasante = null;
             // Procesamos datos
             if ($superficie > 0) $extintores = True;
             if ($superficie > 500) $bies_25 = True;
@@ -469,30 +375,10 @@ $usos_ins->post('/resultados', function (Request $request) use ($app) {
             break;
         
         case 'Pública Concurrencia':
-            $dens_1per  = null;
             $cocina_50kW = ($request->get('cocina_50kW')=='si') ? 1 : 0;
-            $trasteros = null;
-            $superficie_trasteros = null;
-            $reprografia = null;
-            $volumen_construido = null;
-            $aloj_50pers = null;
-            $cocina_20kW = null;
-            $roperos = null;
-            $superficie_roperos = null;
-            $camas_100 = null;
-            $almacenes_fc = null;
-            $v_almacenes_fc = null;
-            $lab_c = null;
-            $v_lab_c = null;
-            $zonas_est = null;
-            $area_ventas_1500 = null;
-            $densidad_cf_500 = null;
-            $almacenes_cf_3400 = null;
             $ocupacion_500 = ($request->get('ocupacion_500')=='si') ? 1 : 0;
             $tipo_pub_concurrencia = $request->get('tipo_pub_concurrencia');
             $talleres_dec = ($request->get('talleres_dec')=='si') ? 1 : 0;
-            $robotizado = null;
-            $plantas_rasante = null;
             // Procesamos datos
             if ($superficie > 0) $extintores = True;
             if ($superficie > 500) $bies_25 = True;
@@ -520,28 +406,7 @@ $usos_ins->post('/resultados', function (Request $request) use ($app) {
             break;
         
         case 'Aparcamiento':
-            $dens_1per  = null;
             $cocina_50kW = ($request->get('cocina_50kW')=='si') ? 1 : 0;
-            $trasteros = null;
-            $superficie_trasteros = null;
-            $reprografia = null;
-            $volumen_construido = null;
-            $aloj_50pers = null;
-            $cocina_20kW = null;
-            $roperos = null;
-            $superficie_roperos = null;
-            $camas_100 = null;
-            $almacenes_fc = null;
-            $v_almacenes_fc = null;
-            $lab_c = null;
-            $v_lab_c = null;
-            $zonas_est = null;
-            $area_ventas_1500 = null;
-            $densidad_cf_500 = null;
-            $almacenes_cf_3400 = null;
-            $ocupacion_500 = null;
-            $tipo_pub_concurrencia = null;
-            $talleres_dec = null;
             $robotizado = ($request->get('robotizado')=='si') ? 1 : 0;
             $plantas_rasante = ($request->get('plantas_rasante')=='si') ? 1 : 0;
             // Procesamos datos
@@ -573,30 +438,6 @@ $usos_ins->post('/resultados', function (Request $request) use ($app) {
             break;
         
         default:
-            $dens_1per  = null;
-            $cocina_50kW = null;
-            $trasteros = null;
-            $superficie_trasteros = null;
-            $reprografia = null;
-            $volumen_construido = null;
-            $aloj_50pers = null;
-            $cocina_20kW = null;
-            $roperos = null;
-            $superficie_roperos = null;
-            $camas_100 = null;
-            $almacenes_fc = null;
-            $v_almacenes_fc = null;
-            $lab_c = null;
-            $v_lab_c = null;
-            $zonas_est = null;
-            $area_ventas_1500 = null;
-            $densidad_cf_500 = null;
-            $almacenes_cf_3400 = null;
-            $ocupacion_500 = null;
-            $tipo_pub_concurrencia = null;
-            $talleres_dec = null;
-            $robotizado = null;
-            $plantas_rasante = null;
             break;
     }
 
@@ -655,15 +496,127 @@ $usos_ins->post('/resultados', function (Request $request) use ($app) {
 ->bind('uso.resultados');
 
 $usos_ins->post('/archivar', function (Request $request) use ($app) {
-    // Obtenemos todos los campos y los almcenamos en la BDD si el usuario está conectado
+    // Obtenemos todos los campos
+    $opcion = $request->get('uso');
+    $superficie = $request->get('superficie');
+    $altura_d = $request->get('altura_d');
+    $altura_a = $request->get('altura_a');
+    $centro_transf = $request->get('centro_transf');
+    $dens_1per = $request->get('dens_1per'); 
+    $cocina_50kW = $request->get('cocina_50kW');
+    $trasteros = $request->get('trasteros');
+    $superficie_trasteros = $request->get('superficie_trasteros');
+    $reprografia = $request->get('reprografia');
+    $volumen_construido = $request->get('volumen_construido');
+    $aloj_50pers = $request->get('aloj_50pers');
+    $cocina_20kW = $request->get('cocina_20kW');
+    $roperos = $request->get('roperos');
+    $superficie_roperos = $request->get('superficie_roperos');
+    $camas_100 = $request->get('camas_100');
+    $almacenes_fc = $request->get('almacenes_fc');
+    $v_almacenes_fc = $request->get('v_almacenes_fc');
+    $lab_c = $request->get('lab_c');
+    $v_lab_c = $request->get('v_lab_c');
+    $zonas_est = $request->get('zonas_est');
+    $area_ventas_1500 = $request->get('area_ventas_1500');
+    $densidad_cf_500 = $request->get('densidad_cf_500');
+    $almacenes_cf_3400 = $request->get('almacenes_cf_3400');
+    $ocupacion_500 = $request->get('ocupacion_500');
+    $tipo_pub_concurrencia = $request->get('tipo_pub_concurrencia');
+    $talleres_dec = $request->get('talleres_dec');
+    $robotizado = $request->get('robotizado');
+    $plantas_rasante = $request->get('plantas_rasante');
 
-    // Construimos los resultados en función de los datos rellenados
+    // Archivamos el informe con los datos obtenidos
+    $error_bd = False;
+    
+    // Obtenemos al usuario autenticado, su nombre, id...
+    $token = $app['security']->getToken();
+    if (null !== $token) {
+        $usuario_autenticado = $token->getUser();
+        $username = $usuario_autenticado->getUsername();
+        
+        // Obtenemos los datos del usuario
+        $user = $app['db']->fetchAssoc(
+            "SELECT * FROM usuarios WHERE username = ?",
+            array($username)
+        );
+        
+        // Obtenemos el id del uso de instalación
+        $id_instalacion = $app['db']->fetchAssoc(
+            "SELECT idUsos FROM usos WHERE Tipo = ?",
+            array($opcion)
+        );
+
+        $numero = $request->get('numero');
+
+        if ($numero == null) {
+            $direccion = $request->get('direccion');
+        } else {
+            $direccion = $request->get('direccion').', '.$request->get('numero');
+        }
+
+        // Insertamos el informe en la BDD
+        if (!$error_bd) {
+            $app['db']->insert(
+                'informes',
+                array(
+                    'idUsuarios' => $user['idUsuarios'],
+                    'idUsos' => $id_instalacion['idUsos'],
+                    'fecha' => date("Y-m-d H:i:s"), // Fecha en formato DateTime de MySQL
+                    'direccion' => $direccion,
+                    'cpostal' => $request->get('cpostal'),
+                    'localidad' => $request->get('localidad'),
+                    'provincia' => $request->get('provincia'),
+                    'superficie' => $superficie,
+                    'altura_d' => $altura_d,
+                    'altura_a' => $altura_a,
+                    'centro_transf' => $centro_transf,
+                    'dens_1per' => $dens_1per,
+                    'cocina_50kW' => $cocina_50kW,
+                    'trasteros' => $trasteros,
+                    'superficie_trasteros' => $superficie_trasteros,
+                    'reprografia' => $reprografia,
+                    'volumen_construido' => $volumen_construido,
+                    'aloj_50pers' => $aloj_50pers,
+                    'cocina_20kW' => $cocina_20kW,
+                    'roperos' => $roperos,
+                    'superficie_roperos' => $superficie_roperos,
+                    'camas_100' => $camas_100,
+                    'almacenes_fc' => $almacenes_fc,
+                    'v_almacenes_fc' => $v_almacenes_fc,
+                    'lab_c' => $lab_c,
+                    'v_lab_c' => $v_lab_c,
+                    'zonas_est' => $zonas_est,
+                    'area_ventas_1500' => $area_ventas_1500,
+                    'densidad_cf_500' => $densidad_cf_500,
+                    'almacenes_cf_3400' => $almacenes_cf_3400,
+                    'ocupacion_500' => $ocupacion_500,
+                    'tipo_pub_concurrencia' => $tipo_pub_concurrencia,
+                    'talleres_dec' => $talleres_dec,
+                    'robotizado' => $robotizado,
+                    'plantas_rasante' => $plantas_rasante,
+                )
+            );
+        }
+
+    } else {
+        // Si no está autenticado no debería pasar por aquí
+        // pero aún así lo mandamos a la portada
+        return $app->redirect('/');
+    }
+
+    // Construimos la confirmación del archivado en caso de que todo haya ido bien
     return $app['twig']->render(
         'archivar.twig',
-        array()
+        array(
+            'error' => $app['security.last_error']($request),
+            'last_username' => $app['session']->get('_security.last_username'),
+            'error_bd' => $error_bd,
+            'opcion' => $opcion
+        )
     );
 })
 ->bind('uso.archivar');
-
 // ----------------------------------------------------------------------------
 return $usos_ins;

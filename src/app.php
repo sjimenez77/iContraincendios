@@ -28,7 +28,7 @@ $app->register(new DoctrineServiceProvider(), array(
         'host'      => 'localhost',
         'dbname'    => 'fire',
         'user'      => 'root',
-        'password'  => '', //cornell1 en casa
+        'password'  => 'cornell1', //cornell1 en casa
         'charset'   => 'utf8',
     ),
 ));
@@ -69,6 +69,7 @@ $app->register(new SecurityServiceProvider(), array(
     'security.access_rules' => array(
         array('^/backend.+$', 'ROLE_ADMIN', 'https'),
         array('^/user.+$', 'ROLE_USER'),
+        array('^/archivar.*$', 'ROLE_USER')
     ),
 ));
 

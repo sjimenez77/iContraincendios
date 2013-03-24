@@ -34,16 +34,21 @@
 {% block contenido_primario %}
 		<div class="content-primary">
             <h2>{{ nombre }} {{ apellidos }}</h2><hr>
-            <p>A continuación se muestra una lista con sus informes organizada por los diferentes tipos de uso de las instalaciones. Seleccione pulsando sobre un uso determinado para ver los informes de este tipo.</p>
-            {% if total_informes_uso|length > 0 %}
-            <ul data-role="listview" data-filter="true" data-filter-placeholder="Busque por uso..." data-inset="true" data-count-theme="a">
-                <li data-role="list-divider">Total informes<span class="ui-li-count">{{ total_informes }}</span></li>
-                {% for informes_uso in total_informes_uso %}
-                    <li><a href="{{ path('usuario.total_informes_tipo', { 'user': app.security.token.user.username, 'tipo': informes_uso.idUsos|e }) }}">{{ informes_uso.Tipo|e }}</a><span class="ui-li-count">{{ informes_uso.Total|default('0') }}</span></li>
+            <p>A continuación se muestra una lista con los informes de este tipo organizada de más actuales a más antiguos. En el caso que desee realizar algún cambio póngase en contacto con el administrador de la plataforma mediante el botón <strong>Contacto</strong>.</p>
+            {% if total_informes_tipo|length > 0 %}
+            <ul data-role="listview" data-filter="true" data-filter-placeholder="Introduzca su búsqueda..." data-inset="true">
+                <li data-role="list-divider">Informes de uso: {{ tipo_uso|e }}</li>
+                {% for informe in total_informes_tipo %}
+                    <li><a href="{{ path('usuario.informe', { 'user': app.security.token.user.username, 'tipo': id_uso, 'id_informe': informe.idInformes|e }) }}">
+                        <h2>{{ informe.direccion|e }}</h2>
+                        <p>{{ informe.cpostal|e }} - {{ informe.localidad|e }} ({{ informe.provincia|e }})</p>
+                        <p class="ui-li-aside"><strong>{{ informe.fecha|date("d/m/Y") }}</strong></p>
+                    </a></li>
                 {% endfor %}
             </ul>
             {% else %}
-            <div class="ui-bar ui-bar-e">No ha archivado todavía ningún informe.</div>
+            <div class="ui-bar ui-bar-e">No ha archivado todavía ningún informe de este tipo.</div>
             {% endif %}
+            <a href="{{ path('usuario', { 'user': app.security.token.user.username }) }}" data-role="button" data-theme="b">Volver</a>
 		</div><!--/content-primary -->
 {% endblock %}
