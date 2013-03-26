@@ -94,6 +94,6 @@
 				$('input[name="v_lab_c"]').addClass('mobile-textinput-disabled');
 			}
 		});
-
+		
 	});
 })(jQuery);

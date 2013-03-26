@@ -24,9 +24,9 @@
 			
 			<ul data-role="listview" data-inset="true" data-theme="c" data-dividertheme="f">
 				<li data-role="list-divider">Opciones generales</li>
-                <li><a href="/quienes">¿Quiénes somos?</a></li>
-				<li><a href="/contacto">Contacto</a></li>				
-				<li><a href="/ayuda">Ayuda</a></li>
+                <li><a href="{{ path('quienes') }}">¿Quiénes somos?</a></li>
+				<li><a href="{{ path('contacto') }}">Contacto</a></li>				
+				<li><a href="{{ path('ayuda') }}">Ayuda</a></li>
                 <li data-theme="b" data-icon="plus"><a href="{{ path('registro') }}" >Registrar nuevo técnico</a></li>
 			</ul>
 		</div><!--/content-secondary -->

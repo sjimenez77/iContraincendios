@@ -3,43 +3,13 @@
 {% block titulo 'Informes de ' ~ nombre ~ ' ' ~ apellidos %}
 
 {% block js %}
+    <script type="text/javascript" src="http://www.modernizr.com/downloads/modernizr-latest.js"></script>
 {{ parent() }}
-    <script type="text/javascript" src="http://maps.google.com/maps/api/js?sensor=true"></script>
-    <script type="text/javascript" src="/js/vendor/ui/jquery.ui.map.full.min.js"></script>
-    <script type="text/javascript">
-        
-        $(function() {
-            var geocoder; 
-            var latitud;
-            var longitud;
-            var lugar = { 'center': '57.7973333,12.0502107', 'zoom': 16 };
-            var direccion = '{{ informe.direccion }}' + ', {{ informe.cpostal }}' + ', {{ informe.localidad }}' + ', España';
-
-            geocoder = new google.maps.Geocoder(); 
-            geocoder.geocode({ 'address': direccion }, function(results, status) { 
-                if (status == google.maps.GeocoderStatus.OK) { 
-                    latitud = results[0].geometry.location.lat().toString(); 
-                    longitud = results[0].geometry.location.lng().toString(); 
-                    alert(latitud+','+longitud);
-                    lugar.center = latitud+','+longitud;
-                } else { 
-                    alert("Geocode was not successful for the following reason: " + status);
-                } 
-            }); 
-
-            $('#map_canvas').gmap({'center': lugar.center, 'zoom': lugar.zoom, 'disableDefaultUI':false, 'callback': function() {
-                var self = this;
-                self.addMarker({'position': this.get('map').getCenter() }).click(function() {
-                    self.openInfoWindow({ 'content': '{{ informe.direccion }}' + ', {{ informe.cpostal }}' + ', {{ informe.localidad }}' + ', España' }, this);
-                }); 
-            }});
-
-        });
-
-    </script> 
+    <script type="text/javascript" src="http://maps.google.com/maps/api/js?sensor=false"></script>
+    <script type="text/javascript" src="/js/vendor/jquery.gomap-1.3.2.min.js"></script>
 {% endblock %}
 
-{% block id_page 'id="directions_map"' %}
+{% block id_page 'id="basic_map"' %}
 {% block body_class 'type-home' %}
 
 {% block cabecera %}
@@ -52,28 +22,31 @@
 {% endblock %}
 
 {% block contenido_secundario %}
-		<div class="content-secondary">
+        <div class="content-secondary">
             <div id="jqm-homeheader">
                 <h1 id="jqm-logo"><img src="/img/logo.fw.png" alt="iContraincendios" /></h1>
                 <p>Calcule las necesidades de una instalación contraincendios.</p>
             </div>
 
-			<p class="intro"><strong>Bienvenido.</strong> iContraincendios es una aplicación para el cálculo de las necesidades para todo tipo de instalaciones contra incendios.</p>
-			
-			<ul data-role="listview" data-inset="true" data-theme="c" data-dividertheme="f">
-				<li data-role="list-divider">Opciones de usuario</li>
-				<li><a href="/contacto">Contacto</a></li>				
-				<li><a href="/ayuda">Ayuda</a></li>
+            <p class="intro"><strong>Bienvenido.</strong> iContraincendios es una aplicación para el cálculo de las necesidades para todo tipo de instalaciones contra incendios.</p>
+            
+            <ul data-role="listview" data-inset="true" data-theme="c" data-dividertheme="f">
+                <li data-role="list-divider">Opciones de usuario</li>
+                <li><a href="{{ path('quienes') }}">¿Quiénes somos?</a></li>
+                <li><a href="{{ path('contacto') }}">Contacto</a></li>              
+                <li><a href="{{ path('ayuda') }}">Ayuda</a></li>
+                <li data-theme="b" data-icon="plus"><a href="{{ path('registro') }}" >Registrar nuevo técnico</a></li>
                 <li data-theme="a" data-icon="arrow-d"><a href="/logout" >Desconectar</a></li>
-			</ul>
-		</div><!--/content-secondary -->
+            </ul>
+        </div><!--/content-secondary -->
 {% endblock %}
 
 {% block contenido_primario %}
-		<div class="content-primary">
+        <div class="content-primary">
             <h2>{{ nombre }} {{ apellidos }}</h2><hr>
             <p>A continuación se muestra los datos del informe conjuntamente con los cálculos de las necesidades contraincendios asociados. En el caso que desee realizar algún cambio póngase en contacto con el administrador de la plataforma mediante el botón <strong>Contacto</strong>.</p>
             {% if errores %}
+            
             <p>
                 <ul data-role="listview" data-inset="true" data-divider-theme="a" data-count-theme="b">
                     <li data-role="list-divider">{% if errores|length > 1 %}Se han producido errores{% else %}Se ha producido un error{% endif %}<span class="ui-li-count">{{ errores|length }} {% if errores|length > 1 %}errores{% else %}error{% endif %}</span></li>
@@ -82,12 +55,141 @@
                     {% endfor %}
                 </ul>
             </p>
-            {% else %}
-            <div id="map_content" class="ui-bar-c ui-corner-all ui-shadow" style="padding:1em;">
-                <div id="map_canvas" style="height:300px;"></div>
-            </div>
 
+            {% else %}
+            
+            <div class="ui-bar ui-bar-b" style="font-weight: normal;">Informe de instalación de tipo: <strong>{{ opcion|e }}</strong></div>
+            <div id="informe" class="ui-body ui-body-b">
+                <p><div class="ui-bar-a ui-corner-all ui-shadow" style="padding:1em;">
+                    <div id="map" style="width:100%;height:300px;"></div>
+                </div></p>
+                <ul data-role="listview" data-inset="true" data-divider-theme="f">
+                    <li data-role="list-divider">Datos generales de la instalación</li>
+                    <li data-theme="c">{{ direccion }} , {{ cpostal }} , {{ localidad }}  ({{ provincia }}) , España.</li>
+                    <li data-theme="c" style="font-weight: normal;">Superficie: <strong>{{ superficie }} m&sup2;</strong></li>
+                    <li data-theme="c" style="font-weight: normal;">Altura de evacuación descendente: <strong>{{ altura_d }} m</strong></li>
+                    <li data-theme="c" style="font-weight: normal;">Altura de evacuación ascendente: <strong>{{ altura_a }} m</strong></li>
+                    <li data-theme="c" style="font-weight: normal;">Centros de transformación: <strong>{{ centro_transf ? 'Sí' : 'No' }}</strong></li>
+                {% if opcion == 'Residencial Vivienda' %}
+                    <li data-theme="c" style="font-weight: normal;">Densidad de ocupación es mayor que 1 persona cada 5 m&sup2;: <strong>{{ dens_1per ? 'Sí' : 'No' }}</strong></li>
+                    <li data-theme="c" style="font-weight: normal;">Cocinas instaladas dentro del edificio con una potencia instalada superior a 50 kW: <strong>{{ cocina_50kW ? 'Sí' : 'No' }}</strong></li>
+                    <li data-theme="c" style="font-weight: normal;">Hay trasteros en el edificio: <strong>{{ trasteros ? 'Sí' : 'No' }}</strong></li>                    
+                    {% if trasteros %}
+                    <li data-theme="c" style="font-weight: normal;">Superficie de los trasteros: <strong>{{ superficie_trasteros }} m&sup2;</strong></li>                    
+                    {% endif %}
+                {% elseif opcion == 'Administrativo' %}
+                    <li data-theme="c" style="font-weight: normal;">Densidad de ocupación es mayor que 1 persona cada 5 m&sup2;: <strong>{{ dens_1per ? 'Sí' : 'No' }}</strong></li>
+                    <li data-theme="c" style="font-weight: normal;">Cocinas instaladas dentro del edificio con una potencia instalada superior a 50 kW: <strong>{{ cocina_50kW ? 'Sí' : 'No' }}</strong></li>
+                    <li data-theme="c" style="font-weight: normal;">Hay imprenta, reprografía y locales anejos, tales como almacenes de papel, encuadernado, etc.: <strong>{{ reprografia ? 'Sí' : 'No' }}</strong></li>                    
+                    {% if reprografia %}
+                    <li data-theme="c" style="font-weight: normal;">Volumen construído: <strong>{{ volumen_construido }} m&sup3;</strong></li>                    
+                    {% endif %}
+                {% elseif opcion == 'Residencial Público' %}
+
+                {% elseif opcion == 'Hospitalario' %}
+
+                {% elseif opcion == 'Docente' %}
+
+                {% elseif opcion == 'Comercial' %}
+
+                {% elseif opcion == 'Pública Concurrencia' %}
+
+                {% elseif opcion == 'Aparcamiento' %}
+
+                    {% endif %}
+                </ul>
+
+                <p><strong>Recuerda: </strong><span style="color:#477DAD"><strong>Azul</strong></span> indica que la instalación es obligatoria y <strong>negro</strong> que no lo es.</p>
+                <ul data-role="listview" data-inset="true">
+                    <li {% if extintores %} data-theme="b" data-icon="check" {% else %} data-theme="a" data-icon="delete" {% endif %}><a href="#">Extintores - Señalización</a></li>
+                    <li {% if bies_25 %} data-theme="b" data-icon="check" {% else %} data-theme="a" data-icon="delete" {% endif %}><a href="#">BIES &Oslash;25 mm</a></li>
+                    <li {% if bies_45 %} data-theme="b" data-icon="check" {% else %} data-theme="a" data-icon="delete" {% endif %}><a href="#">BIES &Oslash;45 mm</a></li>
+                    <li {% if columna_seca %} data-theme="b" data-icon="check" {% else %} data-theme="a" data-icon="delete" {% endif %}><a href="#">Columna seca</a></li>
+                    <li {% if sm_alarma %} data-theme="b" data-icon="check" {% else %} data-theme="a" data-icon="delete" {% endif %}><a href="#">Sistema manual de alarma de incendio</a></li>
+                    <li {% if sd_incendio %} data-theme="b" data-icon="check" {% else %} data-theme="a" data-icon="delete" {% endif %}><a href="#">Sistema de detección de incendio</a></li>
+                    <li {% if hid_exteriores %} data-theme="b" data-icon="check" {% else %} data-theme="a" data-icon="delete" {% endif %}><a href="#">Hidrantes exteriores</a></li>
+                    <li {% if ia_extincion %} data-theme="b" data-icon="check" {% else %} data-theme="a" data-icon="delete" {% endif %}><a href="#">Instalación automática de extinción</a></li>
+                    <li {% if ia_extincion_cocina %} data-theme="b" data-icon="check" {% else %} data-theme="a" data-icon="delete" {% endif %}><a href="#">Instalación automática de extinción cocina</a></li>
+                    <li {% if ia_extincion_centro_transf %} data-theme="b" data-icon="check" {% else %} data-theme="a" data-icon="delete" {% endif %}><a href="#">Instalación automática de extinción centro transformación</a></li>
+                </ul>
+                <ul data-role="listview" data-inset="true" data-divider-theme="a">
+                  <li data-role="list-divider">Aclaraciones y/o comentarios a los resultados</li>
+                  {% if comentarios|length > 0%}
+                    {% for comentario in comentarios %}
+                      <li data-theme="e" style="font-weight: normal;">{{ comentario|raw }}</li>
+                    {% endfor %}
+                  {% else %}
+                    <li data-theme="e" style="font-weight: normal;">No hay ninguna aclaración y/o comentario.</li>
+                  {% endif %}
+                </ul>                  
+                <hr>
             {% endif %}
             <a href="{{ path('usuario.total_informes_tipo', { 'user': app.security.token.user.username, 'tipo': id_uso }) }}" data-role="button" data-theme="b">Volver</a>
-		</div><!--/content-primary -->
+        </div><!--/content-primary -->
+        <br>
+    <script type="text/javascript">
+
+            ////////////////////////////////////////////////////////////
+            (function($){
+
+                function refreshPage() {
+                    console.log('Refreshing...');
+                    $.mobile.changePage(
+                        window.location.href,
+                        {
+                          allowSamePageTransition : true,
+                          transition              : 'none',
+                          showLoadMsg             : false,
+                          reloadPage              : true
+                        }
+                     );
+                }
+
+                $(document).on('pageinit', '#basic_map', function(e) {
+
+                    console.log('pageinit');
+                
+                    var latitud;
+                    var longitud;
+                    var geocoder = new google.maps.Geocoder(); 
+                    
+                    geocoder.geocode({ 'address': '{{ direccion }}' + ', {{ cpostal }}' + ', {{ localidad }}' + ', España' }, function(results, status) { 
+                        if (status == google.maps.GeocoderStatus.OK) { 
+                            latitud = results[0].geometry.location.lat(); 
+                            longitud = results[0].geometry.location.lng(); 
+                            console.log('lat, long: '+latitud+','+longitud);
+                            $("#map").goMap({ 
+                                address: '{{ direccion }}' + ', {{ cpostal }}' + ', {{ localidad }}' + ', España', 
+                                markers: [{
+                                    latitude: latitud, 
+                                    longitude: longitud,  
+                                    title: '{{ direccion }}' + ', {{ cpostal }}' + ', {{ localidad }}' + ' ({{ provincia }})' + ', España'
+                                }], 
+                                zoom: 17 
+                            }); 
+                            console.log('Mapa supuestamente dibujado');
+
+                        } else { 
+                            console.log("Geocode was not successful for the following reason: " + status);
+                        } 
+                    });
+
+                });
+
+                /*$(document).on('pageshow', function(e) {
+                    console.log('pageshow');
+                    if ($('#map').is(':empty')) {
+                        console.log('Mapa vacío');
+                        refreshPage();
+                    } else {
+                        console.log('Mapa visible');
+                    }
+                });*/
+
+
+
+            })(jQuery);
+            ////////////////////////////////////////////////////////////
+
+    </script> 
 {% endblock %}
