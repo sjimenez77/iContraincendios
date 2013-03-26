@@ -2,81 +2,6 @@
 
 {% block titulo 'Informes de ' ~ nombre ~ ' ' ~ apellidos %}
 
-{% block js %}
-    <!-- JS -->
-    <script type="text/javascript" src="http://www.modernizr.com/downloads/modernizr-latest.js"></script>
-    <script src="http://code.jquery.com/jquery-1.9.1.min.js"></script>
-    <script src="http://code.jquery.com/mobile/1.3.0/jquery.mobile-1.3.0.min.js"></script>
-    <script src="/js/vendor/jqm-docs.js"></script>
-    <script src="/js/main.js"></script>
-    <script type="text/javascript" src="http://maps.google.com/maps/api/js?sensor=false"></script>
-    <script type="text/javascript" src="/js/vendor/jquery.gomap-1.3.2.min.js"></script>
-    <script type="text/javascript">
-        ////////////////////////////////////////////////////////////
-        (function($){
-
-            function refreshPage() {
-                console.log('Refreshing...');
-                $.mobile.changePage(
-                    window.location.href,
-                    {
-                      allowSamePageTransition : true,
-                      transition              : 'none',
-                      showLoadMsg             : false,
-                      reloadPage              : true
-                    }
-                 );
-            }
-
-            $(document).on('pageinit', '#basic_map', function(e) {
-
-                console.log('pageinit');
-            
-                var latitud;
-                var longitud;
-                var geocoder = new google.maps.Geocoder(); 
-                
-                geocoder.geocode({ 'address': '{{ direccion }}' + ', {{ cpostal }}' + ', {{ localidad }}' + ', España' }, function(results, status) { 
-                    if (status == google.maps.GeocoderStatus.OK) { 
-                        latitud = results[0].geometry.location.lat(); 
-                        longitud = results[0].geometry.location.lng(); 
-                        console.log('lat, long: '+latitud+','+longitud);
-                        $("#map").goMap({ 
-                            address: '{{ direccion }}' + ', {{ cpostal }}' + ', {{ localidad }}' + ', España', 
-                            markers: [{
-                                latitude: latitud, 
-                                longitude: longitud,  
-                                title: '{{ direccion }}' + ', {{ cpostal }}' + ', {{ localidad }}' + ' ({{ provincia }})' + ', España'
-                            }], 
-                            zoom: 17 
-                        }); 
-                        console.log('Mapa supuestamente dibujado');
-
-                    } else { 
-                        console.log("Geocode was not successful for the following reason: " + status);
-                    } 
-                });
-
-            });
-
-            /*$(document).on('pageshow', '#basic_map', function(e) {
-                console.log('pageshow');
-                if ($('#map').is(':empty')) {
-                    console.log('Mapa vacío');
-                    refreshPage();
-                } else {
-                    console.log('Mapa visible');
-                }
-            });*/
-
-
-
-        })(jQuery);
-        ////////////////////////////////////////////////////////////
-    </script>
-{% endblock %}
-
-{% block id_page 'id="basic_map"' %}
 {% block body_class 'type-home' %}
 
 {% block cabecera %}
@@ -127,9 +52,7 @@
             
             <div class="ui-bar ui-bar-b" style="font-weight: normal;">Informe de instalación de tipo: <strong>{{ opcion|e }}</strong></div>
             <div id="informe" class="ui-body ui-body-b">
-                <p><div class="ui-bar-a ui-corner-all ui-shadow" style="padding:1em;">
-                    <div id="map" style="width:100%;height:300px;"></div>
-                </div></p>
+                <p><a href="{{ path('usuario.mapa', { 'user': app.security.token.user.username, 'tipo': id_uso, 'id_informe': id_informe|e }) }}" data-role="button" data-icon="info" data-icon-pos="right" data-ajax="false" data-theme="a">Ver localización en mapa</a></p>
                 <ul data-role="listview" data-inset="true" data-divider-theme="f">
                     <li data-role="list-divider">Datos generales de la instalación</li>
                     <li data-theme="c">{{ direccion }} , {{ cpostal }} , {{ localidad }}  ({{ provincia }}) , España.</li>
@@ -163,7 +86,7 @@
 
                 {% elseif opcion == 'Aparcamiento' %}
 
-                    {% endif %}
+                {% endif %}
                 </ul>
 
                 <p><strong>Recuerda: </strong><span style="color:#477DAD"><strong>Azul</strong></span> indica que la instalación es obligatoria y <strong>negro</strong> que no lo es.</p>
@@ -191,7 +114,7 @@
                 </ul>                  
                 <hr>
             {% endif %}
-            <a href="{{ path('usuario.total_informes_tipo', { 'user': app.security.token.user.username, 'tipo': id_uso }) }}" data-role="button" data-theme="b">Volver</a>
+            <a href="{{ path('usuario.total_informes_tipo', { 'user': app.security.token.user.username, 'tipo': id_uso }) }}" data-role="button" data-icon="back" data-icon-pos="right" data-theme="b">Volver</a>
         </div><!--/content-primary -->
         <br>
 {% endblock %}

@@ -544,6 +544,7 @@ $usuarios->get('/{user}/{tipo}/{id_informe}', function (Request $request, $user,
         'apellidos' => $usuario_consulta['apellidos'],
         'errores' => $errores,
         'id_uso' => $tipo,
+        'id_informe' => $id_informe,
         'opcion' => $tipo_uso,
         'fecha' => $informe['fecha'],
         'direccion' => $informe['direccion'],
@@ -594,4 +595,103 @@ $usuarios->get('/{user}/{tipo}/{id_informe}', function (Request $request, $user,
 ->bind('usuario.informe');
 
 // -----------------------------------------------------------------------------
+
+$usuarios->get('/{user}/{tipo}/{id_informe}/mapa', function (Request $request, $user, $tipo, $id_informe) use ($app) {
+    // Comprobamos que es el usuario el que consulta su propio perfil 
+    // y no el de otro usuario, salvo que sea administrador
+    $token = $app['security']->getToken();
+    if (null !== $token) {
+        // Obtenemos al usuario autenticado, su nombre y si es administrador 
+        $usuario_autenticado = $token->getUser();
+        $nombre_usuario_autenticado = $usuario_autenticado->getUsername();
+        $esAdmin = in_array('ROLE_ADMIN', $usuario_autenticado->getRoles());
+
+        if ($user != $nombre_usuario_autenticado and !$esAdmin) {
+            // El usuario autenticado no es administrador y está intentando
+            // ver el perfil de otro usuario
+            return $app->redirect($app['url_generator']->generate('inicio'));
+        }
+
+    } else {
+        // Si no está autenticado no debería pasar por aquí
+        // pero aún así lo mandamos a la portada
+        return $app->redirect($app['url_generator']->generate('inicio'));
+    }
+
+    // Obtenemos el ID de usuario y sus informes
+    $usuario_consulta = $app['db']->fetchAssoc(
+        "SELECT * FROM usuarios WHERE username = ?",
+        array($user)
+        );
+
+    // Obtenemos el informe concreto
+    $informe = $app['db']->fetchAssoc(
+        "SELECT * FROM informes WHERE idInformes = ?",
+        array($id_informe)
+        );
+
+    // Obtenemos el título del tipo de uso del informe obtenido
+    $tipo_uso = $app['db']->fetchColumn(
+        "SELECT Tipo FROM usos WHERE idUsos = ?",
+        array($informe['idUsos'])
+        );
+    
+    // Obtenemos el título del tipo de uso de campo de la URL
+    $tipo_uso_url = $app['db']->fetchColumn(
+        "SELECT Tipo FROM usos WHERE idUsos = ?",
+        array($tipo)
+        );
+
+    // Obtenemos el total de informes para cada uso
+    $total_informes_tipo = $app['db']->fetchAll(
+        "SELECT * FROM informes WHERE idUsuarios = ? AND idUsos = ? ORDER BY fecha DESC",
+        array(
+            $usuario_consulta['idUsuarios'],
+            $tipo
+            )
+        );
+
+    // Comprobamos errores al introducir manualmente las URLs e inicializamos los valores que le
+    // pasamos a la plantilla
+    $errores = null;
+    
+    if ($informe == False) {
+    
+        // No hay ningún resultado en la consulta
+        $errores[] = "El informe con identificador <strong>".$id_informe."</strong> no existe.";
+    
+    } else {
+
+        // Hay un resultado
+        if ($informe['idUsos'] != $tipo) {
+            if (count($errores) > 0)
+                array_push($errores, "El informe con identificador <strong>".$id_informe."</strong> no corresponde con el uso <strong>".$tipo_uso_url."</strong>");
+            else
+                $errores[] = "El informe con identificador <strong>".$id_informe."</strong> no corresponde con el uso <strong>".$tipo_uso."</strong>";
+        }
+
+        if ($informe['idUsuarios'] != $usuario_consulta['idUsuarios']) {
+            if (count($errores) > 0)
+                array_push($errores, "Este informe no ha sido realizado por el usuario <strong>".$nombre_usuario_autenticado."</strong>");
+            else
+                $errores[] = "Este informe no ha sido realizado por el usuario <strong>".$nombre_usuario_autenticado."</strong>";
+        }
+
+        return $app['twig']->render('mapa_informe.twig', array(
+            'id' => $usuario_consulta['idUsuarios'],
+            'nombre' => $usuario_consulta['nombre'],
+            'apellidos' => $usuario_consulta['apellidos'],
+            'errores' => $errores,
+            'usuario' => $user,
+            'id_uso' => $tipo,
+            'id_informe' => $id_informe,
+            'tipo_uso' => $tipo_uso,
+            'direccion' => $informe['direccion'],
+            'cpostal' => $informe['cpostal'],
+            'localidad' => $informe['localidad'],
+            'provincia' => $informe['provincia'],
+        ));
+    }
+})
+->bind('usuario.mapa');
 return $usuarios;

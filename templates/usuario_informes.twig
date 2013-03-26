@@ -51,6 +51,6 @@
             {% else %}
             <div class="ui-bar ui-bar-e">No ha archivado todavía ningún informe de este tipo.</div>
             {% endif %}
-            <a href="{{ path('usuario', { 'user': app.security.token.user.username }) }}" data-role="button" data-theme="b">Volver</a>
+            <a href="{{ path('usuario', { 'user': app.security.token.user.username }) }}" data-role="button" data-icon="back" data-icon-pos="right" data-theme="b">Volver</a>
 		</div><!--/content-primary -->
 {% endblock %}
