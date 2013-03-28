@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Servidor: 127.0.0.1
--- Tiempo de generación: 03-03-2013 a las 23:08:18
+-- Tiempo de generación: 28-03-2013 a las 18:53:14
 -- Versión del servidor: 5.5.27
 -- Versión de PHP: 5.4.7
 
@@ -32,22 +32,23 @@ CREATE TABLE IF NOT EXISTS `informes` (
   `idUsos` int(11) NOT NULL DEFAULT '1',
   `fecha` datetime NOT NULL,
   `direccion` varchar(255) COLLATE utf8_spanish_ci NOT NULL,
-  `cpostal` int(5) NOT NULL,
-  `poblacion` varchar(45) COLLATE utf8_spanish_ci NOT NULL,
+  `cpostal` int(5) unsigned zerofill NOT NULL,
+  `localidad` varchar(45) COLLATE utf8_spanish_ci NOT NULL,
   `provincia` varchar(45) COLLATE utf8_spanish_ci NOT NULL,
-  `superfice` int(11) NOT NULL COMMENT 'Superficie construida',
+  `superficie` int(11) NOT NULL COMMENT 'Superficie construida',
   `altura_d` int(11) NOT NULL COMMENT 'Altura de evacuación descendente',
-  `altura_e` int(11) NOT NULL COMMENT 'Altura de evacuación ascendente',
+  `altura_a` int(11) NOT NULL COMMENT 'Altura de evacuación ascendente',
   `dens_1per` tinyint(1) DEFAULT NULL COMMENT '¿La densidad de ocupación es mayor que 1 persona cada 5 m cuadrados?',
   `cocina_50kW` tinyint(1) DEFAULT NULL,
   `centro_transf` tinyint(1) DEFAULT NULL,
   `trasteros` tinyint(1) DEFAULT NULL,
   `superficie_trasteros` int(11) DEFAULT NULL,
-  `locales_riesgo` tinyint(1) DEFAULT NULL,
+  `reprografia` tinyint(1) DEFAULT NULL,
   `volumen_construido` int(11) DEFAULT NULL,
   `aloj_50pers` tinyint(1) DEFAULT NULL,
   `cocina_20kW` tinyint(1) DEFAULT NULL,
-  `superficie_locales` int(11) DEFAULT NULL,
+  `roperos` tinyint(1) DEFAULT NULL,
+  `superficie_roperos` int(11) DEFAULT NULL,
   `camas_100` tinyint(1) DEFAULT NULL,
   `almacenes_fc` tinyint(1) DEFAULT NULL COMMENT '¿Hay almacenes de productos farmacéuticos y clínicos?',
   `v_almacenes_fc` int(11) DEFAULT NULL,
@@ -65,7 +66,7 @@ CREATE TABLE IF NOT EXISTS `informes` (
   PRIMARY KEY (`idInformes`),
   KEY `Usuarios_idx` (`idUsuarios`),
   KEY `Usos_idx` (`idUsos`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_spanish_ci COMMENT='Datos generales de un informe. ' AUTO_INCREMENT=1 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 COLLATE=utf8_spanish_ci COMMENT='Datos generales de un informe. ' AUTO_INCREMENT=7 ;
 
 -- --------------------------------------------------------
 
@@ -78,20 +79,6 @@ CREATE TABLE IF NOT EXISTS `usos` (
   `Tipo` varchar(45) COLLATE utf8_spanish_ci NOT NULL,
   PRIMARY KEY (`idUsos`)
 ) ENGINE=InnoDB  DEFAULT CHARSET=utf8 COLLATE=utf8_spanish_ci COMMENT='Diferentes usos previstos de las instalaciones' AUTO_INCREMENT=9 ;
-
---
--- Volcado de datos para la tabla `usos`
---
-
-INSERT INTO `usos` (`idUsos`, `Tipo`) VALUES
-(1, 'Residencial Vivienda'),
-(2, 'Administrativo'),
-(3, 'Residencial Público'),
-(4, 'Hospitalario'),
-(5, 'Docente'),
-(6, 'Comercial'),
-(7, 'Pública Concurrencia'),
-(8, 'Aparcamiento');
 
 -- --------------------------------------------------------
 
@@ -109,14 +96,7 @@ CREATE TABLE IF NOT EXISTS `usuarios` (
   `roles` varchar(255) COLLATE utf8_spanish_ci NOT NULL,
   PRIMARY KEY (`idUsuarios`),
   UNIQUE KEY `usuario_UNIQUE` (`username`)
-) ENGINE=InnoDB  DEFAULT CHARSET=utf8 COLLATE=utf8_spanish_ci COMMENT='Usuarios técnicos con capacidad para almacenar informes' AUTO_INCREMENT=7 ;
-
---
--- Volcado de datos para la tabla `usuarios`
---
-
-INSERT INTO `usuarios` (`idUsuarios`, `nombre`, `apellidos`, `username`, `password`, `salt`, `roles`) VALUES
-(6, 'Santos', 'Jiménez', 'sjimenez77@gmail.com', 'xWUkGYZSfAGNiurr1KK3nfnrkt9Hs3LJH0pBTPYCV4eRqvF9hxjALhR6LMr+f4FsR2obFIGpMV4R//pmVz5gdQ==', '', 'ROLE_USER');
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 COLLATE=utf8_spanish_ci COMMENT='Usuarios técnicos con capacidad para almacenar informes' AUTO_INCREMENT=8 ;
 
 --
 -- Restricciones para tablas volcadas
