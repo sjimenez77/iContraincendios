@@ -22,14 +22,17 @@
 
             <p class="intro"><strong>Bienvenido.</strong> iContraincendios es una aplicación para el cálculo de las necesidades para todo tipo de instalaciones contra incendios.</p>
             
-            <ul data-role="listview" data-inset="true" data-theme="c" data-dividertheme="f">
-                <li data-role="list-divider">Opciones de usuario</li>
-                <li><a href="{{ path('quienes') }}">¿Quiénes somos?</a></li>
-                <li><a href="{{ path('contacto') }}">Contacto</a></li>              
-                <li><a href="{{ path('ayuda') }}">Ayuda</a></li>
-                <li data-theme="b" data-icon="plus"><a href="{{ path('registro') }}" >Registrar nuevo técnico</a></li>
-                <li data-theme="a" data-icon="arrow-d"><a href="/logout" >Desconectar</a></li>
-            </ul>
+            <div data-role="collapsible" data-inset="true" data-theme="f" data-content-theme="c">
+                <h2>Opciones de usuario</h2>
+                <ul class="ui-shadow" data-role="listview" data-theme="c"  data-dividertheme="d">
+                    <li data-role="list-divider">Seleccione una opción</li>
+                    <li><a href="{{ path('quienes') }}">¿Quiénes somos?</a></li>
+                    <li><a href="{{ path('contacto') }}">Contacto</a></li>              
+                    <li><a href="{{ path('ayuda') }}">Ayuda</a></li>
+                    <li data-theme="b" data-icon="plus"><a href="{{ path('registro') }}" >Registrar nuevo técnico</a></li>
+                    <li data-theme="a" data-icon="arrow-d"><a href="/logout" >Desconectar</a></li>
+                </ul>
+            </div>
         </div><!--/content-secondary -->
 {% endblock %}
 
@@ -55,7 +58,7 @@
                 <p><a href="{{ path('usuario.mapa', { 'user': app.security.token.user.username, 'tipo': id_uso, 'id_informe': id_informe|e }) }}" data-role="button" data-icon="info" data-icon-pos="right" data-ajax="false" data-theme="a">Ver localización en mapa</a></p>
                 <ul data-role="listview" data-inset="true" data-divider-theme="f">
                     <li data-role="list-divider">Datos generales de la instalación</li>
-                    <li data-theme="c">{{ direccion }} , {{ cpostal }} , {{ localidad }}  ({{ provincia }}) , España.</li>
+                    <li data-theme="c">{{ direccion }} , {{ cpostal }} , {{ localidad }}  ({{ provincia }}), España.</li>
                     <li data-theme="c" style="font-weight: normal;">Superficie: <strong>{{ superficie }} m&sup2;</strong></li>
                     <li data-theme="c" style="font-weight: normal;">Altura de evacuación descendente: <strong>{{ altura_d }} m</strong></li>
                     <li data-theme="c" style="font-weight: normal;">Altura de evacuación ascendente: <strong>{{ altura_a }} m</strong></li>
@@ -72,20 +75,42 @@
                     <li data-theme="c" style="font-weight: normal;">Cocinas instaladas dentro del edificio con una potencia instalada superior a 50 kW: <strong>{{ cocina_50kW ? 'Sí' : 'No' }}</strong></li>
                     <li data-theme="c" style="font-weight: normal;">Hay imprenta, reprografía y locales anejos, tales como almacenes de papel, encuadernado, etc.: <strong>{{ reprografia ? 'Sí' : 'No' }}</strong></li>                    
                     {% if reprografia %}
-                    <li data-theme="c" style="font-weight: normal;">Volumen construído: <strong>{{ volumen_construido }} m&sup3;</strong></li>                    
-                    {% endif %}
+                    <li data-theme="c" style="font-weight: normal;">Volumen construído: <strong>{{ volumen_construido }} m&sup3;</strong></li>  {% endif %}
                 {% elseif opcion == 'Residencial Público' %}
-
+                    <li data-theme="c" style="font-weight: normal;">Previsto para dar alojamiento a más de 50 personas: <strong>{{ aloj_50pers ? 'Sí' : 'No' }}</strong></li>
+                    <li data-theme="c" style="font-weight: normal;">Cocinas instaladas dentro del edificio con una potencia instalada superior a 20 kW: <strong>{{ cocina_20kW ? 'Sí' : 'No' }}</strong></li>
+                    <li data-theme="c" style="font-weight: normal;">Hay roperos y locales para la custodia de equipajes: <strong>{{ roperos ? 'Sí' : 'No' }}</strong></li>
+                    {% if roperos %}
+                    <li data-theme="c" style="font-weight: normal;">Superficie construida de los locales: <strong>{{ superficie_roperos }} m&sup2;</strong></li>
+                    {% endif %}
                 {% elseif opcion == 'Hospitalario' %}
-
+                    <li data-theme="c" style="font-weight: normal;">Dispone de más de 100 camas: <strong>{{ camas_100 ? 'Sí' : 'No' }}</strong></li>
+                    <li data-theme="c" style="font-weight: normal;">Cocinas instaladas dentro del edificio con una potencia instalada superior a 20 kW: <strong>{{ cocina_20kW ? 'Sí' : 'No' }}</strong></li>
+                    <li data-theme="c" style="font-weight: normal;">Hay almacenes de productos farmacéuticos y clínicos: <strong>{{ almacenes_fc ? 'Sí' : 'No' }}</strong></li>
+                    {% if almacenes_fc %}
+                    <li data-theme="c" style="font-weight: normal;">Superficie construida de los almacenes: <strong>{{ superficie_roperos }} m&sup2;</strong></li>
+                    {% endif %}
+                    <li data-theme="c" style="font-weight: normal;">Hay laboratorios clínicos: <strong>{{ lab_c ? 'Sí' : 'No' }}</strong></li>
+                    {% if lab_c %}
+                    <li data-theme="c" style="font-weight: normal;">Volumen construido de los laboratorios: <strong>{{ v_lab_c }} m&sup3;</strong></li>
+                    {% endif %}
+                    <li data-theme="c" style="font-weight: normal;">Hay zonas de esterilización y almacenes anejos: <strong>{{ zonas_est ? 'Sí' : 'No' }}</strong></li>
                 {% elseif opcion == 'Docente' %}
-
+                    <li data-theme="c" style="font-weight: normal;">Cocinas instaladas dentro del edificio con una potencia instalada superior a 50 kW: <strong>{{ cocina_50kW ? 'Sí' : 'No' }}</strong></li>
                 {% elseif opcion == 'Comercial' %}
-
+                    <li data-theme="c" style="font-weight: normal;">La superficie total construida del área pública de ventas excede de 1.500 m&sup2;: <strong>{{ area_ventas_1500 ? 'Sí' : 'No' }}</strong></li>
+                    <li data-theme="c" style="font-weight: normal;">La densidad de carga de fuego ponderada y corregida aportada por los productos comercializados es mayor que 500 MJ/m&sup2;: <strong>{{ densidad_cf_500 ? 'Sí' : 'No' }}</strong></li>
+                    <li data-theme="c" style="font-weight: normal;">Cocinas instaladas dentro del edificio con una potencia instalada superior a 50 kW: <strong>{{ cocina_50kW ? 'Sí' : 'No' }}</strong></li>
+                    <li data-theme="c" style="font-weight: normal;">Hay almacenes en los que la densidad de carga de fuego ponderada y corregida (Qs) aportada por los productos almacenados es superior a 3.400 MJ/m&sup2;: <strong>{{ almacenes_cf_3400 ? 'Sí' : 'No' }}</strong></li>
                 {% elseif opcion == 'Pública Concurrencia' %}
-
+                    <li data-theme="c" style="font-weight: normal;">La ocupación excede de 500 personas: <strong>{{ ocupacion_500 ? 'Sí' : 'No' }}</strong></li>
+                    <li data-theme="c" style="font-weight: normal;">Uso previsto: <strong>{{ tipo_pub_concurrencia }}</strong></li>
+                    <li data-theme="c" style="font-weight: normal;">Cocinas instaladas dentro del edificio con una potencia instalada superior a 50 kW: <strong>{{ cocina_50kW ? 'Sí' : 'No' }}</strong></li>
+                    <li data-theme="c" style="font-weight: normal;">Existen talleres o almacenes de decorados, de vestuario, etc., con un volumen construido superior a 200m&sup3;: <strong>{{ talleres_dec ? 'Sí' : 'No' }}</strong></li>
                 {% elseif opcion == 'Aparcamiento' %}
-
+                    <li data-theme="c" style="font-weight: normal;">El aparcamiento es robotizado: <strong>{{ robotizado ? 'Sí' : 'No' }}</strong></li>
+                    <li data-theme="c" style="font-weight: normal;">Existen más de tres plantas bajo rasante o más de cuatro sobre rasante: <strong>{{ plantas_rasante ? 'Sí' : 'No' }}</strong></li>
+                    <li data-theme="c" style="font-weight: normal;">Cocinas instaladas dentro del edificio con una potencia instalada superior a 50 kW: <strong>{{ cocina_50kW ? 'Sí' : 'No' }}</strong></li>
                 {% endif %}
                 </ul>
 

@@ -39,7 +39,7 @@
 					            position: 'BOTTOM', 
 					            style: 'ANDROID' 
 					        }, 
-                            zoom: 18 
+                            zoom: 16 
                         }); 
                         console.log('Mapa supuestamente dibujado');
 
@@ -73,21 +73,24 @@
 
             <p class="intro"><strong>Bienvenido.</strong> iContraincendios es una aplicación para el cálculo de las necesidades para todo tipo de instalaciones contra incendios.</p>
             
-            <ul data-role="listview" data-inset="true" data-theme="c" data-dividertheme="f">
-                <li data-role="list-divider">Opciones de usuario</li>
-                <li><a href="{{ path('quienes') }}">¿Quiénes somos?</a></li>
-                <li><a href="{{ path('contacto') }}">Contacto</a></li>              
-                <li><a href="{{ path('ayuda') }}">Ayuda</a></li>
-                <li data-theme="b" data-icon="plus"><a href="{{ path('registro') }}" >Registrar nuevo técnico</a></li>
-                <li data-theme="a" data-icon="arrow-d"><a href="/logout" >Desconectar</a></li>
-            </ul>
+            <div data-role="collapsible" data-inset="true" data-theme="f" data-content-theme="c">
+                <h2>Opciones de usuario</h2>
+                <ul class="ui-shadow" data-role="listview" data-theme="c"  data-dividertheme="d">
+                    <li data-role="list-divider">Seleccione una opción</li>
+                    <li><a href="{{ path('quienes') }}">¿Quiénes somos?</a></li>
+                    <li><a href="{{ path('contacto') }}">Contacto</a></li>              
+                    <li><a href="{{ path('ayuda') }}">Ayuda</a></li>
+                    <li data-theme="b" data-icon="plus"><a href="{{ path('registro') }}" >Registrar nuevo técnico</a></li>
+                    <li data-theme="a" data-icon="arrow-d"><a href="/logout" >Desconectar</a></li>
+                </ul>
+            </div>
         </div><!--/content-secondary -->
 {% endblock %}
 
 {% block contenido_primario %}
         <div class="content-primary">
             <h2>{{ nombre }} {{ apellidos }}</h2><hr>
-            <p>A continuación se muestra los datos del informe conjuntamente con los cálculos de las necesidades contraincendios asociados. En el caso que desee realizar algún cambio póngase en contacto con el administrador de la plataforma mediante el botón <strong>Contacto</strong>.</p>
+            <p>A continuación se muestra el mapa del informe seleccionado. En el caso que desee realizar algún cambio póngase en contacto con el administrador de la plataforma mediante el botón <strong>Contacto</strong>.</p>
             {% if errores %}
             <p>
                 <ul data-role="listview" data-inset="true" data-divider-theme="a" data-count-theme="b">
@@ -98,8 +101,10 @@
                 </ul>
             </p>
             {% else %}
-				<div class="ui-bar-c ui-corner-all ui-shadow" style="padding:1em;">
-					<div id="map" style="height:400px;width:100%"></div>
+				<div class="ui-bar-d ui-corner-all ui-shadow" style="padding:1em;">
+                    <p>{{ direccion }}, {{ cpostal }}, {{ localidad }} ({{ provincia }})</p>
+                    <hr>
+					<div id="map" style="height:400px;width:100%;border:1px solid #666666"></div>
 				</div>
             {% endif %}
             <a href="{{ path('usuario.informe', { 'user': app.security.token.user.username, 'tipo': id_uso, 'id_informe': id_informe }) }}" data-role="button" data-icon="back" data-icon-pos="right" data-theme="b">Volver</a>

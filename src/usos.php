@@ -613,6 +613,8 @@ $usos_ins->post('/archivar', function (Request $request) use ($app) {
             'error' => $app['security.last_error']($request),
             'last_username' => $app['session']->get('_security.last_username'),
             'error_bd' => $error_bd,
+            'idUsuarios' => $user['idUsuarios'],
+            'idUsos' => $id_instalacion['idUsos'],
             'opcion' => $opcion
         )
     );

@@ -22,13 +22,19 @@
 
 			<p class="intro"><strong>Bienvenido.</strong> iContraincendios es una aplicación para el cálculo de las necesidades para todo tipo de instalaciones contra incendios.</p>
 			
-			<ul data-role="listview" data-inset="true" data-theme="c" data-dividertheme="f">
-				<li data-role="list-divider">Opciones generales</li>
-                <li><a href="{{ path('quienes') }}">¿Quiénes somos?</a></li>
-                <li><a href="{{ path('contacto') }}">Contacto</a></li>              
-                <li><a href="{{ path('ayuda') }}">Ayuda</a></li>
-                <li data-theme="b" data-icon="plus"><a href="{{ path('registro') }}" >Registrar nuevo técnico</a></li>
-			</ul>
+            <div data-role="collapsible" data-inset="true" data-theme="f" data-content-theme="c">
+                <h2>Opciones generales</h2>
+                <ul class="ui-shadow" data-role="listview" data-theme="c"  data-dividertheme="d">
+                    <li data-role="list-divider">Seleccione una opción</li>
+                    <li><a href="{{ path('quienes') }}">¿Quiénes somos?</a></li>
+                    <li><a href="{{ path('contacto') }}">Contacto</a></li>              
+                    <li><a href="{{ path('ayuda') }}">Ayuda</a></li>
+                    <li data-theme="b" data-icon="plus"><a href="{{ path('registro') }}" >Registrar nuevo técnico</a></li>
+                    {% if is_granted('IS_AUTHENTICATED_FULLY') %}
+                    <li data-theme="a" data-icon="arrow-d"><a href="/logout" >Desconectar</a></li>
+                    {% endif %}
+                </ul>
+            </div>
 		</div><!--/content-secondary -->
 {% endblock %}
 
@@ -38,7 +44,17 @@
             <p>El manejo de esta aplicación es muy sencillo y se puede dividir en dos apartados. El primero, el <strong>acceso y registro</strong> en la plataforma y el segundo el <strong>manejo</strong> de la propia plataforma. Es importante indicar que la interfaz de usuario se verá de diferente manera automáticamente dependiendo del dispositivo desde donde se acceda. Es decir, mientras que un PC aparecerán todos los botones y menús, en un smartphone algunos aparecerán mediante desplegables fácilmente accesibles en la parte superior de las diferentes páginas o pantallas.</p> 
             <p>El registro se realiza pinchando o pulsando el botón <strong>"Registrar nuevo técnico"</strong> y rellenando correctamente los campos del formulario. En caso de que se detecte algún fallo el propio sistema indicará cúal es. Para cualquier duda o problema rellene los datos del formulario de contacto pulsando el botón <strong>"Contacto"</strong> y un técnico de la plataforma se pondrá en contacto con usted en la mayor brevedad posible.</p>
             <p><strong>Para acceder al sistema</strong>, una vez se haya registrado, debe pinchar sobre el <strong>botón</strong>, situado a la derecha en la barra superior verde, con forma de <strong>lápiz</strong> e introducir su usuario y contraseña. En caso de que todo haya funcionado bien el icono del botón cambiará a un <strong>engranaje</strong>, y al pulsarlo aparecerán las opciones del usuario conectado: ver su perfil y desconectarse de la plataforma. En caso de error, el icono no cambiará, pero al pinchar mostrará el mensaje de usuario y/o contraseña incorrectos.</p>
-            <p><strong>Para el manejo de la plataforma</strong> simplemente ha de pinchar en el uso de la instalación y rellenar el formulario adjunto. Al enviarlo verá los resultados y, <strong>si está conectado, le permitirá archivarlo</strong> introduciendo unos datos referentes a dicho inmueble: dirección, código postal, población, etc.</p>
+            <p><strong>Para el manejo de la plataforma</strong> simplemente ha de pinchar en el uso de la instalación y rellenar el formulario adjunto. Al enviarlo verá los resultados y, <strong>si está conectado, le permitirá archivarlo</strong> introduciendo unos datos referentes a dicho inmueble: dirección, código postal, población, etc. Los <strong>resultados</strong> se mustran siguiendo el siguiente <strong>patrón</strong>:</p>
+            <p>
+                <ul data-role="listview" data-inset="true">
+                    <li data-theme="b" data-icon="check"><a href="#">Instalación necesaria</a></li>
+                    <li data-theme="a" data-icon="delete"><a href="#">Instalación prescindible</a></li>
+                </ul>
+            </p>
+            <p>Cuando el usuario desee consultar sus informes almacenados, puede también <strong>consultar la localización</strong> del inmueble relacionado en Google Maps pulsando el siguiente botón:</p>
+            <p>
+                <a href="#" data-role="button" data-icon="info" data-icon-pos="right" data-theme="a">Ver localización en mapa</a>
+            </p>
             <p>&nbsp;</p>
         </div><!--/content-primary -->
 {% endblock %}

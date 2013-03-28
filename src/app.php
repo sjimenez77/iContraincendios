@@ -75,9 +75,9 @@ $app->register(new SecurityServiceProvider(), array(
 
 // Registro del proveedor de plantillas TWIG
 $app->register(new TwigServiceProvider(), array(
-    'twig.path'    => array(__DIR__.'/../templates')
     // descomenta esta línea para activar la cache de Twig y añade una coma
-    // 'twig.options' => array('cache' => __DIR__.'/../cache/twig'),
+    'twig.path'    => array(__DIR__.'/../templates'),
+    'twig.options' => array('cache' => __DIR__.'/../cache/twig')
 ));
 
 // activada la cache HTTP

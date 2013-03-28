@@ -64,9 +64,14 @@
                 </div>
                 {% endif %}
             </div>
-            <div class="ui-bar ui-bar-b">Informe archivado</div>
+            <div class="ui-bar ui-bar-b">Informe archivado correctamente</div>
             <div class="ui-body ui-body-b">
-              
+                <p>Seleccione una de las siguientes opciones para continuar:</p>
+                <ul data-role="listview" data-inset="true" data-divider-theme="a">
+                    <li data-theme="f"><a href="{{ path('inicio') }}">Volver a la pantalla de inicio</a></li>
+                    <li data-theme="b"><a href="{{ path(volver) }}">Insertar un nuevo informe del mismo tipo ({{ opcion|e }})</a></li>
+                    <li data-theme="c"><a href="{{ path('usuario', { 'user': app.security.token.user.username }) }}">Consultar mis informes</a></li>
+                </ul>
             </div>
 	        <p>&nbsp;</p>		
     	</div><!--/content-primary -->

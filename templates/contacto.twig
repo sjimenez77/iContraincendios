@@ -1,0 +1,96 @@
+{% extends 'layout.twig' %}
+
+{% block titulo 'Portada' %}
+
+{% block body_class 'type-home' %}
+
+{% block cabecera %}
+    {% include 'cabecera.twig' %}
+    {% if is_granted('IS_AUTHENTICATED_FULLY') %}
+    {% include 'menu_usuario.twig' %}
+    {% else %}
+    {% include 'form_login_popup.twig' %}
+    {% endif %}
+{% endblock %}
+
+{% block contenido_secundario %}
+		<div class="content-secondary">
+            <div id="jqm-homeheader">
+                <h1 id="jqm-logo"><img src="/img/logo.fw.png" alt="iContraincendios" /></h1>
+                <p>Calcule las necesidades de una instalación contraincendios.</p>
+            </div>
+
+			<p class="intro"><strong>Bienvenido.</strong> iContraincendios es una aplicación para el cálculo de las necesidades para todo tipo de instalaciones contra incendios.</p>
+			
+            <div data-role="collapsible" data-inset="true" data-theme="f" data-content-theme="c">
+                <h2>Opciones generales</h2>
+                <ul class="ui-shadow" data-role="listview" data-theme="c"  data-dividertheme="d">
+                    <li data-role="list-divider">Seleccione una opción</li>
+                    <li><a href="{{ path('quienes') }}">¿Quiénes somos?</a></li>
+                    <li><a href="{{ path('contacto') }}">Contacto</a></li>              
+                    <li><a href="{{ path('ayuda') }}">Ayuda</a></li>
+                    <li data-theme="b" data-icon="plus"><a href="{{ path('registro') }}" >Registrar nuevo técnico</a></li>
+                    {% if is_granted('IS_AUTHENTICATED_FULLY') %}
+                    <li data-theme="a" data-icon="arrow-d"><a href="/logout" >Desconectar</a></li>
+                    {% endif %}
+                </ul>
+            </div>
+		</div><!--/content-secondary -->
+{% endblock %}
+
+{% block contenido_primario %}
+		<div class="content-primary">
+            <h2>Contacta con nosotros</h2><hr>
+            <p>Rellena el siguiente formulario para contactar con el administrador de la plataforma. <strong>Todos los campos son obligatorios</strong>.</p>
+            <div id="nombre_error" data-role="popup" data-theme="a" data-overlay-theme="a" style="padding:10px 20px;">
+            <a href="#" id="nombre_error_c" data-rel="back" data-role="button" data-theme="f" data-icon="delete" data-iconpos="notext" class="ui-btn-right">Close</a>
+            Falta su nombre
+            </div>
+            <div id="email_error" data-role="popup" data-theme="a" data-overlay-theme="a" style="padding:10px 20px;">
+            <a href="#" id="email_error_c" data-rel="back" data-role="button" data-theme="f" data-icon="delete" data-iconpos="notext" class="ui-btn-right">Close</a>
+            Email no v&aacute;lido
+            </div>
+            <div id="email_vacio" data-role="popup" data-theme="a" data-overlay-theme="a" style="padding:10px 20px;">
+            <a href="#" id="email_vacio_c" data-rel="back" data-role="button" data-theme="f" data-icon="delete" data-iconpos="notext" class="ui-btn-right">Close</a>
+            Falta su email
+            </div>
+            <div id="asunto_error" data-role="popup" data-theme="a" data-overlay-theme="a" style="padding:10px 20px;">
+            <a href="#" id="asunto_error_c" data-rel="back" data-role="button" data-theme="f" data-icon="delete" data-iconpos="notext" class="ui-btn-right">Close</a>
+            Falta el asunto
+            </div>
+            <div id="mensaje_error" data-role="popup" data-theme="a" data-overlay-theme="a" style="padding:10px 20px;">
+            <a href="#" id="mensaje_error_c" data-rel="back" data-role="button" data-theme="f" data-icon="delete" data-iconpos="notext" class="ui-btn-right">Close</a>
+            No hay mensaje
+            </div>
+            <div id="mensaje_no_enviado" data-role="popup" data-theme="a" data-overlay-theme="a" style="padding:10px 20px;">
+            <a href="#" id="mensaje_no_enviado_c" data-rel="back" data-role="button" data-theme="f" data-icon="delete" data-iconpos="notext" class="ui-btn-right">Close</a>
+            Mensaje no enviado. Int&eacute;ntelo de nuevo.
+            </div>
+            <div id="mensaje_enviado" data-role="popup" data-theme="d" data-overlay-theme="a" style="padding:10px 20px;">
+            Mensaje enviado correctamente
+            <a href="{{ path('inicio') }}" id="mensaje_enviado_c" data-role="button" data-theme="f" data-icon="back" data-direction="reverse">Volver a la portada</a>
+            </div>
+            <div class="ui-bar ui-bar-b">Formulario de contacto</div>
+            <form id="contacto" method="post">
+               <div class="ui-body ui-body-b">
+                   <div data-role="fieldcontain">
+                   <label for="nombre"><strong>Nombre</strong></label>
+                   <input type="text" name="nombre" id="nombre" placeholder="Nombre y apellidos" />
+                   </div>
+                   <div data-role="fieldcontain">
+                   <label for="email"><strong>Email</strong></label>
+                   <input type="text" name="email" id="email" placeholder="ejemplo@dominio.com" />
+                   </div>
+                   <div data-role="fieldcontain">
+                   <label for="asunto"><strong>Asunto</strong></label>
+                   <input type="text" name="asunto" id="asunto" placeholder="Indique el asunto de su mensaje" />
+                   </div>
+                   <div data-role="fieldcontain">
+                   <label for="mensaje"><strong>Mensaje</strong></label>
+                   <textarea cols="30" rows="5" name="mensaje" id="mensaje" ></textarea>
+                   </div>
+                   <button type="submit" id="submit_contacto" name="submit_contacto" value="submit-value">Enviar</button>
+               </div>
+            </form>
+		</div><!--/content-primary -->
+{% endblock %}

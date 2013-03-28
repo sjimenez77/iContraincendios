@@ -195,6 +195,14 @@ $app->get('/contacto', function(Request $request) use ($app) {
 })
 ->bind('contacto');
 
+$app->post('/contacto', function(Request $request) use ($app) {
+    return $app['twig']->render('contacto.twig', array(
+            'error' => $app['security.last_error']($request),
+            'last_username' => $app['session']->get('_security.last_username'),
+        ));
+})
+->bind('contacto.post');
+
 $app->get('/ayuda', function(Request $request) use ($app) {
     return $app['twig']->render('ayuda.twig', array(
             'error' => $app['security.last_error']($request),

@@ -94,6 +94,55 @@
 				$('input[name="v_lab_c"]').addClass('mobile-textinput-disabled');
 			}
 		});
+
+		/*	Validación y llamada AJAX para enviar el correo */
+		$("#submit_contacto").click(function() {
+	 		console.log('Botón submit de contacto pulsado...');
+			var nombre = $("#nombre").val();
+				email = $.trim($("#email").val());
+				validacion_email = /^[a-zA-Z0-9_\.\-]+@[a-zA-Z0-9\-]+\.[a-zA-Z0-9\-\.]+$/;
+				asunto = $("#asunto").val();
+				mensaje = $("#mensaje").val();
+	 
+			if ((nombre == "") || (nombre == $("#nombre").attr('placeholder'))){
+				$( "#nombre_error" ).popup( "open" );
+				return false;
+			} else if(email == "" || (email == $("#email").attr('placeholder')) || !validacion_email.test(email)){
+				if (!validacion_email.test(email))
+					$( "#email_error" ).popup( "open" );
+				else
+					$( "#email_vacio" ).popup( "open" );
+				return false;
+			} else if(asunto == "" || (asunto == $("#asunto").attr('placeholder'))){
+				$( "#asunto_error" ).popup( "open" );
+				return false;
+			} else if(mensaje == ""){
+				$( "#mensaje_error" ).popup( "open" );
+				return false;
+			} else {
+					// Si todo paso, aqui ira la llamada AJAX
+					var datos = 'nombre='+ nombre + '&email=' + email + '&asunto=' + asunto + '&mensaje=' + mensaje;
+					$.ajax({
+						type: "POST",
+						url: "/web/js/proceso.php",
+						data: datos,
+						success: function() {
+							$( "#mensaje_enviado" ).popup( "open" );
+						},
+						error: function() {
+							$( "#mensaje_no_enviado" ).popup( "open" );
+						}
+					});
+					return false;
+				}
+	 
+		});
+		/* Hacemos scroll y foco sobre el elemento del error del formulario */
+		$("#nombre_error_c").click(function() 	{ $.mobile.silentScroll($("#nombre").offset().top); $("#nombre").focus(); });
+		$("#email_error_c").click(function() 	{ $.mobile.silentScroll($("#email").offset().top); $("#email").focus();	});
+		$("#email_vacio_c").click(function() 	{ $.mobile.silentScroll($("#email").offset().top); $("#email").focus();	});
+		$("#asunto_error_c").click(function() 	{ $.mobile.silentScroll($("#asunto").offset().top); $("#asunto").focus(); });
+		$("#mensaje_error_c").click(function() 	{ $.mobile.silentScroll($("#mensaje").offset().top); $("#mensaje").focus();});
 		
 	});
 })(jQuery);
