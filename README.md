@@ -22,9 +22,8 @@ Para acceder al sistema, una vez se haya registrado, debe pinchar sobre el botó
 
 Para el manejo de la plataforma simplemente ha de pinchar en el uso de la instalación y rellenar el formulario adjunto. Al enviarlo verá los resultados y, si está conectado, le permitirá archivarlo introduciendo unos datos referentes a dicho inmueble: dirección, código postal, población, etc. Los resultados se mustran siguiendo el siguiente patrón:
 
-Instalación necesaria: en azul con un icono tick
- 
-Instalación prescindible: en negro con un icono de cruz
+- Instalación necesaria: en azul con un icono de tick
+- Instalación prescindible: en negro con un icono de cruz
  
 Cuando el usuario desee consultar sus informes almacenados, puede también consultar la localización del inmueble relacionado en Google Maps pulsando el siguiente botón con la etiqueta "Ver localización en mapa".
  
