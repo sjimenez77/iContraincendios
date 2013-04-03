@@ -7,7 +7,10 @@ Aplicación Web Silex para el cálculo de las necesidades de una instalación co
 
 ---
 
-Para instalarlo es necesario instalar [composer](http://getcomposer.org/) en el equipo, crear una base de datos con el código SQL adjunto en el archivo src/fire.sql y modificar la configuración de dicha base de datos en el archivo src/app.php.
+Para instalarlo es necesario instalar [composer](http://getcomposer.org/) en el equipo, crear una base de datos con el código SQL adjunto en el archivo src/fire.sql y modificar la configuración de dicha base de datos en el archivo src/app.php. A continuación ejecutar los siguientes comandos:
+
+ composer self-update
+ composer update
 
 ---
 
