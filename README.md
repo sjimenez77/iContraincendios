@@ -1,19 +1,22 @@
 ﻿iContraincendios
 ================
-
+---
 Autor: Santos Jiménez Linares <sjimenez77@gmail.com>
 
 Aplicación Web Silex para el cálculo de las necesidades de una instalación contraincendios.
 
+Instalación
+===========
 ---
 
-Para instalarlo es necesario instalar [composer](http://getcomposer.org/) en el equipo, crear una base de datos con el código SQL adjunto en el archivo src/fire.sql y modificar la configuración de dicha base de datos en el archivo src/app.php. A continuación ejecutar los siguientes comandos:
+Para instalarlo es necesario [composer](http://getcomposer.org/), crear una base de datos con el código SQL adjunto en el archivo src/fire.sql y modificar la configuración de acceso a la base de datos en el archivo src/app.php. A continuación ejecutar los siguientes comandos:
 
 	composer self-update
 	composer update
 
+Utilización
+===========
 ---
-
 El manejo de esta aplicación es muy sencillo y se puede dividir en dos apartados. El primero, el acceso y registro en la plataforma y el segundo el manejo de la propia plataforma. Es importante indicar que la interfaz de usuario se verá de diferente manera automáticamente dependiendo del dispositivo desde donde se acceda. Es decir, mientras que un PC aparecerán todos los botones y menús, en un smartphone algunos aparecerán mediante desplegables fácilmente accesibles en la parte superior de las diferentes páginas o pantallas.
 
 El registro se realiza pinchando o pulsando el botón "Registrar nuevo técnico" y rellenando correctamente los campos del formulario. En caso de que se detecte algún fallo el propio sistema indicará cúal es. Para cualquier duda o problema rellene los datos del formulario de contacto pulsando el botón "Contacto" y un técnico de la plataforma se pondrá en contacto con usted en la mayor brevedad posible.
