@@ -174,13 +174,13 @@ $usos_ins->post('/resultados', function (Request $request) use ($app) {
             if ($altura_d > 24 || $altura_a > 24) $columna_seca = True;
             if ($altura_d > 50 || $altura_a > 50) $sm_alarma = True;
             if ($altura_d > 50 || $altura_a > 50) $sd_incendio = True;
-            if ($trasteros && $superficie_trasteros > 500) $bies_45 = True;
+            if ($trasteros && $superficie_trasteros > 500) $bies_25 = True;
             if ($cocina_50kW) $ia_extincion_cocina = True;
             if ($centro_transf) $ia_extincion_centro_transf = True;
             // Rellenamos los comentarios asociados
-            if ($bies_45) {
-                array_push($claves_comentarios, "bies_45");
-                array_push($lista_comentarios, "Instalación de BIES de 45mm, en las que el riesgo se deba principalmente a materias combustibles sólidas. En nuestro caso los trasteros.");
+            if ($bies_25) {
+                array_push($claves_comentarios, "bies_25");
+                array_push($lista_comentarios, "Instalación de BIES de 25mm, en las que el riesgo se deba principalmente a materias combustibles sólidas. En nuestro caso los trasteros.");
             }
             if ($ia_extincion_cocina) {
                 array_push($claves_comentarios, "ia_extincion_cocina");
@@ -198,7 +198,8 @@ $usos_ins->post('/resultados', function (Request $request) use ($app) {
             // Procesamos datos
             if ($superficie > 0) $extintores = True;
             if ($superficie > 2000) $bies_25 = True;
-            if ($superficie > 5000 || $altura_d > 28 || $altura_a > 6 || $dens_1per) $hid_exteriores = True;
+            // Condición antigua -> if ($superficie > 5000 || $altura_d > 28 || $altura_a > 6 || $dens_1per) $hid_exteriores = True;
+            if ($superficie > 2000 && $superficie < 10000 && $dens_1per) $hid_exteriores = True;
             if ($altura_d > 80) $ia_extincion = True;
             if ($altura_d > 24 || $altura_a > 24) $columna_seca = True;
             if ($superficie > 1000) $sm_alarma = True;
@@ -440,9 +441,6 @@ $usos_ins->post('/resultados', function (Request $request) use ($app) {
         default:
             break;
     }
-
-    $app['monolog']->addDebug('Opcion: '.$opcion);
-    $app['monolog']->addDebug('Superficie: '.$superficie);
 
     // Construimos los resultados en función de los datos rellenados
     return $app['twig']->render(
