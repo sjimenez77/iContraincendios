@@ -1,0 +1,9 @@
+<IfModule mod_rewrite.c>
+    RewriteEngine On
+    RewriteBase /icontraincendios/web
+    RewriteCond %{REQUEST_FILENAME} !-f
+    RewriteRule ^(.*)$ /web/index.php [QSA,L]
+    Redirect /img /web/img
+    Redirect /css /web/css
+    Redirect /js /web/js
+</IfModule>
