@@ -282,7 +282,7 @@ $usos_ins->post('/resultados', function (Request $request) use ($app) {
             // Rellenamos los comentarios asociados
             if ($extintores && $superficie > 500) {
                 array_push($claves_comentarios, "extintores");
-                array_push($lista_comentarios, "En las zonas de riesgo especial alto, cuya superficie construida exceda de 500 m&sup2;, un extintor móvil de 25 kg de polvo o de CO2 por cada 2.500m&sup2; de superficie o fracción.");
+                array_push($lista_comentarios, "En las zonas de riesgo especial alto, cuya superficie construida exceda de 500 m&sup2;, un extintor móvil de 25 kg de polvo o de CO<sub>2</sub> por cada 2.500m&sup2; de superficie o fracción.");
             }
             if ($bies_45) {
                 // Sitios donde se realizarán la instalación de BIES de 45mm 
