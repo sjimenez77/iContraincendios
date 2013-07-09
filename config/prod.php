@@ -22,4 +22,4 @@ $app['security.role_hierarchy'] = array(
 $app['salt'] = '$1$tralariquetevi12341kdfmdnñlanfñlkd';
 
 // Título de la aplicación
-$app['title'] = 'Info Fire Protection';
+$app['title'] = 'iContraincendios';
