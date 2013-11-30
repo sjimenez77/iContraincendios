@@ -14,7 +14,7 @@ use Silex\Provider\SessionServiceProvider;
 use Silex\Provider\SecurityServiceProvider;
 use Silex\Provider\TwigServiceProvider;
 use Silex\Provider\HttpCacheServiceProvider;
-use ic; // Mi proveedor de usuarios
+use \ic; // Mi proveedor de usuarios
 
 $app = new Application();
 
