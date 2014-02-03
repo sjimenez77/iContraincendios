@@ -274,7 +274,7 @@ $usuarios->get('/{user}/{tipo}/{id_informe}', function (Request $request, $user,
                     }
                     if ($ia_extincion_cocina) {
                         array_push($claves_comentarios, "ia_extincion_cocina");
-                        array_push($lista_comentarios, "Se recomienda instalar un sistema de extinción apto para Clases de Fuego F o K.");
+                        array_push($lista_comentarios, "Se recomienda instalar un sistema de extinción apto para Clases de Fuego F o K en cocinas.");
                     }
                     // Combinamos los arrays de claves y de comentarios
                     $comentarios = array_combine($claves_comentarios, $lista_comentarios);
@@ -289,7 +289,7 @@ $usuarios->get('/{user}/{tipo}/{id_informe}', function (Request $request, $user,
                     if ($superficie > 0) $extintores = True;
                     if ($superficie > 2000) $bies_25 = True;
                     // Condición antigua -> if ($superficie > 5000 || $altura_d > 28 || $altura_a > 6 || $dens_1per) $hid_exteriores = True;
-                    if ($superficie > 2000 && $superficie < 10000 && $dens_1per) $hid_exteriores = True;
+                    if ($superficie > 5000 && $superficie < 10000 && $dens_1per) $hid_exteriores = True;
                     if ($altura_d > 80) $ia_extincion = True;
                     if ($altura_d > 24 || $altura_a > 24) $columna_seca = True;
                     if ($superficie > 1000) $sm_alarma = True;
@@ -312,7 +312,7 @@ $usuarios->get('/{user}/{tipo}/{id_informe}', function (Request $request, $user,
                     }
                     if ($ia_extincion_cocina) {
                         array_push($claves_comentarios, "ia_extincion_cocina");
-                        array_push($lista_comentarios, "Se recomienda instalar un sistema de extinción apto para Clases de Fuego F o K.");
+                        array_push($lista_comentarios, "Se recomienda instalar un sistema de extinción apto para Clases de Fuego F o K en cocinas.");
                     }
                     // Combinamos los arrays de claves y de comentarios
                     $comentarios = array_combine($claves_comentarios, $lista_comentarios);
@@ -343,7 +343,7 @@ $usuarios->get('/{user}/{tipo}/{id_informe}', function (Request $request, $user,
                     }
                     if ($ia_extincion_cocina) {
                         array_push($claves_comentarios, "ia_extincion_cocina");
-                        array_push($lista_comentarios, "Se recomienda instalar un sistema de extinción apto para Clases de Fuego F o K.");
+                        array_push($lista_comentarios, "Se recomienda instalar un sistema de extinción apto para Clases de Fuego F o K en cocinas.");
                     }
                     // Combinamos los arrays de claves y de comentarios
                     $comentarios = array_combine($claves_comentarios, $lista_comentarios);
@@ -371,7 +371,7 @@ $usuarios->get('/{user}/{tipo}/{id_informe}', function (Request $request, $user,
                     if ($cocina_20kW) $ia_extincion_cocina = True;
                     if ($centro_transf) $ia_extincion_centro_transf = True;
                     // Rellenamos los comentarios asociados
-                    if ($extintores && $superficie > 500) {
+                    if ($extintores && (($almacenes_fc && $v_almacenes_fc > 400) || ($lab_c && $v_lab_c > 500) || $zonas_est)) {
                         array_push($claves_comentarios, "extintores");
                         array_push($lista_comentarios, "En las zonas de riesgo especial alto, cuya superficie construida exceda de 500 m&sup2;, un extintor móvil de 25 kg de polvo o de CO2 por cada 2.500m&sup2; de superficie o fracción.");
                     }
@@ -401,7 +401,7 @@ $usuarios->get('/{user}/{tipo}/{id_informe}', function (Request $request, $user,
                     }
                     if ($ia_extincion_cocina) {
                         array_push($claves_comentarios, "ia_extincion_cocina");
-                        array_push($lista_comentarios, "Se recomienda instalar un sistema de extinción apto para Clases de Fuego F o K.");
+                        array_push($lista_comentarios, "Se recomienda instalar un sistema de extinción apto para Clases de Fuego F o K en cocinas.");
                     }
                     // Combinamos los arrays de claves y de comentarios
                     $comentarios = array_combine($claves_comentarios, $lista_comentarios);
@@ -459,7 +459,7 @@ $usuarios->get('/{user}/{tipo}/{id_informe}', function (Request $request, $user,
                     }
                     if ($ia_extincion) {
                         array_push($claves_comentarios, "ia_extincion");
-                        array_push($lista_comentarios, "La instalación automática de extinción deberá contar, tanto el área pública de ventas, como los locales y zonas de riesgo especial medio y alto.");
+                        array_push($lista_comentarios, "Contará con la instalación automática de extinción, tanto el área pública de ventas, como los locales y zonas de riesgo especial medio y alto.");
                     }
                     // Combinamos los arrays de claves y de comentarios
                     $comentarios = array_combine($claves_comentarios, $lista_comentarios);
@@ -490,7 +490,7 @@ $usuarios->get('/{user}/{tipo}/{id_informe}', function (Request $request, $user,
                     }
                     if ($superficie > 5000 && ($tipo_pub_concurrencia == "Recintos deportivos" || $tipo_pub_concurrencia = "Otros")) {
                         array_push($claves_comentarios, "hid_exteriores");
-                        array_push($lista_comentarios, "Al ser recinto deportivo o sin especificar de más de 5000 m&sup2; de superficie construida es necesaria la instalación del sistema de hidrantes.");
+                        array_push($lista_comentarios, "Al ser recinto deportivo o sin especificar es necesaria la instalación del sistema de hidrantes sólo si es mayor de 5000 m&sup2;.");
                     }
                     // Combinamos los arrays de claves y de comentarios
                     $comentarios = array_combine($claves_comentarios, $lista_comentarios);
@@ -507,12 +507,11 @@ $usuarios->get('/{user}/{tipo}/{id_informe}', function (Request $request, $user,
                         $sd_incendio = True;
                     }
                     if ($superficie > 1000 || $altura_d > 28 || $altura_a > 6) $hid_exteriores = True;
-                    if ($plantas_rasante) {
+                    if ($plantas_rasante) $columna_seca = True;
+                    if ($robotizado) {
                         $ia_extincion = True;
-                        $columna_seca = True;
-                        $bies_45 = True;
+                        $sm_alarma = True;
                     }
-                    if ($robotizado) $sm_alarma = True;
                     if ($cocina_50kW) $ia_extincion_cocina = True;
                     if ($centro_transf) $ia_extincion_centro_transf = True;
                     // Rellenamos los comentarios asociados
