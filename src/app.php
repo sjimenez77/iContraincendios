@@ -39,27 +39,18 @@ $app->register(new SessionServiceProvider());
 // Registro del proveedor de seguridad
 $app->register(new SecurityServiceProvider(), array(
     'security.firewalls' => array(
-        'secured' => array(
-            'pattern' => '^/backend.*$',
-            'anonymous' => false, 
-            'form' => array(
-                'login_path' => '/login', 
-                'check_path' => '/login_check'
-            ),
-            'logout' => array('logout_path' => '/logout'), // url to call for logging out
-            'users' => $app->share(function() use ($app) {
-                // Specific class ic\UserProvider is described below
-                return new ic\UserProvider($app['db']);
-            }),
-        ),
-		'unsecured' => array(
+		'secured' => array(
 			'pattern' => '^/.*$',
         	'anonymous' => true,
             'form' => array(
             	'login_path' => '/login', 
             	'check_path' => '/login_check'
             ),
-            'logout' => array('logout_path' => '/logout'), // url to call for logging out
+            'logout' => array(
+                'logout_path' => '/logout',             // url to call for logging out
+                'target' => '/',
+                'invalidate_session' => true,
+            ),
             'users' => $app->share(function() use ($app) {
                 // Specific class ic\UserProvider is described below
                 return new ic\UserProvider($app['db']);

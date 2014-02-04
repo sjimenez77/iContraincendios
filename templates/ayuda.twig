@@ -31,7 +31,7 @@
                     <li><a href="{{ path('ayuda') }}">Ayuda</a></li>
                     <li data-theme="b" data-icon="plus"><a href="{{ path('registro') }}" >Registrar nuevo técnico</a></li>
                     {% if is_granted('IS_AUTHENTICATED_FULLY') %}
-                    <li data-theme="a" data-icon="arrow-d"><a href="/logout" >Desconectar</a></li>
+                    <li data-theme="a" data-icon="arrow-d"><a href="{{ path('logout') }}" >Desconectar</a></li>
                     {% endif %}
                 </ul>
             </div>
