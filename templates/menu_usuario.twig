@@ -3,6 +3,6 @@
     <ul data-role="listview" data-inset="true" style="min-width:210px;" data-theme="c">
         <li data-role="divider" data-theme="f">{{ app.security.token.user.username }}</li>
         <li data-icon="info"><a href="{{ path('usuario', { 'user': app.security.token.user.username }) }}">Ver mi perfil</a></li>
-        <li data-theme="a" data-icon="arrow-d"><a href="{{ path('logout') }}">Desconectar</a></li>
+        <li data-theme="a" data-icon="arrow-d"><a href="/logout">Desconectar</a></li>
     </ul>
 </div>

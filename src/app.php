@@ -40,23 +40,36 @@ $app->register(new SessionServiceProvider());
 $app->register(new SecurityServiceProvider(), array(
     'security.firewalls' => array(
         'secured' => array(
-            'pattern' => '^/.*$',
-            'anonymous' => true, 
+            'pattern' => '^/backend.*$',
+            'anonymous' => false, 
             'form' => array(
                 'login_path' => '/login', 
                 'check_path' => '/login_check'
             ),
-            'logout' => array('logout_path' => 'logout'), // url to call for logging out
+            'logout' => array('logout_path' => '/logout'), // url to call for logging out
             'users' => $app->share(function() use ($app) {
                 // Specific class ic\UserProvider is described below
                 return new ic\UserProvider($app['db']);
             }),
         ),
+		'unsecured' => array(
+			'pattern' => '^/.*$',
+        	'anonymous' => true,
+            'form' => array(
+            	'login_path' => '/login', 
+            	'check_path' => '/login_check'
+            ),
+            'logout' => array('logout_path' => '/logout'), // url to call for logging out
+            'users' => $app->share(function() use ($app) {
+                // Specific class ic\UserProvider is described below
+                return new ic\UserProvider($app['db']);
+            }),
+		),
     ),
     'security.access_rules' => array(
-        array('^/.+$', 'IS_AUTHENTICATED_ANONYMOUSLY'),
+        array('^/backend.+$', 'ROLE_ADMIN', 'https'),
         array('^/user.+$', 'ROLE_USER'),
-        array('^/archivar.*$', 'ROLE_USER'),
+        array('^/archivar.*$', 'ROLE_USER')
     ),
 ));
 
