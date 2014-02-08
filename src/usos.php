@@ -243,13 +243,13 @@ $usos_ins->post('/resultados', function (Request $request) use ($app) {
                 $sm_alarma = True;
                 $sd_incendio = True;
             }
-            if ($roperos && $superficie_roperos > 500) $bies_45 = True;
+            if ($roperos && $superficie_roperos > 100) $bies_25 = True;
             if ($cocina_20kW) $ia_extincion_cocina = True;
             if ($centro_transf) $ia_extincion_centro_transf = True;
             // Rellenamos los comentarios asociados
-            if ($bies_45) {
-                array_push($claves_comentarios, "bies_45");
-                array_push($lista_comentarios, "Instalación de BIES de 45mm, en las que el riesgo se deba principalmente a materias combustibles sólidas. En los locales de riesgo especial alto.");
+            if ($roperos && $superficie_roperos > 100) {
+                array_push($claves_comentarios, "bies_25");
+                array_push($lista_comentarios, "En los locales de riesgo en los que el riesgo se deba principalmente a materias combustibles sólidas, se recomienda la instalación de BIES de 45mm.");
             }
             if ($ia_extincion_cocina) {
                 array_push($claves_comentarios, "ia_extincion_cocina");
