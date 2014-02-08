@@ -214,6 +214,7 @@ $usuarios->get('/{user}/{tipo}/{id_informe}', function (Request $request, $user,
     $almacenes_cf_3400 = null;
     $ocupacion_500 = null;
     $tipo_pub_concurrencia = null;
+    $centro_transf_interior = null;
     $talleres_dec = null;
     $robotizado = null;
     $plantas_rasante = null;
@@ -469,6 +470,7 @@ $usuarios->get('/{user}/{tipo}/{id_informe}', function (Request $request, $user,
                     $cocina_50kW = $informe['cocina_50kW'];
                     $ocupacion_500 = $informe['ocupacion_500'];
                     $tipo_pub_concurrencia = $informe['tipo_pub_concurrencia'];
+                    $centro_transf_interior = $informe['centro_transf_interior'];
                     $talleres_dec = $informe['talleres_dec'];
                     // Procesamos datos
                     if ($superficie > 0) $extintores = True;
@@ -482,7 +484,7 @@ $usuarios->get('/{user}/{tipo}/{id_informe}', function (Request $request, $user,
                     if ($superficie > 1000) $sd_incendio = True;
                     if ($talleres_dec) $bies_45 = True;
                     if ($cocina_50kW) $ia_extincion_cocina = True;
-                    if ($centro_transf) $ia_extincion_centro_transf = True;
+                    if ($centro_transf || $centro_transf_interior) $ia_extincion_centro_transf = True;
                     // Rellenamos los comentarios asociados
                     if ($sm_alarma) {
                         array_push($claves_comentarios, "sm_alarma");
@@ -576,6 +578,7 @@ $usuarios->get('/{user}/{tipo}/{id_informe}', function (Request $request, $user,
         'almacenes_cf_3400' => $informe['almacenes_cf_3400'],
         'ocupacion_500' => $informe['ocupacion_500'],
         'tipo_pub_concurrencia' => $informe['tipo_pub_concurrencia'],
+        'centro_transf_interior' => $informe['centro_transf_interior'],
         'talleres_dec' => $informe['talleres_dec'],
         'robotizado' => $informe['robotizado'],
         'plantas_rasante' => $informe['plantas_rasante'],

@@ -156,6 +156,7 @@ $usos_ins->post('/resultados', function (Request $request) use ($app) {
     $almacenes_cf_3400 = null;
     $ocupacion_500 = null;
     $tipo_pub_concurrencia = null;
+    $centro_transf_interior = null;
     $talleres_dec = null;
     $robotizado = null;
     $plantas_rasante = null;
@@ -379,6 +380,7 @@ $usos_ins->post('/resultados', function (Request $request) use ($app) {
             $cocina_50kW = ($request->get('cocina_50kW')=='si') ? 1 : 0;
             $ocupacion_500 = ($request->get('ocupacion_500')=='si') ? 1 : 0;
             $tipo_pub_concurrencia = $request->get('tipo_pub_concurrencia');
+            $centro_transf_interior = ($request->get('centro_transf_interior')=='si') ? 1 : 0;
             $talleres_dec = ($request->get('talleres_dec')=='si') ? 1 : 0;
             // Procesamos datos
             if ($superficie > 0) $extintores = True;
@@ -392,7 +394,7 @@ $usos_ins->post('/resultados', function (Request $request) use ($app) {
             if ($superficie > 1000) $sd_incendio = True;
             if ($talleres_dec) $bies_45 = True;
             if ($cocina_50kW) $ia_extincion_cocina = True;
-            if ($centro_transf) $ia_extincion_centro_transf = True;
+            if ($centro_transf || $centro_transf_interior) $ia_extincion_centro_transf = True;
             // Rellenamos los comentarios asociados
             if ($sm_alarma) {
                 array_push($claves_comentarios, "sm_alarma");
@@ -473,6 +475,7 @@ $usos_ins->post('/resultados', function (Request $request) use ($app) {
             'almacenes_cf_3400' => $almacenes_cf_3400,
             'ocupacion_500' => $ocupacion_500,
             'tipo_pub_concurrencia' => $tipo_pub_concurrencia,
+            'centro_transf_interior' => $centro_transf_interior,
             'talleres_dec' => $talleres_dec,
             'robotizado' => $robotizado,
             'plantas_rasante' => $plantas_rasante,
@@ -520,6 +523,7 @@ $usos_ins->post('/archivar', function (Request $request) use ($app) {
     $almacenes_cf_3400 = $request->get('almacenes_cf_3400');
     $ocupacion_500 = $request->get('ocupacion_500');
     $tipo_pub_concurrencia = $request->get('tipo_pub_concurrencia');
+    $centro_transf_interior = $request->get('centro_transf_interior');
     $talleres_dec = $request->get('talleres_dec');
     $robotizado = $request->get('robotizado');
     $plantas_rasante = $request->get('plantas_rasante');
@@ -590,6 +594,7 @@ $usos_ins->post('/archivar', function (Request $request) use ($app) {
                     'almacenes_cf_3400' => $almacenes_cf_3400,
                     'ocupacion_500' => $ocupacion_500,
                     'tipo_pub_concurrencia' => $tipo_pub_concurrencia,
+                    'centro_transf_interior' => $centro_transf_interior,
                     'talleres_dec' => $talleres_dec,
                     'robotizado' => $robotizado,
                     'plantas_rasante' => $plantas_rasante,
