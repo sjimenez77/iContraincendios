@@ -14,26 +14,7 @@
 {% endblock %}
 
 {% block contenido_secundario %}
-		<div class="content-secondary">
-            <div id="jqm-homeheader">
-                <h1 id="jqm-logo"><img src="/img/logo.fw.png" alt="iContraincendios" /></h1>
-                <p>Calcule las necesidades de una instalación contraincendios.</p>
-            </div>
-
-			<p class="intro">Bienvenido, <strong>{{ app.title }}</strong> es una aplicación para el cálculo de las necesidades para todo tipo de instalaciones contra incendios.</p>
-			
-            <div data-role="collapsible" data-inset="true" data-theme="f" data-content-theme="c">
-                <h2>Opciones de usuario</h2>
-                <ul class="ui-shadow" data-role="listview" data-theme="c"  data-dividertheme="d">
-                    <li data-role="list-divider">Seleccione una opción</li>
-                    <li><a href="{{ path('quienes') }}">¿Quiénes somos?</a></li>
-                    <li><a href="{{ path('contacto') }}">Contacto</a></li>              
-                    <li><a href="{{ path('ayuda') }}">Ayuda</a></li>
-                    <li data-theme="b" data-icon="plus"><a href="{{ path('registro') }}" >Registrar nuevo técnico</a></li>
-                    <li data-theme="a" data-icon="arrow-d"><a href="/logout" >Desconectar</a></li>
-                </ul>
-            </div>
-		</div><!--/content-secondary -->
+    {% include 'menu_general.twig' %}
 {% endblock %}
 
 {% block contenido_primario %}
@@ -41,7 +22,7 @@
             <h2>{{ nombre }} {{ apellidos }}</h2><hr>
             <p>A continuación se muestra una lista con los informes de este tipo organizada de más actuales a más antiguos. En el caso que desee realizar algún cambio póngase en contacto con el administrador de la plataforma mediante el botón <strong>Contacto</strong>.</p>
             {% if total_informes_tipo|length > 0 %}
-            <ul data-role="listview" data-filter="true" data-filter-placeholder="Introduzca su búsqueda..." data-inset="true">
+            <ul data-role="listview" data-filter="true" data-filter-placeholder="Introduzca su búsqueda..." data-divider-theme="g" data-inset="true">
                 <li data-role="list-divider">Informes de uso: {{ tipo_uso|e }}</li>
                 {% for informe in total_informes_tipo %}
                     <li><a href="{{ path('usuario.informe', { 'user': app.security.token.user.username, 'tipo': id_uso, 'id_informe': informe.idInformes|e }) }}">
@@ -54,6 +35,6 @@
             {% else %}
             <div class="ui-bar ui-bar-e">No ha archivado todavía ningún informe de este tipo.</div>
             {% endif %}
-            <a href="{{ path('usuario', { 'user': app.security.token.user.username }) }}" data-role="button" data-icon="back" data-icon-pos="right" data-theme="b">Volver</a>
+            <a href="{{ path('usuario', { 'user': app.security.token.user.username }) }}" data-role="button" data-icon="back" data-icon-pos="right" data-theme="a">Volver</a>
 		</div><!--/content-primary -->
 {% endblock %}

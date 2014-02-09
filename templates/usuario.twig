@@ -14,26 +14,7 @@
 {% endblock %}
 
 {% block contenido_secundario %}
-		<div class="content-secondary">
-            <div id="jqm-homeheader">
-                <h1 id="jqm-logo"><img src="/img/logo.fw.png" alt="iContraincendios" /></h1>
-                <p>Calcule las necesidades de una instalación contraincendios.</p>
-            </div>
-
-			<p class="intro">Bienvenido, <strong>{{ app.title }}</strong> es una aplicación para el cálculo de las necesidades para todo tipo de instalaciones contra incendios.</p>
-			
-            <div data-role="collapsible" data-inset="true" data-theme="f" data-content-theme="c">
-                <h2>Opciones de usuario</h2>
-                <ul class="ui-shadow" data-role="listview" data-theme="c"  data-dividertheme="d">
-                    <li data-role="list-divider">Seleccione una opción</li>
-                    <li><a href="{{ path('quienes') }}">¿Quiénes somos?</a></li>
-                    <li><a href="{{ path('contacto') }}">Contacto</a></li>              
-                    <li><a href="{{ path('ayuda') }}">Ayuda</a></li>
-                    <li data-theme="b" data-icon="plus"><a href="{{ path('registro') }}" >Registrar nuevo técnico</a></li>
-                    <li data-theme="a" data-icon="arrow-d"><a href="/logout" >Desconectar</a></li>
-                </ul>
-            </div>
-		</div><!--/content-secondary -->
+    {% include 'menu_general.twig' %}
 {% endblock %}
 
 {% block contenido_primario %}
@@ -41,7 +22,7 @@
             <h2>{{ nombre }} {{ apellidos }}</h2><hr>
             <p>A continuación se muestra una lista con sus informes organizada por los diferentes tipos de uso de las instalaciones. Seleccione pulsando sobre un uso determinado para ver los informes de este tipo.</p>
             {% if total_informes_uso|length > 0 %}
-            <ul data-role="listview" data-filter="true" data-filter-placeholder="Busque por uso..." data-inset="true" data-count-theme="a">
+            <ul data-role="listview" data-filter="true" data-filter-placeholder="Busque por uso..." data-inset="true" data-divider-theme="g" data-count-theme="a">
                 <li data-role="list-divider">Total informes<span class="ui-li-count">{{ total_informes }}</span></li>
                 {% for informes_uso in total_informes_uso %}
                     <li><a href="{{ path('usuario.total_informes_tipo', { 'user': app.security.token.user.username, 'tipo': informes_uso.idUsos|e }) }}">{{ informes_uso.Tipo|e }}</a><span class="ui-li-count">{{ informes_uso.Total|default('0') }}</span></li>

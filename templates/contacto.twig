@@ -14,28 +14,7 @@
 {% endblock %}
 
 {% block contenido_secundario %}
-		<div class="content-secondary">
-            <div id="jqm-homeheader">
-                <h1 id="jqm-logo"><img src="/img/logo.fw.png" alt="iContraincendios" /></h1>
-                <p>Calcule las necesidades de una instalación contraincendios.</p>
-            </div>
-
-			<p class="intro">Bienvenido, <strong>{{ app.title }}</strong> es una aplicación para el cálculo de las necesidades para todo tipo de instalaciones contra incendios.</p>
-			
-            <div data-role="collapsible" data-inset="true" data-theme="f" data-content-theme="c">
-                <h2>Opciones generales</h2>
-                <ul class="ui-shadow" data-role="listview" data-theme="c"  data-dividertheme="d">
-                    <li data-role="list-divider">Seleccione una opción</li>
-                    <li><a href="{{ path('quienes') }}">¿Quiénes somos?</a></li>
-                    <li><a href="{{ path('contacto') }}">Contacto</a></li>              
-                    <li><a href="{{ path('ayuda') }}">Ayuda</a></li>
-                    <li data-theme="b" data-icon="plus"><a href="{{ path('registro') }}" >Registrar nuevo técnico</a></li>
-                    {% if is_granted('IS_AUTHENTICATED_FULLY') %}
-                    <li data-theme="a" data-icon="arrow-d"><a href="{{ path('logout') }}" >Desconectar</a></li>
-                    {% endif %}
-                </ul>
-            </div>
-		</div><!--/content-secondary -->
+    {% include 'menu_general.twig' %}
 {% endblock %}
 
 {% block contenido_primario %}
@@ -70,9 +49,9 @@
             Mensaje enviado correctamente
             <a href="{{ path('inicio') }}" id="mensaje_enviado_c" data-role="button" data-theme="f" data-icon="back" data-direction="reverse">Volver a la portada</a>
             </div>
-            <div class="ui-bar ui-bar-b">Formulario de contacto</div>
+            <div class="ui-bar ui-bar-g">Formulario de contacto</div>
             <form id="contacto" method="post">
-               <div class="ui-body ui-body-b">
+               <div class="ui-body ui-body-g">
                    <div data-role="fieldcontain">
                    <label for="nombre"><strong>Nombre</strong></label>
                    <input type="text" name="nombre" id="nombre" placeholder="Nombre y apellidos" />
@@ -89,8 +68,85 @@
                    <label for="mensaje"><strong>Mensaje</strong></label>
                    <textarea cols="30" rows="5" name="mensaje" id="mensaje" ></textarea>
                    </div>
-                   <button type="submit" id="submit_contacto" name="submit_contacto" value="submit-value">Enviar</button>
+                   <button type="submit" id="submit_contacto" name="submit_contacto" value="submit-value" data-theme="a">Enviar</button>
                </div>
             </form>
+            <h2>Direcciones de interés</h2>
+            <hr>
+            <div data-role="collapsible-set">
+              <div data-role="collapsible" data-theme="g" data-content-theme="g" data-inset="true">
+                <h3>Central Madrid</h3>
+                <p>
+                  C/La Forja, 2 Pol. Ind. La Cantueña <br>
+                  28946 - Fuenlabrada (Madrid) <br>
+                  Tel.: <a href="tel:+34916424570">91 642 45 70</a> Fax: 91 642 45 78 <br>
+                  <a href="mailto:madrid@extintoreseivar.com">madrid@extintoreseivar.com</a> <br>
+                  <a href="https://www.google.com/maps/preview/place/Extintores+Eivar+-+Madrid/@40.273779,-3.757603,17z/data=!4m2!3m1!1s0xd418a914b1d57a3:0xe2a717f31cffb604?hl=es" data-role="button" data-icon="info" data-theme="g" target="_blank">Ver mapa</a>
+                </p>
+              </div><!-- collapsible -->
+              <div data-role="collapsible" data-theme="c" data-content-theme="g" data-inset="true">
+                <h3>Delegación Galicia</h3>
+                <p>
+                  Pol. Industrial Os Capelos, 13 - I <br>
+                  15175 Carral - (La Coruña) <br>
+                  Tel.: <a href="tel:+34981903595">981 903 595</a> <br>
+                  <a href="mailto:galicia@extintoreseivar.com">galicia@extintoreseivar.com</a><br>
+                  <a href="https://maps.google.es/maps/ms?ie=UTF8&hl=es&msa=0&msid=216989640415271318531.00043f99fc11d3909e2b8&om=0&source=embed&t=h&ll=43.24303,-8.352356&spn=0.005299,0.010192&z=16&iwloc=00043f9a0175003a99ffb" data-role="button" data-icon="info" data-theme="g" target="_blank">Ver mapa</a>
+                </p>
+              </div><!-- collapsible -->
+              <div data-role="collapsible" data-theme="c" data-content-theme="g" data-inset="true">
+                <h3>Delegación Extremadura</h3>
+                <p>
+                  Av Martín Palomino, 70 - Nave 4 <br>
+                  10600 - Plasencia (Cáceres) <br>
+                  Tel.: <a href="tel:+34927411902">927 41 19 02</a> Fax: 927 41 28 84 <br>
+                  <a href="mailto:plasencia@extintoreseivar.com">plasencia@extintoreseivar.com</a><br>
+                  <a href="https://maps.google.com/maps?f=q&source=embed&hl=es&geocode=&q=Eivar,+S.A.,+Plasencia,+España&aq=1&oq=eivar&sll=41.456494,1.965609&sspn=0.044964,0.104628&ie=UTF8&hq=eivar+sa&hnear=Plasencia,+Cáceres,+Extremadura,+España&t=h&cid=15652604784177300814&ll=40.011707,-6.107969&spn=0.022088,0.041027&z=14&iwloc=A" data-role="button" data-icon="info" data-theme="g" target="_blank">Ver mapa</a>
+                </p>
+              </div><!-- collapsible -->
+              <div data-role="collapsible" data-theme="c" data-content-theme="g" data-inset="true">
+                <h3>Delegación Cataluña</h3>
+                <p>
+                  C/ Frances Vila, 16 - 17 <br>
+                  Pol. Ind. Can Magi <br>
+                  08137 - Sant Cugat del Valles (Barcelona) <br>
+                  Tel.: <a href="tel:+34936531020">93 653 10 20</a> Fax: 93 628 48 94 <br>
+                  <a href="mailto:barcelona@extintoreseivar.com">barcelona@extintoreseivar.com</a><br>
+                  <a href="https://maps.google.com/maps?f=q&source=embed&hl=es&geocode=&q=Eivar+barcelona&aq=&sll=40.011694,-6.107955&sspn=0.045951,0.104628&ie=UTF8&hq=Eivar&hnear=Barcelona,+Cataluña,+España&t=h&cid=13452278742403238959&ll=41.457941,1.961918&spn=0.010903,0.020428&z=15&iwloc=A" data-role="button" data-icon="info" data-theme="g" target="_blank">Ver mapa</a>
+                </p>
+              </div><!-- collapsible -->
+              <div data-role="collapsible" data-theme="c" data-content-theme="g" data-inset="true">
+                <h3>Delegación Sevilla</h3>
+                <p>
+                  C/ Comercio, 45 Parque "P.I.S.A." <br>
+                  41087 - Mairena del Aljarafe (Sevilla) <br>
+                  Tel.: <a href="tel:+34955602371">955 602 371</a> <br>
+                  <a href="mailto:sevilla@extintoreseivar.com">sevilla@extintoreseivar.com</a><br>
+                  <a href="https://maps.google.com/maps?f=q&source=embed&hl=es&geocode=&q=eivar+sevilla&aq=&sll=37.354355,-6.057654&sspn=0.04769,0.104628&g=Calle+del+Comercio,+45,+41927+Mairena+del+Aljarafe,+Sevilla,+Andaluc%C3%ADa,+España&ie=UTF8&hq=eivar&hnear=Sevilla,+Andaluc%C3%ADa,+España&t=h&cid=5527340908761582293&ll=37.357537,-6.05617&spn=0.011564,0.020428&z=15&iwloc=A" data-role="button" data-icon="info" data-theme="g" target="_blank">Ver mapa</a>
+                </p>
+              </div><!-- collapsible -->
+              <div data-role="collapsible" data-theme="c" data-content-theme="g" data-inset="true">
+                <h3>Delegación Burgos</h3>
+                <p>
+                  C/ Merindad de Montija, 11 Nave 5 <br>
+                  Pol. Ind "Villalonquejar" <br>
+                  09001 – Burgos <br>
+                  Tel.: <a href="tel:+34947473049">947 473 049</a> <br>
+                  <a href="mailto:burgos@extintoreseivar.com">burgos@extintoreseivar.com</a><br>
+                  <a href="https://maps.google.com/maps?f=q&source=embed&hl=es&geocode=&q=Calle+de+la+Merindad+de+Montija,+11,+Burgos,+España&sll=42.372876,-3.733796&sspn=0.004494,0.011362&ie=UTF8&hq=&hnear=Calle+de+la+Merindad+de+Montija,+11,+09001+Burgos,+Castilla+y+León,+España&t=h&ll=42.375222,-3.735266&spn=0.010748,0.020385&z=15&iwloc=A" data-role="button" data-icon="info" data-theme="g" target="_blank">Ver mapa</a>
+                </p>
+              </div><!-- collapsible -->
+              <div data-role="collapsible" data-theme="c" data-content-theme="g" data-inset="true">
+                <h3>Delegación Valencia</h3>
+                <p>
+                  Pza. de Zaragoza, 11 <br>
+                  Pol. Ind. "Fuente del Jarro" <br>
+                  46988 - Paterna (Valencia) <br>
+                  Tel.: <a href="tel:+34961345779">961 345 779</a> <br>
+                  <a href="mailto:valencia@extintoreseivar.com">valencia@extintoreseivar.com</a><br>
+                  <a href="https://maps.google.es/maps?f=q&source=embed&hl=es&q=Pol%C3%ADgono+Fuente+del+Jarro,+Plaza+de+Zaragoza,+11,+46988+Paterna,+Valencia,+Comunidad+Valenciana,+España&aq=&sll=35.101934,-95.712891&sspn=49.379754,107.138672&ie=UTF8&geocode=FX_1WgIdqvT4_w&split=0&hq=&hnear=Plaza+de+Zaragoza,+11,+46988+Paterna,+Valencia,+Comunidad+Valenciana&t=h&ll=39.51692,-0.461168&spn=0.011223,0.020385&z=15&iwloc=A" data-role="button" data-icon="info" data-theme="g" target="_blank">Ver mapa</a>
+                </p>
+              </div><!-- collapsible -->
+            </div><!-- collapsible-set -->
 		</div><!--/content-primary -->
 {% endblock %}

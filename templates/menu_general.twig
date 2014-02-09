@@ -1,0 +1,21 @@
+		<div class="content-secondary">
+            <div id="jqm-homeheader">
+                <h1 id="jqm-logo"><img src="/img/logo.fw.png" alt="{{ app.title }}" /></h1>
+            </div>
+
+			<p class="intro">Bienvenido, <strong>{{ app.title }}</strong> es una aplicación para el cálculo de necesidades de dotación de instalaciones de protección contra incendios, en edificios. El cálculo de las necesidades está basado en el <strong>documento básico SI-4</strong> del código técnico de la edificación.</p>
+			
+            <div data-role="collapsible" data-inset="true" data-theme="g" data-content-theme="c">
+                <h2>Opciones generales</h2>
+                <ul class="ui-shadow" data-role="listview" data-theme="c"  data-dividertheme="g">
+                    <li data-role="list-divider">Seleccione una opción</li>
+                    <li><a href="{{ path('quienes') }}">¿Quiénes somos?</a></li>
+                    <li><a href="{{ path('contacto') }}">Contacto</a></li>              
+                    <li><a href="{{ path('ayuda') }}">Ayuda</a></li>
+                    <li data-theme="e" data-icon="plus"><a href="{{ path('registro') }}" >Registrar nuevo técnico</a></li>
+                    {% if is_granted('IS_AUTHENTICATED_FULLY') %}
+                    <li data-theme="a" data-icon="arrow-d"><a href="{{ path('logout') }}">Desconectar</a></li>
+                    {% endif %}
+                </ul>
+            </div>
+		</div><!--/content-secondary -->

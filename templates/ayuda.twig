@@ -14,28 +14,7 @@
 {% endblock %}
 
 {% block contenido_secundario %}
-		<div class="content-secondary">
-            <div id="jqm-homeheader">
-                <h1 id="jqm-logo"><img src="/img/logo.fw.png" alt="iContraincendios" /></h1>
-                <p>Calcule las necesidades de una instalación contraincendios.</p>
-            </div>
-
-			<p class="intro">Bienvenido, <strong>{{ app.title }}</strong> es una aplicación para el cálculo de las necesidades para todo tipo de instalaciones contra incendios.</p>
-			
-            <div data-role="collapsible" data-inset="true" data-theme="f" data-content-theme="c">
-                <h2>Opciones generales</h2>
-                <ul class="ui-shadow" data-role="listview" data-theme="c"  data-dividertheme="d">
-                    <li data-role="list-divider">Seleccione una opción</li>
-                    <li><a href="{{ path('quienes') }}">¿Quiénes somos?</a></li>
-                    <li><a href="{{ path('contacto') }}">Contacto</a></li>              
-                    <li><a href="{{ path('ayuda') }}">Ayuda</a></li>
-                    <li data-theme="b" data-icon="plus"><a href="{{ path('registro') }}" >Registrar nuevo técnico</a></li>
-                    {% if is_granted('IS_AUTHENTICATED_FULLY') %}
-                    <li data-theme="a" data-icon="arrow-d"><a href="{{ path('logout') }}" >Desconectar</a></li>
-                    {% endif %}
-                </ul>
-            </div>
-		</div><!--/content-secondary -->
+    {% include 'menu_general.twig' %}
 {% endblock %}
 
 {% block contenido_primario %}

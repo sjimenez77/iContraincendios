@@ -64,7 +64,7 @@
                 </div>
                 {% endif %}
             </div>
-            <div class="ui-bar ui-bar-b">Resultados de la instalación de uso <strong>{{ opcion|e }}</strong></div>
+            <div class="ui-bar ui-bar-g">Resultados de la instalación de uso <strong>{{ opcion|e }}</strong></div>
             <form name="resviv" method="post" action="{{ path('uso.archivar') }}">
               <input type="hidden" name="uso" id="uso" value="{{ opcion }}">
               <input type="hidden" name="superficie" id="superficie" value="{{ superficie }}">

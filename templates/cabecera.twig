@@ -1,9 +1,9 @@
-	<div data-role="header" data-position="fixed" data-theme="f">
+	<div data-role="header" data-position="fixed" data-theme="g">
         <div align="center"><img src="/img/logo_claro.png" alt="iContraincendios" height="35" /></div>
-        <a href="{{ app.url_generator.generate('inicio') }}" data-icon="home" data-direction="reverse" data-theme="f">Inicio</a>
+        <a href="{{ app.url_generator.generate('inicio') }}" data-icon="home" data-direction="reverse" data-theme="g">Inicio</a>
         {% if is_granted('IS_AUTHENTICATED_FULLY') %}
-        <a href="#menuUsuario" data-icon="gear" data-iconpos="right" data-rel="popup" data-position-to="window" data-role="button" data-inline="true" data-transition="pop" data-theme="f">Info</a>
+        <a href="#menuUsuario" data-icon="gear" data-iconpos="right" data-rel="popup" data-position-to="window" data-role="button" data-inline="true" data-transition="pop" data-theme="g">Info</a>
 		{% else %}
-        <a href="#popupLogin" data-icon="edit" data-iconpos="right" data-rel="popup" data-position-to="window" data-role="button" data-inline="true" data-transition="pop" data-theme="f">Acceso</a>
+        <a href="#popupLogin" data-icon="edit" data-iconpos="right" data-rel="popup" data-position-to="window" data-role="button" data-inline="true" data-transition="pop" data-theme="g">Acceso</a>
         {% endif %}
     </div><!-- /header -->
