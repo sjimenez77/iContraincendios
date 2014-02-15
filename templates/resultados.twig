@@ -98,18 +98,18 @@
               <input type="hidden" name="robotizado" id="robotizado" value="{{ robotizado }}">
               <input type="hidden" name="plantas_rasante" id="plantas_rasante" value="{{ plantas_rasante }}">
               <div class="ui-body ui-body-b">
-                <p><strong>Recuerda: </strong><span style="color:#477DAD"><strong>Azul</strong></span> indica que la instalación es obligatoria y <strong>negro</strong> que no lo es.</p>
+                <p><strong>Recuerda: </strong><span style="color:#74b042"><strong>Verde</strong></span> indica que la instalación es obligatoria y <span style="color:#666"><strong>gris</strong></span> que no lo es.</p>
                 <ul data-role="listview" data-inset="true">
-                  <li {% if extintores %} data-theme="b" data-icon="check" {% else %} data-theme="a" data-icon="delete" {% endif %}><a href="#">Extintores - Señalización</a></li>
-                  <li {% if bies_25 %} data-theme="b" data-icon="check" {% else %} data-theme="a" data-icon="delete" {% endif %}><a href="#">BIES &Oslash;25 mm</a></li>
-                  <li {% if bies_45 %} data-theme="b" data-icon="check" {% else %} data-theme="a" data-icon="delete" {% endif %}><a href="#">BIES &Oslash;45 mm</a></li>
-                  <li {% if columna_seca %} data-theme="b" data-icon="check" {% else %} data-theme="a" data-icon="delete" {% endif %}><a href="#">Columna seca</a></li>
-                  <li {% if sm_alarma %} data-theme="b" data-icon="check" {% else %} data-theme="a" data-icon="delete" {% endif %}><a href="#">Sistema manual de alarma de incendio</a></li>
-                  <li {% if sd_incendio %} data-theme="b" data-icon="check" {% else %} data-theme="a" data-icon="delete" {% endif %}><a href="#">Sistema de detección de incendio</a></li>
-                  <li {% if hid_exteriores %} data-theme="b" data-icon="check" {% else %} data-theme="a" data-icon="delete" {% endif %}><a href="#">Hidrantes exteriores</a></li>
-                  <li {% if ia_extincion %} data-theme="b" data-icon="check" {% else %} data-theme="a" data-icon="delete" {% endif %}><a href="#">Instalación automática de extinción</a></li>
-                  <li {% if ia_extincion_cocina %} data-theme="b" data-icon="check" {% else %} data-theme="a" data-icon="delete" {% endif %}><a href="#">Instalación automática de extinción cocina</a></li>
-                  <li {% if ia_extincion_centro_transf %} data-theme="b" data-icon="check" {% else %} data-theme="a" data-icon="delete" {% endif %}><a href="#">Instalación automática de extinción centro transformación</a></li>
+                  <li {% if extintores %} data-theme="f" data-icon="check" {% else %} data-theme="c" data-icon="delete" {% endif %}><a href="#"{% if not extintores %} style="color: #ddd"{% endif %}>Extintores - Señalización</a></li>
+                  <li {% if bies_25 %} data-theme="f" data-icon="check" {% else %} data-theme="c" data-icon="delete" {% endif %}><a href="#"{% if not bies_25 %} style="color: #ddd"{% endif %}>BIES &Oslash;25 mm</a></li>
+                  <li {% if bies_45 %} data-theme="f" data-icon="check" {% else %} data-theme="c" data-icon="delete" {% endif %}><a href="#"{% if not bies_45 %} style="color: #ddd"{% endif %}>BIES &Oslash;45 mm</a></li>
+                  <li {% if columna_seca %} data-theme="f" data-icon="check" {% else %} data-theme="c" data-icon="delete" {% endif %}><a href="#"{% if not columna_seca %} style="color: #ddd"{% endif %}>Columna seca</a></li>
+                  <li {% if sm_alarma %} data-theme="f" data-icon="check" {% else %} data-theme="c" data-icon="delete" {% endif %}><a href="#"{% if not sm_alarma %} style="color: #ddd"{% endif %}>Sistema manual de alarma de incendio</a></li>
+                  <li {% if sd_incendio %} data-theme="f" data-icon="check" {% else %} data-theme="c" data-icon="delete" {% endif %}><a href="#"{% if not sd_incendio %} style="color: #ddd"{% endif %}>Sistema de detección de incendio</a></li>
+                  <li {% if hid_exteriores %} data-theme="f" data-icon="check" {% else %} data-theme="c" data-icon="delete" {% endif %}><a href="#"{% if not hid_exteriores %} style="color: #ddd"{% endif %}>Hidrantes exteriores</a></li>
+                  <li {% if ia_extincion %} data-theme="f" data-icon="check" {% else %} data-theme="c" data-icon="delete" {% endif %}><a href="#"{% if not ia_extincion %} style="color: #ddd"{% endif %}>Instalación automática de extinción</a></li>
+                  <li {% if ia_extincion_cocina %} data-theme="f" data-icon="check" {% else %} data-theme="c" data-icon="delete" {% endif %}><a href="#"{% if not ia_extincion_cocina %} style="color: #ddd"{% endif %}>Instalación automática de extinción cocina</a></li>
+                  <li {% if ia_extincion_centro_transf %} data-theme="f" data-icon="check" {% else %} data-theme="c" data-icon="delete" {% endif %}><a href="#"{% if not ia_extincion_centro_transf %} style="color: #ddd"{% endif %}>Instalación automática de extinción centro transformación</a></li>
                 </ul>
                 <ul data-role="listview" data-inset="true" data-divider-theme="a">
                   <li data-role="list-divider">Aclaraciones y/o comentarios a los resultados</li>
@@ -123,7 +123,7 @@
                 </ul>                  
                 <hr>
                 {% if is_granted('IS_AUTHENTICATED_FULLY') %}
-                <ul data-role="listview" data-inset="true" data-theme="c" data-divider-theme="f">
+                <ul data-role="listview" data-inset="true" data-theme="c" data-divider-theme="g">
                   <li data-role="list-divider">Rellene los siguientes datos si desea archivar el informe en el sistema</li>
                   <li data-role="fieldcontain">
                     <label for="direccion">Calle o Plaza</label>
@@ -147,16 +147,16 @@
                   </li>
                 </ul>
                 <fieldset class="ui-grid-a">
-                    <div class="ui-block-a"><a href="{{ path('portada') }}" data-role="button" data-theme="a">Inicio</a></div>
-                    <div class="ui-block-b"><a href="{{ path(volver) }}" data-role="button" data-theme="c">Volver</a></div>       
+                    <div class="ui-block-a"><a href="{{ path('portada') }}" data-role="button" data-icon="home" data-theme="g">Inicio</a></div>
+                    <div class="ui-block-b"><a href="{{ path(volver) }}" data-role="button" data-icon="back" data-theme="a">Volver</a></div>       
                 </fieldset>
                 <div class="ui-grid-solo">
-                  <div class="ui-block-a"><input type="submit" value="Archivar" data-icon="plus" data-iconpos="right" data-theme="b"></div>
+                  <div class="ui-block-a"><input type="submit" value="Archivar" data-icon="plus" data-theme="e"></div>
                 </div>
                 {% else %}
                 <fieldset class="ui-grid-a">
-                    <div class="ui-block-a"><a href="{{ path('portada') }}" data-role="button" data-theme="a">Inicio</a></div>
-                    <div class="ui-block-b"><a href="{{ path(volver) }}" data-role="button" data-theme="c">Volver</a></div>       
+                    <div class="ui-block-a"><a href="{{ path('portada') }}" data-role="button" data-icon="home" data-theme="g">Inicio</a></div>
+                    <div class="ui-block-b"><a href="{{ path(volver) }}" data-role="button" data-icon="back" data-theme="a">Volver</a></div>       
                 </fieldset>
                 {% endif %}
               </div>
