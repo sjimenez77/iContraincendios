@@ -31,9 +31,9 @@
                 </ul>
             </p>
             {% endif %}
-            <div class="ui-bar ui-bar-a"><strong>Cumplimente los datos solicitados a continuación:</strong></div>
+            <div class="ui-bar ui-bar-g"><strong>Cumplimente los datos solicitados a continuación:</strong></div>
             <form name="registro" method="post" action="{{ app.url_generator.generate('registro_tecnico') }}">
-                <div class="ui-body ui-body-b">
+                <div class="ui-body ui-body-g">
                     <label for="nombre">Nombre</label>
                     <input type="text" name="nombre" id="nombre" placeholder="Introduzca su nombre" value="{{ datos.nombre|e }}">
                     <label for="apellidos">Apellidos</label>
@@ -45,8 +45,8 @@
                 </div>
                 <div class="ui-bar ui-bar-a">
                     <fieldset class="ui-grid-a">
-                        <div class="ui-block-a"><button type="reset" data-theme="c">Cancelar</button></div>
-                        <div class="ui-block-b"><button type="submit" data-theme="b">Registrar</button></div>       
+                        <div class="ui-block-a"><button type="reset" data-icon="delete" data-theme="d">Cancelar</button></div>
+                        <div class="ui-block-b"><button type="submit" data-icon="plus" data-iconpos="right" data-theme="g">Registrar</button></div>       
                     </fieldset>
                 </div>
             </form>
