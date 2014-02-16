@@ -14,6 +14,11 @@ use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 
 // -- PORTADA -----------------------------------------------------------------
 $app->get('/', function (Request $request) use ($app) {
+    // Borramos los datos de formulario almacenados en la sesión si existen
+    if ($app['session']->has('formData'))
+    {
+        $app['session']->remove('formData');
+    }
 
     return new Response(
         $app['twig']->render('portada.twig', array(
@@ -34,6 +39,12 @@ $app->get('/portada', function() use ($app) {
 
 // -- GENERAL ------------------------------------------------------------------
 $app->get('/quienes', function (Request $request) use ($app) {
+    // Borramos los datos de formulario almacenados en la sesión si existen
+    if ($app['session']->has('formData'))
+    {
+        $app['session']->remove('formData');
+    }
+
     return $app['twig']->render('quienes.twig', array(
         'error'         => $app['security.last_error']($request),
         'last_username' => $app['session']->get('_security.last_username'),
@@ -41,7 +52,35 @@ $app->get('/quienes', function (Request $request) use ($app) {
 })
 ->bind('quienes');
 
+$app->get('/contacto', function(Request $request) use ($app) {
+    // Borramos los datos de formulario almacenados en la sesión si existen
+    if ($app['session']->has('formData'))
+    {
+        $app['session']->remove('formData');
+    }
+
+    return $app['twig']->render('contacto.twig', array(
+            'error' => $app['security.last_error']($request),
+            'last_username' => $app['session']->get('_security.last_username'),
+        ));
+})
+->bind('contacto');
+
+$app->post('/contacto', function(Request $request) use ($app) {
+    return $app['twig']->render('contacto.twig', array(
+            'error' => $app['security.last_error']($request),
+            'last_username' => $app['session']->get('_security.last_username'),
+        ));
+})
+->bind('contacto.post');
+
 $app->get('/ayuda', function (Request $request) use ($app) {
+    // Borramos los datos de formulario almacenados en la sesión si existen
+    if ($app['session']->has('formData'))
+    {
+        $app['session']->remove('formData');
+    }
+
     return $app['twig']->render('ayuda.twig', array(
         'error'         => $app['security.last_error']($request),
         'last_username' => $app['session']->get('_security.last_username'),
@@ -52,6 +91,12 @@ $app->get('/ayuda', function (Request $request) use ($app) {
 
 // -- LOGIN --------------------------------------------------------------------
 $app->get('/login', function(Request $request) use ($app) {
+    // Borramos los datos de formulario almacenados en la sesión si existen
+    if ($app['session']->has('formData'))
+    {
+        $app['session']->remove('formData');
+    }
+
     return $app['twig']->render('portada.twig', array(
         'error'         => $app['security.last_error']($request),
         'last_username' => $app['session']->get('_security.last_username'),
@@ -70,6 +115,12 @@ $app->mount('/user', include 'usuarios.php');
 
 // -- REGISTRO -----------------------------------------------------------------
 $app->get('/registro', function(Request $request) use ($app) {
+    // Borramos los datos de formulario almacenados en la sesión si existen
+    if ($app['session']->has('formData'))
+    {
+        $app['session']->remove('formData');
+    }
+
     return $app['twig']->render('registro.twig', array(
         'error' => $app['security.last_error']($request),
         'last_username' => $app['session']->get('_security.last_username'),
@@ -176,38 +227,4 @@ $app->post('/registro_tecnico', function(Request $request) use ($app) {
 
 })
 ->bind('registro_tecnico');
-// -----------------------------------------------------------------------------
-
-// -- MENÚ GENERAL -------------------------------------------------------------
-$app->get('/quienes', function(Request $request) use ($app) {
-    return $app['twig']->render('quienes.twig', array(
-            'error' => $app['security.last_error']($request),
-            'last_username' => $app['session']->get('_security.last_username'),
-        ));
-})
-->bind('quienes');
-
-$app->get('/contacto', function(Request $request) use ($app) {
-    return $app['twig']->render('contacto.twig', array(
-            'error' => $app['security.last_error']($request),
-            'last_username' => $app['session']->get('_security.last_username'),
-        ));
-})
-->bind('contacto');
-
-$app->post('/contacto', function(Request $request) use ($app) {
-    return $app['twig']->render('contacto.twig', array(
-            'error' => $app['security.last_error']($request),
-            'last_username' => $app['session']->get('_security.last_username'),
-        ));
-})
-->bind('contacto.post');
-
-$app->get('/ayuda', function(Request $request) use ($app) {
-    return $app['twig']->render('ayuda.twig', array(
-            'error' => $app['security.last_error']($request),
-            'last_username' => $app['session']->get('_security.last_username'),
-        ));
-})
-->bind('ayuda');
 // -----------------------------------------------------------------------------

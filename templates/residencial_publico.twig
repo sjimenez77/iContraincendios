@@ -19,39 +19,39 @@
         		<div class="ui-body ui-body-b">
                     <input type="hidden" name="uso" id="uso" value="{{ opcion }}">
         		    <label for="superficie">Superficie construida en (m&sup2;)</label>
-                    <input type="text" name="superficie" id="superficie" pattern="[0-9]*" placeholder="m&sup2;" title="Se necesita un valor de superficie" required>
+                    <input type="text" name="superficie" id="superficie" pattern="[0-9]*" placeholder="m&sup2;" title="Se necesita un valor de superficie" required value="{{ formData.superficie }}">
                     <label for="altura_d">Altura de evacuación descendente (m)</label>
-                    <input type="text" name="altura_d" id="altura_d" pattern="[0-9]*" placeholder="m" title="Se necesita un valor de altura de evacuación descendente" required>
+                    <input type="text" name="altura_d" id="altura_d" pattern="[0-9]*" placeholder="m" title="Se necesita un valor de altura de evacuación descendente" required value="{{ formData.altura_d }}">
                     <label for="altura_a">Altura de evacuación ascendente (m)</label>
-                    <input type="text" name="altura_a" id="altura_a" pattern="[0-9]*" placeholder="m" title="Se necesita un valor de altura de evacuación ascendente" required>
+                    <input type="text" name="altura_a" id="altura_a" pattern="[0-9]*" placeholder="m" title="Se necesita un valor de altura de evacuación ascendente" required value="{{ formData.altura_a }}">
         		    <hr>
         		    <label for="aloj_50pers">¿El establecimiento está previsto para dar alojamiento a más de 50 personas?</label>
         		    <select name="aloj_50pers" id="aloj_50pers" data-role="slider" data-theme="c" data-track-theme="a">
         		        <option value="no">No</option>
-        		        <option value="si">Si</option>
+        		        <option value="si"{% if formData.aloj_50pers == 1 %} selected{% endif %}>Si</option>
         		    </select>
         		    <hr>
         		    <label for="cocina_20kW">¿Hay cocinas instaladas dentro del edificio con una potencia instalada superior a 20 kW?</label>
         		    <select name="cocina_20kW" id="cocina_20kW" data-role="slider" data-theme="c" data-track-theme="a">
         		        <option value="no">No</option>
-        		        <option value="si">Si</option>
+        		        <option value="si"{% if formData.cocina_20kW == 1 %} selected{% endif %}>Si</option>
         		    </select>
         		    <hr>
         		    <label for="centro_transf">¿Existe centro de transformación cuyos aparatos tengan aislamiento dieléctrico con punto de inflamación menor de 300&deg; y potencia instalada mayor de 1000 kVA en cada aparato o de 4000 kVA en el conjunto de aparatos?</label>
         		    <select name="centro_transf" id="centro_transf" data-role="slider" data-theme="c" data-track-theme="a">
         		        <option value="no">No</option>
-        		        <option value="si">Si</option>
+        		        <option value="si"{% if formData.centro_transf == 1 %} selected{% endif %}>Si</option>
         		    </select><br>&nbsp;
         		    <div class="ui-bar ui-bar-a"><strong>Locales y zonas de riesgo especial</strong></div>
         		    <div class="ui-body ui-body-e">
                         <label for="roperos">¿Hay roperos y locales para la custodia de equipajes?</label>
                         <select name="roperos" id="roperos" data-role="slider" data-theme="c" data-track-theme="a">
                             <option value="no">No</option>
-                            <option value="si">Si</option>
+                            <option value="si"{% if formData.roperos == 1 %} selected{% endif %}>Si</option>
                         </select>
                         <hr>
                         <label for="superficie_roperos">¿Cuál es la superficie construida de los locales? (m&sup2;)</label>
-                        <input type="text" disabled="disabled" name="superficie_roperos" id="superficie_roperos" pattern="[0-9]*" placeholder="m&sup2;" title="Si hay roperos y locales para la custodia de equipajes debe indicar su superficie" required>
+                        <input type="text"{% if formData.roperos == 0 %} disabled="disabled"{% endif %} name="superficie_roperos" id="superficie_roperos" pattern="[0-9]*" placeholder="m&sup2;" title="Si hay roperos y locales para la custodia de equipajes debe indicar su superficie" required value="{{ formData.superficie_roperos }}">
         		    </div>
         		</div>
                 {% block envio %}

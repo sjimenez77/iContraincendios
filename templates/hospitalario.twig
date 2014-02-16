@@ -20,53 +20,53 @@
         		<div class="ui-body ui-body-b">
                     <input type="hidden" name="uso" id="uso" value="{{ opcion }}">
                     <label for="superficie">Superficie construida en (m&sup2;)</label>
-                    <input type="text" name="superficie" id="superficie" pattern="[0-9]*" placeholder="m&sup2;" title="Se necesita un valor de superficie" required>
+                    <input type="text" name="superficie" id="superficie" pattern="[0-9]*" placeholder="m&sup2;" title="Se necesita un valor de superficie" required value="{{ formData.superficie }}">
                     <label for="altura_d">Altura de evacuación descendente (m)</label>
-                    <input type="text" name="altura_d" id="altura_d" pattern="[0-9]*" placeholder="m" title="Se necesita un valor de altura de evacuación descendente" required>
+                    <input type="text" name="altura_d" id="altura_d" pattern="[0-9]*" placeholder="m" title="Se necesita un valor de altura de evacuación descendente" required value="{{ formData.altura_d }}">
                     <label for="altura_a">Altura de evacuación ascendente (m)</label>
-                    <input type="text" name="altura_a" id="altura_a" pattern="[0-9]*" placeholder="m" title="Se necesita un valor de altura de evacuación ascendente" required>
+                    <input type="text" name="altura_a" id="altura_a" pattern="[0-9]*" placeholder="m" title="Se necesita un valor de altura de evacuación ascendente" required value="{{ formData.altura_a }}">
         		    <hr>
         		    <label for="camas_100">¿El edificio dispone de más de 100 camas?</label>
         		    <select name="camas_100" id="camas_100" data-role="slider" data-theme="c" data-track-theme="a">
         		        <option value="no">No</option>
-        		        <option value="si">Si</option>
+        		        <option value="si"{% if formData.camas_100 == 1 %} selected{% endif %}>Si</option>
         		    </select>
         		    <hr>
         		    <label for="cocina_20kW">¿Hay cocinas instaladas dentro del edificio con una potencia instalada superior a 20 kW?</label>
         		    <select name="cocina_20kW" id="cocina_20kW" data-role="slider" data-theme="c" data-track-theme="a">
         		        <option value="no">No</option>
-        		        <option value="si">Si</option>
+        		        <option value="si"{% if formData.cocina_20kW == 1 %} selected{% endif %}>Si</option>
         		    </select>
         		    <hr>
         		    <label for="centro_transf">¿Existe centro de transformación cuyos aparatos tengan aislamiento dieléctrico con punto de inflamación menor de 300&deg; y potencia instalada mayor de 1000 kVA en cada aparato o de 4000 kVA en el conjunto de aparatos?</label>
         		    <select name="centro_transf" id="centro_transf" data-role="slider" data-theme="c" data-track-theme="a">
         		        <option value="no">No</option>
-        		        <option value="si">Si</option>
+        		        <option value="si"{% if formData.centro_transf == 1 %} selected{% endif %}>Si</option>
         		    </select><br>&nbsp;
         		    <div class="ui-bar ui-bar-a"><strong>Locales y zonas de riesgo especial</strong></div>
         		    <div class="ui-body ui-body-e">
             		    <label for="almacenes_fc">¿Hay almacenes de productos farmacéuticos y clínicos?</label>
             		    <select name="almacenes_fc" id="almacenes_fc" data-role="slider" data-theme="c" data-track-theme="a">
             		        <option value="no">No</option>
-            		        <option value="si">Si</option>
+            		        <option value="si"{% if formData.almacenes_fc == 1 %} selected{% endif %}>Si</option>
             		    </select>
             		    <hr>
             		    <label for="v_almacenes_fc">¿Cuál es el volumen construido de los almacenes?  (m&sup3;)</label>
-            		    <input type="text" disabled="disabled" name="v_almacenes_fc" id="v_almacenes_fc" pattern="[0-9]*" placeholder="m&sup3;"  title="Si hay almacenes de productos farmacéuticos y clínicos debe indicar su volumen" required>
+            		    <input type="text"{% if formData.almacenes_fc == 0 %} disabled="disabled"{% endif %} name="v_almacenes_fc" id="v_almacenes_fc" pattern="[0-9]*" placeholder="m&sup3;"  title="Si hay almacenes de productos farmacéuticos y clínicos debe indicar su volumen" required value="{{ formData.v_almacenes_fc }}">
                         <hr>
                         <label for="lab_c">¿Hay laboratorios clínicos?</label>
                         <select name="lab_c" id="lab_c" data-role="slider" data-theme="c" data-track-theme="a">
                             <option value="no">No</option>
-                            <option value="si">Si</option>
+                            <option value="si"{% if formData.lab_c == 1 %} selected{% endif %}>Si</option>
                         </select>
                         <hr>
                         <label for="v_lab_c">¿Cuál es el volumen construido de los laboratorios?  (m&sup3;)</label>
-                        <input type="text" disabled="disabled" name="v_lab_c" id="v_lab_c" pattern="[0-9]*" placeholder="m&sup3;" title="Si hay laboratorios clínicos debe indicar su volumen" required>
+                        <input type="text"{% if formData.lab_c == 0 %} disabled="disabled"{% endif %} name="v_lab_c" id="v_lab_c" pattern="[0-9]*" placeholder="m&sup3;" title="Si hay laboratorios clínicos debe indicar su volumen" required value="{{ formData.v_lab_c }}">
                         <hr>
                         <label for="zonas_est">¿Hay zonas de esterilización y almacenes anejos?</label>
                         <select name="zonas_est" id="zonas_est" data-role="slider" data-theme="c" data-track-theme="a">
                             <option value="no">No</option>
-                            <option value="si">Si</option>
+                            <option value="si"{% if formData.zonas_est == 1 %} selected{% endif %}>Si</option>
                         </select>
         		    </div>
         		</div>

@@ -20,51 +20,51 @@
         		<div class="ui-body ui-body-b">
                     <input type="hidden" name="uso" id="uso" value="{{ opcion }}">
                     <label for="superficie">Superficie construida en (m&sup2;)</label>
-                    <input type="text" name="superficie" id="superficie" pattern="[0-9]*" placeholder="m&sup2;" title="Se necesita un valor de superficie" required>
+                    <input type="text" name="superficie" id="superficie" pattern="[0-9]*" placeholder="m&sup2;" title="Se necesita un valor de superficie" required value="{{ formData.superficie }}">
                     <label for="altura_d">Altura de evacuación descendente (m)</label>
-                    <input type="text" name="altura_d" id="altura_d" pattern="[0-9]*" placeholder="m" title="Se necesita un valor de altura de evacuación descendente" required>
+                    <input type="text" name="altura_d" id="altura_d" pattern="[0-9]*" placeholder="m" title="Se necesita un valor de altura de evacuación descendente" required value="{{ formData.altura_d }}">
                     <label for="altura_a">Altura de evacuación ascendente (m)</label>
-                    <input type="text" name="altura_a" id="altura_a" pattern="[0-9]*" placeholder="m" title="Se necesita un valor de altura de evacuación ascendente" required>
+                    <input type="text" name="altura_a" id="altura_a" pattern="[0-9]*" placeholder="m" title="Se necesita un valor de altura de evacuación ascendente" required value="{{ formData.altura_a }}">
         		    <hr>
         		    <label for="ocupacion_500">¿La ocupación excede de 500 personas?</label>
         		    <select name="ocupacion_500" id="ocupacion_500" data-role="slider" data-theme="c" data-track-theme="a">
         		        <option value="no">No</option>
-        		        <option value="si">Si</option>
+        		        <option value="si"{% if formData.ocupacion_500 == 1 %} selected{% endif %}>Si</option>
         		    </select>
         		    <hr>
                     <label for="tipo_pub_concurrencia" class="select">Seleccione de la lista el uso previsto...</label>
                     <select name="tipo_pub_concurrencia" id="tipo_pub_concurrencia" data-theme="a">
-                        <option value="Cines">Cines</option>
-                        <option value="Teatros">Teatros</option>
-                        <option value="Auditorios">Auditorios</option>
-                        <option value="Discotecas">Discotecas</option>
-                        <option value="Recintos deportivos">Recintos deportivos</option>
-                        <option value="Otros">Otros</option>
+                        <option value="Cines"{% if formData.tipo_pub_concurrencia == "Cines" %} selected{% endif %}>Cines</option>
+                        <option value="Teatros"{% if formData.tipo_pub_concurrencia == "Teatros" %} selected{% endif %}>Teatros</option>
+                        <option value="Auditorios"{% if formData.tipo_pub_concurrencia == "Auditorios" %} selected{% endif %}>Auditorios</option>
+                        <option value="Discotecas"{% if formData.tipo_pub_concurrencia == "Discotecas" %} selected{% endif %}>Discotecas</option>
+                        <option value="Recintos deportivos"{% if formData.tipo_pub_concurrencia == "Recintos deportivos" %} selected{% endif %}>Recintos deportivos</option>
+                        <option value="Otros"{% if formData.tipo_pub_concurrencia == "Otros" %} selected{% endif %}>Otros</option>
                     </select>
                     <hr>
         		    <label for="cocina_50kW">¿Hay cocinas instaladas dentro del edificio con una potencia instalada superior a 50 kW?</label>
         		    <select name="cocina_50kW" id="cocina_50kW" data-role="slider" data-theme="c" data-track-theme="a">
         		        <option value="no">No</option>
-        		        <option value="si">Si</option>
+        		        <option value="si"{% if formData.cocina_50kW == 1 %} selected{% endif %}>Si</option>
         		    </select>
         		    <hr>
         		    <label for="centro_transf">¿Existe centro de transformación cuyos aparatos tengan aislamiento dieléctrico con punto de inflamación menor de 300&deg; y potencia instalada mayor de 1000 kVA en cada aparato o de 4000 kVA en el conjunto de aparatos?</label>
         		    <select name="centro_transf" id="centro_transf" data-role="slider" data-theme="c" data-track-theme="a">
         		        <option value="no">No</option>
-        		        <option value="si">Si</option>
+        		        <option value="si"{% if formData.centro_transf == 1 %} selected{% endif %}>Si</option>
         		    </select>
                     <hr>
                     <label for="centro_transf_interior">¿Existe centro de transformación integrado en el edificio con acceso desde el interior del mismo, cuyos aparatos tengan aislamiento dieléctrico con punto de inflamación menor de 300&deg; y potencia instalada mayor de 630 kVA en cada aparato o de 2500 kVA en el conjunto de aparatos?</label>
                     <select name="centro_transf_interior" id="centro_transf_interior" data-role="slider" data-theme="c" data-track-theme="a">
                         <option value="no">No</option>
-                        <option value="si">Si</option>
+                        <option value="si"{% if formData.centro_transf_interior == 1 %} selected{% endif %}>Si</option>
                     </select><br>&nbsp;
         		    <div class="ui-bar ui-bar-a"><strong>Locales y zonas de riesgo especial</strong></div>
         		    <div class="ui-body ui-body-e">
             		    <label for="talleres_dec">¿Existen talleres o almacenes de decorados, de vestuario, etc., con un volumen construido superior a 200m&sup3;?</label>
             		    <select name="talleres_dec" id="talleres_dec" data-role="slider" data-theme="c" data-track-theme="a">
             		        <option value="no">No</option>
-            		        <option value="si">Si</option>
+            		        <option value="si"{% if formData.talleres_dec == 1 %} selected{% endif %}>Si</option>
             		    </select>
         		    </div>
         		</div>

@@ -13,96 +13,440 @@ $usos_ins = $app['controllers_factory'];
 
 // -- USOS DE INSTALACIONES ----------------------------------------------------
 $usos_ins->get('/residencial_vivienda', function (Request $request) use ($app) {
+    // Obtenemos los datos de formulario almacenados en la sesión o generamos valores vacíos
+    if (!$app['session']->has('formData'))
+    {
+        // Generamos unos valores vacíos
+        $app['session']->set(
+            'formData',
+            array(
+                'superficie' => '',
+                'altura_d' => '',
+                'altura_a' => '',
+                'centro_transf' => 0,
+                'dens_1per' => 0,
+                'cocina_50kW' => 0,
+                'trasteros' => 0,
+                'superficie_trasteros' => '',
+                'reprografia' => 0,
+                'volumen_construido' => '',
+                'aloj_50pers' => 0,
+                'cocina_20kW' => 0,
+                'roperos' => 0,
+                'superficie_roperos' => '',
+                'camas_100' => 0,
+                'almacenes_fc' => 0,
+                'v_almacenes_fc' => '',
+                'lab_c' => 0,
+                'v_lab_c' => '',
+                'zonas_est' => 0,
+                'area_ventas_1500' => 0,
+                'densidad_cf_500' => 0,
+                'almacenes_cf_3400' => 0,
+                'ocupacion_500' => 0,
+                'tipo_pub_concurrencia' => '',
+                'centro_transf_interior' => 0,
+                'talleres_dec' => 0,
+                'robotizado' => 0,
+                'plantas_rasante' => 0,
+            )
+        );
+    }
+    // Obtenemos los datos, ya sean vacíos o provenientes de un formulario real
+    $formData = $app['session']->get('formData');
+
     return $app['twig']->render(
     	'residencial_vivienda.twig', 
     	array(
             'error' => $app['security.last_error']($request),
             'last_username' => $app['session']->get('_security.last_username'),
-            'opcion' => 'Residencial Vivienda'
+            'opcion' => 'Residencial Vivienda',
+            'formData' => $formData
         )
     );
 })
 ->bind('uso.residencial_vivienda');
 
 $usos_ins->get('/administrativo', function (Request $request) use ($app) {
+    // Obtenemos los datos de formulario almacenados en la sesión o generamos valores vacíos
+    if (!$app['session']->has('formData'))
+    {
+        // Generamos unos valores vacíos
+        $app['session']->set(
+            'formData',
+            array(
+                'superficie' => '',
+                'altura_d' => '',
+                'altura_a' => '',
+                'centro_transf' => 0,
+                'dens_1per' => 0,
+                'cocina_50kW' => 0,
+                'trasteros' => 0,
+                'superficie_trasteros' => '',
+                'reprografia' => 0,
+                'volumen_construido' => '',
+                'aloj_50pers' => 0,
+                'cocina_20kW' => 0,
+                'roperos' => 0,
+                'superficie_roperos' => '',
+                'camas_100' => 0,
+                'almacenes_fc' => 0,
+                'v_almacenes_fc' => '',
+                'lab_c' => 0,
+                'v_lab_c' => '',
+                'zonas_est' => 0,
+                'area_ventas_1500' => 0,
+                'densidad_cf_500' => 0,
+                'almacenes_cf_3400' => 0,
+                'ocupacion_500' => 0,
+                'tipo_pub_concurrencia' => '',
+                'centro_transf_interior' => 0,
+                'talleres_dec' => 0,
+                'robotizado' => 0,
+                'plantas_rasante' => 0,
+            )
+        );
+    }
+    // Obtenemos los datos, ya sean vacíos o provenientes de un formulario real
+    $formData = $app['session']->get('formData');
+
     return $app['twig']->render(
     	'administrativo.twig', 
     	array(
             'error' => $app['security.last_error']($request),
             'last_username' => $app['session']->get('_security.last_username'),
-            'opcion' => 'Administrativo'
+            'opcion' => 'Administrativo',
+            'formData' => $formData
         )
     );
 })
 ->bind('uso.administrativo');
 
 $usos_ins->get('/residencial_publico', function (Request $request) use ($app) {
+    // Obtenemos los datos de formulario almacenados en la sesión o generamos valores vacíos
+    if (!$app['session']->has('formData'))
+    {
+        // Generamos unos valores vacíos
+        $app['session']->set(
+            'formData',
+            array(
+                'superficie' => '',
+                'altura_d' => '',
+                'altura_a' => '',
+                'centro_transf' => 0,
+                'dens_1per' => 0,
+                'cocina_50kW' => 0,
+                'trasteros' => 0,
+                'superficie_trasteros' => '',
+                'reprografia' => 0,
+                'volumen_construido' => '',
+                'aloj_50pers' => 0,
+                'cocina_20kW' => 0,
+                'roperos' => 0,
+                'superficie_roperos' => '',
+                'camas_100' => 0,
+                'almacenes_fc' => 0,
+                'v_almacenes_fc' => '',
+                'lab_c' => 0,
+                'v_lab_c' => '',
+                'zonas_est' => 0,
+                'area_ventas_1500' => 0,
+                'densidad_cf_500' => 0,
+                'almacenes_cf_3400' => 0,
+                'ocupacion_500' => 0,
+                'tipo_pub_concurrencia' => '',
+                'centro_transf_interior' => 0,
+                'talleres_dec' => 0,
+                'robotizado' => 0,
+                'plantas_rasante' => 0,
+            )
+        );
+    }
+    // Obtenemos los datos, ya sean vacíos o provenientes de un formulario real
+    $formData = $app['session']->get('formData');
+
     return $app['twig']->render(
     	'residencial_publico.twig', 
     	array(
             'error' => $app['security.last_error']($request),
             'last_username' => $app['session']->get('_security.last_username'),
-            'opcion' => 'Residencial Público'
+            'opcion' => 'Residencial Público',
+            'formData' => $formData
         )
     );
 })
 ->bind('uso.residencial_publico');
 
 $usos_ins->get('/hospitalario', function (Request $request) use ($app) {
+    // Obtenemos los datos de formulario almacenados en la sesión o generamos valores vacíos
+    if (!$app['session']->has('formData'))
+    {
+        // Generamos unos valores vacíos
+        $app['session']->set(
+            'formData',
+            array(
+                'superficie' => '',
+                'altura_d' => '',
+                'altura_a' => '',
+                'centro_transf' => 0,
+                'dens_1per' => 0,
+                'cocina_50kW' => 0,
+                'trasteros' => 0,
+                'superficie_trasteros' => '',
+                'reprografia' => 0,
+                'volumen_construido' => '',
+                'aloj_50pers' => 0,
+                'cocina_20kW' => 0,
+                'roperos' => 0,
+                'superficie_roperos' => '',
+                'camas_100' => 0,
+                'almacenes_fc' => 0,
+                'v_almacenes_fc' => '',
+                'lab_c' => 0,
+                'v_lab_c' => '',
+                'zonas_est' => 0,
+                'area_ventas_1500' => 0,
+                'densidad_cf_500' => 0,
+                'almacenes_cf_3400' => 0,
+                'ocupacion_500' => 0,
+                'tipo_pub_concurrencia' => '',
+                'centro_transf_interior' => 0,
+                'talleres_dec' => 0,
+                'robotizado' => 0,
+                'plantas_rasante' => 0,
+            )
+        );
+    }
+    // Obtenemos los datos, ya sean vacíos o provenientes de un formulario real
+    $formData = $app['session']->get('formData');
+
     return $app['twig']->render(
     	'hospitalario.twig', 
     	array(
             'error' => $app['security.last_error']($request),
             'last_username' => $app['session']->get('_security.last_username'),
-            'opcion' => 'Hospitalario'
+            'opcion' => 'Hospitalario',
+            'formData' => $formData
         )
     );
 })
 ->bind('uso.hospitalario');
 
 $usos_ins->get('/docente', function (Request $request) use ($app) {
+    // Obtenemos los datos de formulario almacenados en la sesión o generamos valores vacíos
+    if (!$app['session']->has('formData'))
+    {
+        // Generamos unos valores vacíos
+        $app['session']->set(
+            'formData',
+            array(
+                'superficie' => '',
+                'altura_d' => '',
+                'altura_a' => '',
+                'centro_transf' => 0,
+                'dens_1per' => 0,
+                'cocina_50kW' => 0,
+                'trasteros' => 0,
+                'superficie_trasteros' => '',
+                'reprografia' => 0,
+                'volumen_construido' => '',
+                'aloj_50pers' => 0,
+                'cocina_20kW' => 0,
+                'roperos' => 0,
+                'superficie_roperos' => '',
+                'camas_100' => 0,
+                'almacenes_fc' => 0,
+                'v_almacenes_fc' => '',
+                'lab_c' => 0,
+                'v_lab_c' => '',
+                'zonas_est' => 0,
+                'area_ventas_1500' => 0,
+                'densidad_cf_500' => 0,
+                'almacenes_cf_3400' => 0,
+                'ocupacion_500' => 0,
+                'tipo_pub_concurrencia' => '',
+                'centro_transf_interior' => 0,
+                'talleres_dec' => 0,
+                'robotizado' => 0,
+                'plantas_rasante' => 0,
+            )
+        );
+    }
+    // Obtenemos los datos, ya sean vacíos o provenientes de un formulario real
+    $formData = $app['session']->get('formData');
+
     return $app['twig']->render(
     	'docente.twig', 
     	array(
             'error' => $app['security.last_error']($request),
             'last_username' => $app['session']->get('_security.last_username'),
-            'opcion' => 'Docente'
+            'opcion' => 'Docente',
+            'formData' => $formData
         )
     );
 })
 ->bind('uso.docente');
 
 $usos_ins->get('/comercial', function (Request $request) use ($app) {
+    // Obtenemos los datos de formulario almacenados en la sesión o generamos valores vacíos
+    if (!$app['session']->has('formData'))
+    {
+        // Generamos unos valores vacíos
+        $app['session']->set(
+            'formData',
+            array(
+                'superficie' => '',
+                'altura_d' => '',
+                'altura_a' => '',
+                'centro_transf' => 0,
+                'dens_1per' => 0,
+                'cocina_50kW' => 0,
+                'trasteros' => 0,
+                'superficie_trasteros' => '',
+                'reprografia' => 0,
+                'volumen_construido' => '',
+                'aloj_50pers' => 0,
+                'cocina_20kW' => 0,
+                'roperos' => 0,
+                'superficie_roperos' => '',
+                'camas_100' => 0,
+                'almacenes_fc' => 0,
+                'v_almacenes_fc' => '',
+                'lab_c' => 0,
+                'v_lab_c' => '',
+                'zonas_est' => 0,
+                'area_ventas_1500' => 0,
+                'densidad_cf_500' => 0,
+                'almacenes_cf_3400' => 0,
+                'ocupacion_500' => 0,
+                'tipo_pub_concurrencia' => '',
+                'centro_transf_interior' => 0,
+                'talleres_dec' => 0,
+                'robotizado' => 0,
+                'plantas_rasante' => 0,
+            )
+        );
+    }
+    // Obtenemos los datos, ya sean vacíos o provenientes de un formulario real
+    $formData = $app['session']->get('formData');
+
     return $app['twig']->render(
     	'comercial.twig', 
     	array(
             'error' => $app['security.last_error']($request),
             'last_username' => $app['session']->get('_security.last_username'),
-            'opcion' => 'Comercial'
+            'opcion' => 'Comercial',
+            'formData' => $formData
         )
     );
 })
 ->bind('uso.comercial');
 
 $usos_ins->get('/publica_concurrencia', function (Request $request) use ($app) {
+    // Obtenemos los datos de formulario almacenados en la sesión o generamos valores vacíos
+    if (!$app['session']->has('formData'))
+    {
+        // Generamos unos valores vacíos
+        $app['session']->set(
+            'formData',
+            array(
+                'superficie' => '',
+                'altura_d' => '',
+                'altura_a' => '',
+                'centro_transf' => 0,
+                'dens_1per' => 0,
+                'cocina_50kW' => 0,
+                'trasteros' => 0,
+                'superficie_trasteros' => '',
+                'reprografia' => 0,
+                'volumen_construido' => '',
+                'aloj_50pers' => 0,
+                'cocina_20kW' => 0,
+                'roperos' => 0,
+                'superficie_roperos' => '',
+                'camas_100' => 0,
+                'almacenes_fc' => 0,
+                'v_almacenes_fc' => '',
+                'lab_c' => 0,
+                'v_lab_c' => '',
+                'zonas_est' => 0,
+                'area_ventas_1500' => 0,
+                'densidad_cf_500' => 0,
+                'almacenes_cf_3400' => 0,
+                'ocupacion_500' => 0,
+                'tipo_pub_concurrencia' => '',
+                'centro_transf_interior' => 0,
+                'talleres_dec' => 0,
+                'robotizado' => 0,
+                'plantas_rasante' => 0,
+            )
+        );
+    }
+    // Obtenemos los datos, ya sean vacíos o provenientes de un formulario real
+    $formData = $app['session']->get('formData');
+
     return $app['twig']->render(
     	'publica_concurrencia.twig', 
     	array(
             'error' => $app['security.last_error']($request),
             'last_username' => $app['session']->get('_security.last_username'),
-            'opcion' => 'Pública Concurrencia'
+            'opcion' => 'Pública Concurrencia',
+            'formData' => $formData
         )
     );
 })
 ->bind('uso.publica_concurrencia');
 
 $usos_ins->get('/aparcamiento', function (Request $request) use ($app) {
+    // Obtenemos los datos de formulario almacenados en la sesión o generamos valores vacíos
+    if (!$app['session']->has('formData'))
+    {
+        // Generamos unos valores vacíos
+        $app['session']->set(
+            'formData',
+            array(
+                'superficie' => '',
+                'altura_d' => '',
+                'altura_a' => '',
+                'centro_transf' => 0,
+                'dens_1per' => 0,
+                'cocina_50kW' => 0,
+                'trasteros' => 0,
+                'superficie_trasteros' => '',
+                'reprografia' => 0,
+                'volumen_construido' => '',
+                'aloj_50pers' => 0,
+                'cocina_20kW' => 0,
+                'roperos' => 0,
+                'superficie_roperos' => '',
+                'camas_100' => 0,
+                'almacenes_fc' => 0,
+                'v_almacenes_fc' => '',
+                'lab_c' => 0,
+                'v_lab_c' => '',
+                'zonas_est' => 0,
+                'area_ventas_1500' => 0,
+                'densidad_cf_500' => 0,
+                'almacenes_cf_3400' => 0,
+                'ocupacion_500' => 0,
+                'tipo_pub_concurrencia' => '',
+                'centro_transf_interior' => 0,
+                'talleres_dec' => 0,
+                'robotizado' => 0,
+                'plantas_rasante' => 0,
+            )
+        );
+    }
+    // Obtenemos los datos, ya sean vacíos o provenientes de un formulario real
+    $formData = $app['session']->get('formData');
+
     return $app['twig']->render(
     	'aparcamiento.twig', 
     	array(
             'error' => $app['security.last_error']($request),
             'last_username' => $app['session']->get('_security.last_username'),
-            'opcion' => 'Aparcamiento'
+            'opcion' => 'Aparcamiento',
+            'formData' => $formData
         )
     );
 })
@@ -442,6 +786,42 @@ $usos_ins->post('/resultados', function (Request $request) use ($app) {
         default:
             break;
     }
+
+    // Almacenamos en la sesión los valores rellenados en formulario
+    $app['session']->set(
+        'formData',
+        array(
+            'superficie' => $superficie,
+            'altura_d' => $altura_d,
+            'altura_a' => $altura_a,
+            'centro_transf' => $centro_transf,
+            'dens_1per' => $dens_1per,
+            'cocina_50kW' => $cocina_50kW,
+            'trasteros' => $trasteros,
+            'superficie_trasteros' => $superficie_trasteros,
+            'reprografia' => $reprografia,
+            'volumen_construido' => $volumen_construido,
+            'aloj_50pers' => $aloj_50pers,
+            'cocina_20kW' => $cocina_20kW,
+            'roperos' => $roperos,
+            'superficie_roperos' => $superficie_roperos,
+            'camas_100' => $camas_100,
+            'almacenes_fc' => $almacenes_fc,
+            'v_almacenes_fc' => $v_almacenes_fc,
+            'lab_c' => $lab_c,
+            'v_lab_c' => $v_lab_c,
+            'zonas_est' => $zonas_est,
+            'area_ventas_1500' => $area_ventas_1500,
+            'densidad_cf_500' => $densidad_cf_500,
+            'almacenes_cf_3400' => $almacenes_cf_3400,
+            'ocupacion_500' => $ocupacion_500,
+            'tipo_pub_concurrencia' => $tipo_pub_concurrencia,
+            'centro_transf_interior' => $centro_transf_interior,
+            'talleres_dec' => $talleres_dec,
+            'robotizado' => $robotizado,
+            'plantas_rasante' => $plantas_rasante,
+        )
+    );
 
     // Construimos los resultados en función de los datos rellenados
     return $app['twig']->render(
