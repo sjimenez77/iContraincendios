@@ -289,8 +289,7 @@ $usuarios->get('/{user}/{tipo}/{id_informe}', function (Request $request, $user,
                     // Procesamos datos
                     if ($superficie > 0) $extintores = True;
                     if ($superficie > 2000) $bies_25 = True;
-                    // Condición antigua -> if ($superficie > 5000 || $altura_d > 28 || $altura_a > 6 || $dens_1per) $hid_exteriores = True;
-                    if ($superficie > 5000 && $superficie < 10000 && $dens_1per) $hid_exteriores = True;
+                    if ($superficie > 5000 || ($dens_1per && $superficie > 2000) || $altura_d > 28 || $altura_a > 6) $hid_exteriores = True;
                     if ($altura_d > 80) $ia_extincion = True;
                     if ($altura_d > 24 || $altura_a > 24) $columna_seca = True;
                     if ($superficie > 1000) $sm_alarma = True;
