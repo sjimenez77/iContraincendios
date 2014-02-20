@@ -12,7 +12,7 @@
                     <li><a href="{{ path('quienes') }}">Nuestra empresa</a></li>
                     <li><a href="{{ path('contacto') }}">Contacto</a></li>              
                     <li><a href="{{ path('ayuda') }}">Ayuda</a></li>
-                    <li data-theme="e" data-icon="plus"><a href="{{ path('registro') }}" >Registrar nuevo técnico</a></li>
+                    <li data-theme="e" data-icon="plus"><a href="{{ path('registro') }}" >Registrar nuevo usuario</a></li>
                     {% if is_granted('IS_AUTHENTICATED_FULLY') %}
                     <li data-theme="a" data-icon="arrow-d"><a href="{{ path('logout') }}">Desconectar</a></li>
                     {% endif %}

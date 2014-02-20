@@ -19,7 +19,7 @@
 
 {% block contenido_primario %}
 		<div class="content-primary">
-            <h2>Registro de técnicos</h2><hr>
+            <h2>Registro de usuarios</h2><hr>
             <p>Los datos que introduzca a continuación serán tratados de manera interna por la organización. En caso que desee revocar o modificar los datos de dicho registro rellene el formulario de contacto <a href="{{ app.url_generator.generate('contacto') }}">pinchando aquí</a> o pulsando el botón "Contacto".</p>
             {% if errores %}
             <p>
@@ -32,7 +32,7 @@
             </p>
             {% endif %}
             <div class="ui-bar ui-bar-g"><strong>Cumplimente los datos solicitados a continuación:</strong></div>
-            <form name="registro" method="post" action="{{ app.url_generator.generate('registro_tecnico') }}">
+            <form name="registro" method="post" action="{{ app.url_generator.generate('registro_tecnico') }}" autocomplete="off">
                 <div class="ui-body ui-body-g">
                     <label for="nombre">Nombre</label>
                     <input type="text" name="nombre" id="nombre" placeholder="Introduzca su nombre" value="{{ datos.nombre|e }}">
