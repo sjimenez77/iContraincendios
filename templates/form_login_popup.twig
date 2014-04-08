@@ -11,7 +11,7 @@
 		        		<p><div class="ui-bar ui-bar-e ui-corner-all">Usuario y/o contraseña incorrectos</div></p>
         			{% endif %}
 		    		<button type="submit" data-icon="arrow-r" data-iconpos="right" data-theme="g">Entrar</button>
-		    		<a data-role="button" data-theme="c" href="mailto:gonzalo.irala@eivar.com?subject=Solicitud de nueva contraseña&body=Solicito una nueva contraseña para el usuario: (escriba aquí su email)">¿Olvidó su contraseña?</a>
+		    		<a data-role="button" data-theme="c" href="mailto:gonzalo.irala@eivar.com?subject=Solicitud de nueva contraseña&body=Solicito una nueva contraseña para el usuario: {{ last_username | default('[escriba aquí su email]') }}">¿Olvidó su contraseña?</a>
 				</div>
 			</form>
 		</div>
