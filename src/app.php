@@ -2,7 +2,7 @@
 
 /**
  * This file is part of the iContraincendios app.
- * 
+ *
  * (c) Santos Jiménez <sjimenez77@gmail.com>
  */
 
@@ -14,7 +14,7 @@ use Silex\Provider\SessionServiceProvider;
 use Silex\Provider\SecurityServiceProvider;
 use Silex\Provider\TwigServiceProvider;
 use Silex\Provider\HttpCacheServiceProvider;
-use \ic; // Mi proveedor de usuarios
+use ic\UserProvider; // Mi proveedor de usuarios
 
 $app = new Application();
 
@@ -43,7 +43,7 @@ $app->register(new SecurityServiceProvider(), array(
 			'pattern' => '^/.*$',
         	'anonymous' => true,
             'form' => array(
-            	'login_path' => '/login', 
+            	'login_path' => '/login',
             	'check_path' => '/login_check'
             ),
             'logout' => array(
@@ -52,8 +52,8 @@ $app->register(new SecurityServiceProvider(), array(
                 'invalidate_session' => true,
             ),
             'users' => $app->share(function() use ($app) {
-                // Specific class ic\UserProvider is described below
-                return new ic\UserProvider($app['db']);
+                // Specific class UserProvider is described below
+                return new UserProvider($app['db']);
             }),
 		),
     ),
